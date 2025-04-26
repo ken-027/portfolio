@@ -300,6 +300,23 @@ const PROJECTS: Project[] = [
       backend.items[3],
     ],
   },
+  {
+    category: "backend",
+    title: "Recipe API",
+    thumbnailLink: "/images/projects/recipe-api.png",
+    description:
+      "A simple CRUD application for managing recipes, instructions, and ingredients.",
+    technologies: [language.items[4], backend.items[3], fullstack.items[1]],
+    githubRepo: "https://github.com/ken-027/laravel-recipe-api",
+  },
+  {
+    category: "backend",
+    title: "Order API",
+    thumbnailLink: "/images/projects/order-api.png",
+    description: "A simple authentication and CRUD application for orders.",
+    technologies: [language.items[4], backend.items[3], fullstack.items[1]],
+    githubRepo: "https://github.com/ken-027/laravel-orderapi",
+  },
 ];
 
 export default PROJECTS;

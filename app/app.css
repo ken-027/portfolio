@@ -507,13 +507,13 @@ input::after {
     transform: translateX(0) translateY(0) scaleY(1);
   }
   25% {
-    transform: translateX(-25%) translateY(10px) scaleY(0.9);
+    transform: translateX(-25%) translateY(3px) scaleY(0.9);
   }
   50% {
     transform: translateX(-50%) translateY(0) scaleY(1);
   }
   75% {
-    transform: translateX(-25%) translateY(15px) scaleY(1.1);
+    transform: translateX(-25%) translateY(5px) scaleY(1.1);
   }
   100% {
     transform: translateX(0) translateY(0) scaleY(1);
@@ -526,34 +526,15 @@ input::after {
     transform: translateX(0) translateY(0) scaleY(1);
   }
   25% {
-    transform: translateX(-20%) translateY(15px) scaleY(1.1);
+    transform: translateX(-20%) translateY(3px) scaleY(1.1);
   }
   50% {
     transform: translateX(-40%) translateY(0) scaleY(0.9);
   }
   75% {
-    transform: translateX(-20%) translateY(10px) scaleY(1);
+    transform: translateX(-20%) translateY(5px) scaleY(1);
   }
   100% {
     transform: translateX(0) translateY(0) scaleY(1);
-  }
-}
-
-/* Third wave animation */
-@keyframes wave3 {
-  0% {
-    transform: translateX(0) translateY(5px) scaleY(1);
-  }
-  25% {
-    transform: translateX(-30%) translateY(0) scaleY(1.1);
-  }
-  50% {
-    transform: translateX(-60%) translateY(10px) scaleY(0.9);
-  }
-  75% {
-    transform: translateX(-30%) translateY(5px) scaleY(1);
-  }
-  100% {
-    transform: translateX(0) translateY(5px) scaleY(1);
   }
 }

@@ -58,7 +58,6 @@ export default function ProjectsLayout() {
         headerSubtitle="Software I've Built and Maintained"
         className="project-animate"
       />
-
       <PaddingWrapperUI className="min-h-[100vh] text-dark lg:space-y-32">
         {CATEGORIES.map((category, index) => {
           const projectItemRef = useRef(null);

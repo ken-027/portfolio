@@ -21,7 +21,6 @@ import MariaDBIcon from "~/components/icons/mariadb.icon";
 import MySQLIcon from "~/components/icons/mysql.icon";
 import NextJSIcon from "~/components/icons/nextjs.icon";
 import NodeJSIcon from "~/components/icons/nodejs.icon";
-import NPMIcon from "~/components/icons/npm.icon";
 import PhpIcon from "~/components/icons/php.icon";
 import PostmanIcon from "~/components/icons/postman.icon";
 import PythonIcon from "~/components/icons/python.icon";
@@ -98,7 +97,7 @@ const SKILLS: Skill[] = [
       { name: "Redux Toolkit", Icon: ReduxIcon, proficiency: 6 },
       { name: "Socket.IO", Icon: SocketIOIcon, proficiency: 5 },
       { name: "GIT", Icon: GitIcon, proficiency: 8 },
-      { name: "NPM", Icon: NPMIcon, proficiency: 8 },
+    //   { name: "NPM", Icon: NPMIcon, proficiency: 8 },
       { name: "Docker", Icon: DockerIcon, proficiency: 4 },
       { name: "AWS", Icon: AWSIcon, proficiency: 4 },
     ],

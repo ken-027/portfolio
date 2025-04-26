@@ -21,8 +21,12 @@ export default function CertificateCardUI({
     >
       <div className="flex justify-between gap-2">
         <div className="flex-1 lg:space-y-1">
-          <h3 className="text-lg font-anton dark:text-light/90  lg:text-2xl">{name}</h3>
-          <small className="text-secondary block lg:text-base">{platform}</small>
+          <h3 className="text-lg font-anton dark:text-light/90  lg:text-2xl">
+            {name}
+          </h3>
+          <small className="text-secondary block lg:text-base">
+            {platform}
+          </small>
           <small className="block italic dark:text-light/90 lg:text-base">
             {dateCompleted.toString()}
           </small>
@@ -33,10 +37,11 @@ export default function CertificateCardUI({
           className="h-[50px] w-[50px] border-1 dark:border-none border-light rounded-md"
         />
       </div>
-      <p className="text-sm lg:text-lg font-open-sauce dark:text-light/90">
-        {description}
-      </p>
-      {certificateLink ? (
+      <p
+        className="text-sm lg:text-lg font-open-sauce dark:text-light/90"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
+      {certificateLink && dateCompleted !== "ongoing" ? (
         <a
           className="text-secondary text-xs lg:text-base"
           href={certificateLink}

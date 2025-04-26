@@ -23,7 +23,7 @@ const CERTIFICATES: Certificate[] = [
     platform: "Udemy",
     dateCompleted: "ongoing",
     description:
-      "Comprehensive training focused on core DevOps tools and practices. Gained hands-on experience with AWS, Linux system administration, shell scripting, Jenkins, Ansible, GitOps workflows, Docker, Kubernetes, and Terraform. Built a strong foundation for CI/CD, infrastructure automation, and cloud-native development.",
+      "Comprehensive training focused on core DevOps tools and practices. Gained hands-on experience with <b>AWS</b>, <b>Linux</b> system administration, <b>shell scripting</b>, <b>Jenkins</b>, <b>Ansible</b>, GitOps workflows, <b>Docker</b>, <b>Kubernetes</b>, and <b>Terraform</b>. Built a strong foundation for CI/CD, infrastructure automation, and cloud-native development.",
     platformLogo: "/images/certificates/udemy-logo.png",
     //   certificateLink: "https://www.udemy.com/",
   },
