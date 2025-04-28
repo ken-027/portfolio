@@ -12,7 +12,7 @@ import "./app.css";
 import "swiper/css";
 import NavLayout from "./components/layout/nav.layout";
 import { useEffect } from "react";
-import { getDarkMode } from "./shared/local-storage";
+import { getDarkMode, getStyledType } from "./shared/local-storage";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -29,6 +29,8 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const getStyle = getStyledType();
+
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
@@ -36,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     );
 
     const preventRightClick = (e: Event) => {
-      e.preventDefault();
+        // e.preventDefault();
     };
 
     const disableDevTools = (e: any) => {
@@ -89,7 +91,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="dark:bg-dark w-[100vw] overflow-x-hidden! select-none">
-        <NavLayout />
+        {getStyle === "gui" ? <NavLayout /> : null}
         {children}
         <ScrollRestoration />
         <Scripts />

@@ -17,7 +17,7 @@ export default function PageLoaderLayout() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 3500);
   }, []);
 
   return (
@@ -40,7 +40,12 @@ export default function PageLoaderLayout() {
               height={81}
             />
           ) : null}
-          <ProgressBarUI />
+          <p className="text-dark dark:text-light/90">Switching style</p>
+          <div className="my-2 flex items-center gap-2">
+            <div className="animate-bounce h-4 w-4 bg-yellow-300 border-[1px] border-border rounded-full ball-loading" />
+            <div className="animate-bounce h-4 w-4 bg-green-300 animate-100 border-[1px] border-border rounded-full ball-loading" />
+            <div className="animate-bounce h-4 w-4 bg-blue-300 delay-200 border-[1px] border-border rounded-full ball-loading" />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

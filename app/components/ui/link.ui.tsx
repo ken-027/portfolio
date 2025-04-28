@@ -25,7 +25,7 @@ export default function LinkUI({
       }}
       transition={{ type: "tween", delay: 0.4 }}
       href="#projects"
-      className={`font-anton cursor-pointer relative group overflow-hidden text-dark text-base md:text-xl lg:text-2xl dark:text-light/90 px-3 py-2 lg:py-3 flex items-center gap-2 banner-animate border-b-1 border-dark/80 dark:border-light/80 ${
+      className={`font-anton cursor-pointer relative group overflow-hidden text-dark w-fit text-base md:text-xl lg:text-2xl dark:text-light/90 px-3 py-2 lg:py-3 flex items-center justify-center gap-2 banner-animate border-b-1 border-dark/80 dark:border-light/80 ${
         className || ""
       }`}
       {...props}

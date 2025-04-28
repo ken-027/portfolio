@@ -2,17 +2,29 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import ProjectIcon from "../icons/project.icon";
 import getExperience from "~/utils/experience-computation";
 import { TypeAnimation } from "react-type-animation";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
 import GlobeUI from "../ui/globe.ui";
+import TerminalStyledIcon from "../icons/terminal-styled.icon";
+import { switchStyle } from "~/shared/local-storage";
+import PageLoaderLayout from "./page-loader.layout";
 
 export default function BannerLayout() {
   const { months, years } = getExperience();
+  const [switching, setSwitching] = useState(false);
   const yearsRef = useRef(null);
   const headerRef = useRef(null);
+
+  const onSwitchStyle = () => {
+    setSwitching(true);
+    switchStyle("terminal");
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
+  };
 
   return (
     <header
@@ -20,6 +32,7 @@ export default function BannerLayout() {
       className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-6 md:gap-20 lg:gap-0 2xl:gap-10 items-center h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
       id="home"
     >
+      {switching ? <PageLoaderLayout /> : null}
       <GlobeUI />
       <PaddingWrapperUI
         className="flex flex-col items-center gap-4 lg:gap-6 dark lg:text-left lg:items-start xl:gap-6 min-h-fit!"
@@ -81,33 +94,49 @@ export default function BannerLayout() {
           to writing clean, efficient code, crafting intuitive user experiences,
           and delivering reliable, results-driven solutions.
         </motion.p>
-        <div className="">
+        <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI title="My Projects" href="#projects" Icon={<ProjectIcon />} />
-          <motion.div
+          <motion.button
             animate={{
               opacity: [0, 1],
-              y: ["-30%", "0%"],
+              y: ["20%", "0%"],
               willChange: "transform",
             }}
-            transition={{ type: "spring", delay: 1, easel: "easeInOut" }}
-            className="scale-75 lg:hidden"
+            transition={{ type: "spring", delay: 1.2, easel: "easeInOut" }}
+            className="flex gap-2 cursor-pointer items-center bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1 font-anton"
+            onClick={onSwitchStyle}
           >
-            <ScrollDownUI className="banner-animate" />
-          </motion.div>
+            <TerminalStyledIcon />
+            Terminal-Styled
+          </motion.button>
+          <div className="bounce">
+            <motion.div
+              animate={{
+                opacity: [0, 1],
+                y: ["-30%", "0%"],
+                willChange: "transform",
+              }}
+              transition={{ type: "spring", delay: 1, easel: "easeInOut" }}
+              className="scale-75 lg:hidden"
+            >
+              <ScrollDownUI className="banner-animate" />
+            </motion.div>
+          </div>
         </div>
       </PaddingWrapperUI>
 
-      <motion.div
-        animate={{
-          opacity: [0, 1],
-          y: ["-30%", "0%"],
-          willChange: "transform",
-        }}
-        transition={{ type: "spring", delay: 1, easel: "easeInOut" }}
-        className="hidden lg:block col-span-2"
-      >
-        <ScrollDownUI className="banner-animate" />
-      </motion.div>
+      <div className="bounce hidden lg:block col-span-2">
+        <motion.div
+          animate={{
+            opacity: [0, 1],
+            y: ["-30%", "0%"],
+            willChange: "transform",
+          }}
+          transition={{ type: "spring", delay: 0.8, easel: "easeInOut" }}
+        >
+          <ScrollDownUI className="banner-animate" />
+        </motion.div>
+      </div>
     </header>
   );
 }

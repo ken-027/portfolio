@@ -7,6 +7,8 @@ import ProjectsLayout from "~/components/layout/projects.layout";
 import ContactLayout from "~/components/layout/contact.layout";
 import FooterLayout from "~/components/layout/footer.layout";
 import CertificateLayout from "~/components/layout/certificate.layout";
+import TerminalLayout from "~/components/layout/terminal.layout";
+import { getStyledType } from "~/shared/local-storage";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -19,16 +21,24 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const getStyle = getStyledType();
+
   return (
     <>
-      <BannerLayout />
-      <ServicesLayout />
-      <SkillsLayout />
-      <ExperiencesLayout />
-      <ProjectsLayout />
-      <CertificateLayout />
-      <ContactLayout />
-      <FooterLayout />
+      {getStyle === "gui" ? (
+        <>
+          <BannerLayout />
+          <ServicesLayout />
+          <SkillsLayout />
+          <ExperiencesLayout />
+          <ProjectsLayout />
+          <CertificateLayout />
+          <ContactLayout />
+          <FooterLayout />
+        </>
+      ) : (
+        <TerminalLayout />
+      )}
     </>
   );
 }
