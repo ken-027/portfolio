@@ -4,6 +4,7 @@ import TextFieldUI from "./text-field.ui";
 import ShareIcon from "../icons/share.icon";
 import { useEffect, useState, type FormEvent } from "react";
 import EmailJS from "~/utils/email-js";
+import { sendEmail } from "~/api/email.api";
 
 interface FormContactUIProps {
   className?: string;
@@ -125,20 +126,22 @@ export default function FormContactUI({
 
       setSubmitting(true);
 
-      const emailjs = new EmailJS(email);
-      emailjs.setSubject(subject);
-      emailjs.setMessage(message);
-      emailjs.setName(name);
+      const { text } = await sendEmail({
+        email,
+        subject,
+        name,
+        message,
+      });
 
-      const { text } = await emailjs.send();
-
-      submitStatus(text.toLowerCase() !== "ok" ? "error" : "success", text);
-
-      appendRequest();
+      submitStatus(text !== "OK" ? "error" : "success", text);
 
       setTimeout(() => {
         submitStatus("not-submitted");
       }, 3000);
+
+      if (text !== "OK") {
+        throw new Error("Something went wrong!");
+      }
 
       clearValidations(form);
       form.reset();
