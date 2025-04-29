@@ -41,7 +41,7 @@ export default function ExperienceContentResponse({
             <h3 className="text-blue-300">{title}</h3>
             <p>{description}</p>
             <p className="mt-1">Technologies Used</p>
-            <ul className="flex flex-wrap gap-1">
+            <ul className="mt-1">
               {technologies.map(({ name }, _index_) => (
                 <li key={_index_}>
                   <small>{name}</small>

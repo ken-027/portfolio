@@ -5,6 +5,7 @@ import COMMANDS from "~/config/commands";
 import UnknownCommandResponse from "../response/unknown-command";
 import UnknownSubCommandResponse from "../response/unknown-sub-command";
 import PageLoaderLayout from "./page-loader.layout";
+import { sendEmail } from "~/api/email.api";
 
 interface TerminalLog {
   shell?: ReactNode;
@@ -24,7 +25,7 @@ const Shell = () => {
 export default function TerminalLayout() {
   const [commandsHistory, setCommandsHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
-  const [logs, setLogs] = useState<TerminalLog[]>([{ shell: <Shell /> }]);
+  const [logs, setLogs] = useState<TerminalLog[]>([]);
   const [cleared, setCleared] = useState(false);
 
   const getOriginOnSubCommands = (command: string, parameter: string) => {
@@ -137,27 +138,43 @@ export default function TerminalLayout() {
   }, [cleared]);
 
   useEffect(() => {
+    sendEmail();
+
     if (logs.length === 0) {
       setLogs([{ shell: <Shell /> }]);
       setCleared(false);
     }
-
-    console.log(commandsHistory);
   }, [logs]);
 
+  useEffect(() => {
+    const Node = COMMANDS.intro.Component;
+
+    setLogs((prevState) => [
+      ...prevState,
+      { Response: Node },
+      { shell: <Shell /> },
+    ]);
+  }, []);
+
   return (
-    <SectionUI className="fixed inset-0 bg-dark text-light/90 px-2 pt-2! space-y-2!">
-      <h1 className="text-center font-bold text-lg text-blue-300">
-        Welcome to my <span className="text-yellow-300">Terminal</span>
-        <span className="text-blue-300">-</span>
-        <span className="text-green-300">Styled </span>
-        Portfolio
+    <SectionUI className="fixed inset-0 text-light/90 px-2 pt-2! space-y-2! bg-gradient-to-b from-90% from-dark to bg-gray-700">
+      <h1 className="text-center text-xl font-bold text-blue-300">
+        <span className="text-green-300">Terminal</span>
+        <span className="text-blue-300">Styled</span>
       </h1>
-      <small className="block text-center text-light/60">
+      {/* <small className="block text-center text-light/60">
         type -h or help for more commands
-      </small>
+      </small> */}
       <TerminalCardUI>
         {logs.map(({ shell, Response }, index) => {
+          let additionalProps: any = null;
+
+          if (index === 0 && commandsHistory.length == 0) {
+            additionalProps = {
+              value: "intro",
+            };
+          }
+
           return (
             <div key={index} className="flex flex-wrap">
               {Response ? (
@@ -177,6 +194,7 @@ export default function TerminalLayout() {
                       type="text"
                       autoFocus={index === logs.length - 1}
                       onKeyDown={keyChange}
+                      {...additionalProps}
                     />
                   </div>
                 </>

@@ -16,6 +16,7 @@ import ExperienceIPPResponse from "~/components/response/experiences/experiences
 import SocialsResponse from "~/components/response/socials.response";
 import IntroResponse from "~/components/response/intro.response";
 import GUIResponse from "~/components/response/gui.response";
+import InfoResponse from "~/components/response/info.response";
 
 interface Command {
   Component?: any;
@@ -25,99 +26,113 @@ interface Command {
 }
 
 const COMMANDS: Record<string, Command> = {
-  switch: {
-    description: "command for switching portfolio to User Interface",
+  exit: {
+    description: "Exit the terminal session.",
     Component: GUIResponse,
   },
-  intro: { description: "command for introduction", Component: IntroResponse },
+  info: {
+    description: "Display basic personal information.",
+    Component: InfoResponse,
+  },
+  intro: {
+    description: "Display an introduction message.",
+    Component: IntroResponse,
+  },
   help: {
-    description: "simple command for help",
+    description:
+      "Show a list of available commands or detailed help information.",
     Component: HelpResponse,
     shortcut: ["-h"],
   },
-  clear: { description: "clear screen", shortcut: ["cls"] },
+  clear: {
+    description: "Clear the terminal screen.",
+    shortcut: ["cls"],
+  },
   services: {
-    description: "list available services",
+    description: "Display a list of available services.",
     Component: ServicesResponse,
     shortcut: ["sv"],
   },
   skills: {
-    description: "list available skills and its proficiency",
+    description: "Show a list of skills along with proficiency levels.",
     Component: SkillsResponse,
     shortcut: ["sk"],
   },
   certificates: {
-    description: "list available certificates",
+    description: "List all earned certificates.",
     Component: CertificatesResponse,
     shortcut: ["cert"],
   },
   socials: {
-    description: "list available contacts",
+    description: "Display available social media or contact links.",
     Component: SocialsResponse,
     shortcut: ["sc"],
   },
   project: {
-    description: "project list with sub commands",
+    description: "Manage and explore project lists through subcommands.",
     shortcut: ["pj"],
     subCommands: {
       help: {
-        description: "simple command for help",
+        description: "Show help information for project commands.",
         Component: ProjectSubHelpResponse,
         shortcut: ["-h"],
       },
       all: {
-        description: "list all projects",
+        description: "List all available projects.",
         Component: ProjectsResponse,
         shortcut: ["-a"],
       },
       frontend: {
-        description: "list all frontend projects",
+        description: "List all frontend-related projects.",
         Component: FrontendProjectsResponse,
         shortcut: ["-fe"],
       },
       backend: {
-        description: "list all backend projects",
+        description: "List all backend-related projects.",
         Component: BackendProjectsResponse,
         shortcut: ["-be"],
       },
       fullstack: {
-        description: "list all fullstack projects",
+        description: "List all fullstack (frontend + backend) projects.",
         Component: FullstackProjectsResponse,
         shortcut: ["-fs"],
       },
     },
   },
   experience: {
-    description: "experiences list with sub commands",
+    description: "Manage and view work experiences through subcommands.",
     shortcut: ["exp"],
     subCommands: {
       help: {
-        description: "simple command for help",
+        description: "Show help information for experience commands.",
         Component: ExperienceSubHelpResponse,
         shortcut: ["-h"],
       },
       all: {
-        description: "list all experiences",
+        description: "List all work experiences.",
         Component: ExperiencesResponse,
         shortcut: ["-a"],
       },
       natcco: {
-        description: "description list for natcco",
+        description: "Display detailed experience information at NATCCO.",
         Component: ExperienceNATCCOResponse,
         shortcut: ["nc"],
       },
       freelance: {
-        description: "description list for freelancing",
+        description:
+          "Display detailed experience information from freelancing projects.",
         Component: ExperienceFreelanceResponse,
         shortcut: ["fr"],
       },
       cloudpanda: {
-        description: "description list for cloud panda ph",
+        description:
+          "Display detailed experience information at Cloud Panda PH.",
         Component: ExperienceCloudPandaResponse,
         shortcut: ["cp"],
       },
       ipp: {
-        description: "description list for international payment processing",
+        description:
+          "Display detailed experience information at International Payment Processing (IPP).",
         Component: ExperienceIPPResponse,
       },
     },

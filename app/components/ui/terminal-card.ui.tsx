@@ -14,10 +14,11 @@ export default function TerminalCardUI({ children }: TerminalCardUIProps) {
 
   return (
     <div
-      className="min-h-[80vh] border-1 border-border-dark w-full rounded-md overflow-hidden  max-w-screen-2xl mx-auto"
+      id="terminal"
+      className="min-h-[85vh] bg-dark border-1 border-border-dark w-full rounded-md overflow-hidden  max-w-screen-2xl mx-auto shadow-2xl shadow-blue-500/10"
       onClick={promptFocus}
     >
-      <div className="bg-light/90 h-[20px] lg:h-[25px] flex items-center justify-between px-2 gap-2">
+      <div className="bg-light/90 h-[30px] flex items-center justify-between px-2 gap-2">
         <div className="flex items-center px-2 gap-2">
           <button
             onClick={() => alert("not allowed")}
