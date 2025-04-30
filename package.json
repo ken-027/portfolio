@@ -8,8 +8,9 @@
         "start": "react-router-serve ./build/server/index.js",
         "typecheck": "react-router typegen && tsc",
         "build:move": "cp -r build/client/* deploy",
-        "build:push": "cd deploy & git add . & git commit -m 'deployment' & git push origin main",
-        "build:automate": "npm run clear-deployments && npm run build & npm run build:move & npm run build:push",
+        "build:directory": "[ -d ./deploy ] && npm run build:move || mkdir deploy && npm run build:move",
+        "build:push": "cd deploy & git add . & git commit -m 'deployment' & git push origin main --force",
+        "build:automate": "npm run clear-deployments && npm run build & npm run build:directory & npm run build:push",
         "clear-deployments": "rm -rf deploy/{assets,fonts,icons,images,pdf,resume,section-illustration}"
     },
     "dependencies": {

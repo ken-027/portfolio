@@ -38,6 +38,11 @@ export const sendEmail = async ({
       text: `'${emailResponse[0].path[0]}' ${emailResponse[0].message}`,
       status: 400,
     };
+  } else if (response.status === 429) {
+    return {
+      text: emailResponse.emailLimit,
+      status: response.status,
+    };
   } else if (emailResponse?.text != "OK") {
     emailResponse = {
       text: "Something went wrong!",
