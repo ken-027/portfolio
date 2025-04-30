@@ -8,8 +8,8 @@
         "start": "react-router-serve ./build/server/index.js",
         "typecheck": "react-router typegen && tsc",
         "build:move": "cp -r build/client/* deploy",
-        "build:directory": "[ -d ./deploy ] && npm run build:move && cd deploy || mkdir deploy && npm run build:move && npm run build:git-init",
-        "build:push": "git add . & git commit -m 'deployment' & git push origin main --force",
+        "build:directory": "[ -d ./deploy ] && npm run build:move || mkdir deploy && npm run build:move && npm run build:git-init",
+        "build:push": "cd deploy && git add . & git commit -m 'deployment' & git push origin main --force",
         "build:git-init": "cd deploy && git init && git branch -M main && git remote add origin https://github.com/kenneth-andales/kenneth-andales.github.io.git",
         "build:automate": "npm run clear-deployments && npm run build & npm run build:directory & npm run build:push",
         "clear-deployments": "rm -rf deploy/{assets,fonts,icons,images,pdf,resume,section-illustration}"
