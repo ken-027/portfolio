@@ -51,9 +51,9 @@ export default function ExperiencesLayout() {
                     className={`lg:flex-1 ${index % 2 === 0 ? "" : "order-2"}`}
                   >
                     <div className="flex gap-3 md:gap-6 flex-col items-center justify-center lg:items-start">
-                      <div className="border-1 overflow-hidden border-border p-5 experience-animate bg-light dark:border-border-dark object-center rounded-md w-[120px] min-h-[80px] md:w-[200px] md:min-h-[100px] flex justify-center items-center">
+                      <div className="border-1 overflow-hidden border-border p-5 experience-animate bg-light dark:border-border-dark object-center rounded-md flex justify-center items-center">
                         <img
-                          className={`font-open-sauce experience-${index}-animate`}
+                          className={`font-open-sauce h-[90px] lg:h-[110px] w-full  object-contain aspect-3/2 experience-${index}-animate`}
                           src={
                             companyLogo ||
                             "/section-illustration/experience-thumbnail.svg"
@@ -127,7 +127,7 @@ export default function ExperiencesLayout() {
                                 className={`xl:pb-10 experience-${index}-animate`}
                               >
                                 <div
-                                  className={`border-1 border-border xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                                  className={`border-1 border-border hover:shadow-md transition-all xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
                                     _index % 2 === 0 ? "" : "ml-auto"
                                   }`}
                                 >

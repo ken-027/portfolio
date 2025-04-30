@@ -20,7 +20,7 @@ export default function ServicesLayout() {
       <PaddingWrapperUI className="text-dark">
         <div className="flex flex-col items-center justify-center gap-10">
           <div className="flex flex-col gap-5 md:grid md:grid-cols-2 xl:grid-cols-3 xl:gap-y-10 xl:gap-x-10">
-            {SERVICES.map(({ description, title, illustration }, index) => {
+            {SERVICES.map(({ description, title, Illustration }, index) => {
               const serviceItemRef = useRef(null);
               useAnimateElement(`service-${index}`, serviceItemRef);
               return (
@@ -29,7 +29,7 @@ export default function ServicesLayout() {
                   className={`service-${index}-animate`}
                   description={description}
                   title={title}
-                  illustration={illustration || ""}
+                  Illustration={Illustration}
                   key={index}
                 />
               );

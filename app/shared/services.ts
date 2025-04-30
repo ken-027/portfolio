@@ -1,46 +1,51 @@
-"use client";
+import BugFixingIllustration from "~/components/illustration/bug-fixing.illustration";
+import DevelopmentIllustration from "~/components/illustration/development.illustration";
+import MaintenanceIllustration from "~/components/illustration/maintenance.illustration";
+import SinglePageAppIllustration from "~/components/illustration/single-page-app.illustration";
+import TeamsIllustration from "~/components/illustration/teams.illustration";
+import WebDevIllustration from "~/components/illustration/webdev.illustration";
 
 interface Service {
   title: string;
   description: string;
-  illustration: string;
+  Illustration: React.FC<any>;
 }
 const SERVICES: Service[] = [
   {
     title: "Custom Website Development",
     description:
       "Business websites and systems tailored to specific needs using modern technologies.",
-    illustration: "/section-illustration/services/web-development.svg",
+    Illustration: WebDevIllustration,
   },
   {
     title: "API Development & Integration",
     description:
       "RESTful API creation using Node.js or PHP, plus integration with any third-party API.",
-    illustration: "/section-illustration/services/integration.svg",
+    Illustration: DevelopmentIllustration,
   },
   {
     title: "Website Maintenance & Upgrades",
     description:
       "Ongoing support, bug fixes, and feature enhancements for existing sites and systems—whether built from scratch or inherited.",
-    illustration: "/section-illustration/services/upgrade.svg",
+    Illustration: MaintenanceIllustration,
   },
   {
     title: "Single Page Applications (SPA)",
     description:
-      "Develop fast, interactive apps using React or Next.js with seamless user experience and client-side routing",
-    illustration: "/section-illustration/services/single-page-app.svg",
+      "Develop  interactive apps using React or Next.js with seamless user experience and client-side routing",
+    Illustration: SinglePageAppIllustration,
   },
   {
-    title: "Bug Fixing & Performance Tuning",
+    title: "Bug Fixing",
     description:
-      "Identify and fix slow-loading pages, broken features, or security issues across web applications.",
-    illustration: "/section-illustration/services/bug-fixing.svg",
+      "Identify and fix slow-loading pages, broken features, or any issues across web applications.",
+    Illustration: BugFixingIllustration,
   },
   {
     title: "Cross-Team Feature Implementation",
     description:
       "Collaborate across frontend/backend teams to ship features end-to-end—clear Git workflows, commits, and documentation included.",
-    illustration: "/section-illustration/services/team.svg",
+    Illustration: TeamsIllustration,
   },
 ];
 

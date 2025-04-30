@@ -34,7 +34,7 @@ export default function BoxUI({
         alt={title}
         width={205}
         height={111}
-        className="w-full border-b-[1px] border-border bg-light dark:border-border-dark h-full aspect-4/2 object-contain"
+        className="w-full border-b-[1px] border-border bg-light dark:border-border-dark h-full aspect-4/2 object-cover"
       />
       <div className="px-3 space-y-3 md:space-y-6">
         <div className="space-y-2 mt-5">

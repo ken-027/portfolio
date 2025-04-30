@@ -101,7 +101,7 @@ export default function NavLayout() {
         <ToggleDarkModeUI />
       </div>
       <motion.nav className="hidden lg:flex bg-light dark:bg-dark flex-col fixed justify-between inset-y-0 left-0 items-center z-20 pb-4">
-        <a href="/#home">
+        <a href="/">
           <motion.img
             animate={{
               opacity: [0, 1],
@@ -152,7 +152,7 @@ export default function NavLayout() {
         className="fixed top-0 inset-x-0 bg-light dark:bg-dark z-20 text-dark dark:text-light/90 border-b-1  lg:border-0 border-border dark:border-border-dark lg:hidden"
       >
         <div className="flex justify-between bg-light dark:bg-dark items-center px-2 z-30">
-          <a href="/#home" onClick={closeNav}>
+          <a href="/" onClick={closeNav}>
             <img
               src={
                 isDarkMode ? "/images/dark-logo.png" : "/images/light-logo.png"

@@ -2,8 +2,8 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import ProjectIcon from "../icons/project.icon";
 import getExperience from "~/utils/experience-computation";
 import { TypeAnimation } from "react-type-animation";
-import { useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "motion/react";
 import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
@@ -11,12 +11,16 @@ import GlobeUI from "../ui/globe.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
 import PageLoaderLayout from "./page-loader.layout";
+import ArrowUpIcon from "../icons/arrow-up.icon";
+import ScrollUpUI from "../ui/scroll-up.ui";
 
 export default function BannerLayout() {
   const { months, years } = getExperience();
   const [switching, setSwitching] = useState(false);
   const yearsRef = useRef(null);
   const headerRef = useRef(null);
+
+  const isInView = useInView(yearsRef);
 
   const onSwitchStyle = () => {
     setSwitching(true);
@@ -32,6 +36,7 @@ export default function BannerLayout() {
       className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-6 md:gap-20 lg:gap-0 2xl:gap-10 items-center h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
       id="home"
     >
+      <ScrollUpUI show={!isInView} />
       {switching ? <PageLoaderLayout /> : null}
       <GlobeUI />
       <PaddingWrapperUI
