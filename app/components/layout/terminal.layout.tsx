@@ -1,13 +1,19 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import SectionUI from "../ui/section.ui";
 import TerminalCardUI from "../ui/terminal-card.ui";
 import COMMANDS from "~/config/commands";
 import UnknownCommandResponse from "../response/unknown-command";
 import UnknownSubCommandResponse from "../response/unknown-sub-command";
-import PageLoaderLayout from "./page-loader.layout";
-import { sendEmail } from "~/api/email.api";
-
-interface TerminalLog {
+import ContactResponse from "../response/contact/contact-terminal.response";
+import { getOrigin, getOriginOnSubCommands } from "~/utils/commands.utils";
+export interface TerminalLog {
   shell?: ReactNode;
   Response?: ReactNode;
 }
@@ -22,47 +28,17 @@ const Shell = () => {
   );
 };
 
+const ContactContext = createContext({
+  isContact: false,
+  setIsContact: (state: boolean) => {},
+});
+
 export default function TerminalLayout() {
   const [commandsHistory, setCommandsHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const [logs, setLogs] = useState<TerminalLog[]>([]);
   const [cleared, setCleared] = useState(false);
-
-  const getOriginOnSubCommands = (command: string, parameter: string) => {
-    let origin = parameter;
-
-    // @ts-ignore
-    for (const key of Object.keys(COMMANDS[`${command}`]?.subCommands)) {
-      if (
-        // @ts-ignore
-        COMMANDS[`${command}`]?.subCommands[`${key}`].shortcut?.includes(
-          parameter
-        )
-      ) {
-        origin = key;
-        break;
-      }
-    }
-
-    return origin;
-  };
-
-  const getOrigin = (command: string) => {
-    let origin = command;
-
-    // @ts-ignore
-    for (const key of Object.keys(COMMANDS)) {
-      if (
-        // @ts-ignore
-        COMMANDS[`${key}`]?.shortcut?.includes(command)
-      ) {
-        origin = key;
-        break;
-      }
-    }
-
-    return origin;
-  };
+  const [isContact, setIsContact] = useState(false);
 
   const onEnter = (value: string) => {
     let origCommand = (value as string).trim().toLowerCase();
@@ -74,12 +50,17 @@ export default function TerminalLayout() {
     setCommandsHistory((prevState) => [...prevState, origCommand]);
     setHistoryIndex(commandsHistory.length);
 
+    if (command === "contact") {
+      setIsContact(true);
+      return;
+    }
+
     if (["clear", "cls"].includes(command)) {
       setCleared(true);
       return;
     }
 
-    const origin = getOrigin(command);
+    const origin = getOrigin(command, COMMANDS);
     Node = COMMANDS[`${origin}`]?.Component;
 
     const hasSubCommands = COMMANDS[`${origin}`]?.subCommands;
@@ -88,7 +69,11 @@ export default function TerminalLayout() {
       if (commandParams.length === 1) {
         Node = () => <UnknownSubCommandResponse command={origin} />;
       } else {
-        const subOrigin = getOriginOnSubCommands(origin, commandParams[1]);
+        const subOrigin = getOriginOnSubCommands(
+          origin,
+          commandParams[1],
+          COMMANDS
+        );
         Node = COMMANDS[`${origin}`]?.subCommands?.[`${subOrigin}`]?.Component;
       }
     }
@@ -138,8 +123,6 @@ export default function TerminalLayout() {
   }, [cleared]);
 
   useEffect(() => {
-    sendEmail();
-
     if (logs.length === 0) {
       setLogs([{ shell: <Shell /> }]);
       setCleared(false);
@@ -166,42 +149,48 @@ export default function TerminalLayout() {
         type -h or help for more commands
       </small> */}
       <TerminalCardUI>
-        {logs.map(({ shell, Response }, index) => {
-          let additionalProps: any = null;
+        <ContactContext.Provider value={{ isContact, setIsContact }}>
+          {!isContact ? (
+            logs.map(({ shell, Response }, index) => {
+              let additionalProps: any = null;
 
-          if (index === 0 && commandsHistory.length == 0) {
-            additionalProps = {
-              value: "intro",
-            };
-          }
+              if (index === 0 && commandsHistory.length == 0) {
+                additionalProps = {
+                  value: "intro",
+                };
+              }
 
-          return (
-            <div key={index} className="flex flex-wrap">
-              {Response ? (
-                // @ts-expect-error
-                <Response />
-              ) : (
-                <>
-                  {shell}
-                  <div className="flex gap-1 w-full lg:flex-1 lg:ml-1">
-                    <span className="font-bold lg:hidden">&gt;</span>
-                    <input
-                      spellCheck="false"
-                      disabled={index !== logs.length - 1}
-                      autoCapitalize="off"
-                      autoComplete="off"
-                      className="outline-none border-0 w-full prompt"
-                      type="text"
-                      autoFocus={index === logs.length - 1}
-                      onKeyDown={keyChange}
-                      {...additionalProps}
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-          );
-        })}
+              return (
+                <div key={index} className="flex flex-wrap">
+                  {Response ? (
+                    // @ts-expect-error
+                    <Response />
+                  ) : (
+                    <>
+                      {shell}
+                      <div className="flex gap-1 w-full lg:flex-1 lg:ml-1">
+                        <span className="font-bold lg:hidden">&gt;</span>
+                        <input
+                          spellCheck="false"
+                          disabled={index !== logs.length - 1}
+                          autoCapitalize="off"
+                          autoComplete="off"
+                          className="outline-none border-0 w-full prompt"
+                          type="text"
+                          autoFocus={index === logs.length - 1}
+                          onKeyDown={keyChange}
+                          {...additionalProps}
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <ContactResponse />
+          )}
+        </ContactContext.Provider>
       </TerminalCardUI>
       <footer className="fixed bottom-0 text-center inset-x-0 flex flex-col pb-2">
         <p className="text-sm lg:text-lg">
@@ -214,3 +203,5 @@ export default function TerminalLayout() {
     </SectionUI>
   );
 }
+
+export const useContactContext = () => useContext(ContactContext);

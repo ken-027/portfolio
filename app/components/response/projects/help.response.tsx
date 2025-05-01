@@ -17,7 +17,7 @@ export default function ProjectSubHelpResponse() {
           const commands = [command, ...shortcuts];
 
           return (
-            <div className="flex gap-1" key={index}>
+            <div className="flex gap-1 flex-wrap" key={index}>
               <div className="flex gap-1">
                 {commands.map((shortcut, _index) => (
                   <p key={_index} className="text-blue-300">

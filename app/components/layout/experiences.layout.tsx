@@ -51,9 +51,9 @@ export default function ExperiencesLayout() {
                     className={`lg:flex-1 ${index % 2 === 0 ? "" : "order-2"}`}
                   >
                     <div className="flex gap-3 md:gap-6 flex-col items-center justify-center lg:items-start">
-                      <div className="border-1 overflow-hidden border-border p-5 experience-animate bg-light dark:border-border-dark object-center rounded-md flex justify-center items-center">
+                      <div className="border-1 overflow-hidden border-border p-2 experience-animate bg-light h-[100px] lg:h-[120px] dark:border-border-dark object-center rounded-md flex justify-center items-center object-contain aspect-3/2">
                         <img
-                          className={`font-open-sauce h-[90px] lg:h-[110px] w-full  object-contain aspect-3/2 experience-${index}-animate`}
+                          className={`font-open-sauce h-full w-full max-w-full max-h-full experience-${index}-animate`}
                           src={
                             companyLogo ||
                             "/section-illustration/experience-thumbnail.svg"

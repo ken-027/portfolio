@@ -8,7 +8,7 @@ export default function SocialsResponse() {
         {CONTACTS.map(({ name, link }, index) => (
           <li key={index}>
             <a className="text-blue-300" href={link} target="_blank">
-              [{name}] {link}
+              {name}
             </a>
           </li>
         ))}

@@ -119,7 +119,6 @@ export default function FormContactUI({
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      validateLimit();
 
       const form = e.currentTarget;
       const { email, subject, name, message } = validation(form);

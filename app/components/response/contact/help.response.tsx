@@ -1,18 +1,17 @@
-import COMMANDS from "~/config/commands";
+import CONTACTCOMMANDS from "~/config/contact-commands";
 import ResponseWrapperUI from "../../ui/response-wrapper.ui";
 
-export default function ExperienceSubHelpResponse() {
+export default function ContactHelpResponse() {
   return (
-    <ResponseWrapperUI>
-      <h2 className="mb-2">available options</h2>
+    <ResponseWrapperUI typeSpeed="fast">
+      <h2 className="mb-2">Available Contact Commands</h2>
 
-      {/* @ts-ignore */}
-      {Object.keys(COMMANDS[`experience`]?.subCommands)
+      {Object.keys(CONTACTCOMMANDS)
         .filter((command) => !["-h", "help"].includes(command))
         .map((command, index) => {
           const shortcuts =
             // @ts-ignore
-            COMMANDS[`experience`].subCommands[`${command}`].shortcut || [];
+            CONTACTCOMMANDS[`${command}`].shortcut || [];
 
           const commands = [command, ...shortcuts];
 
@@ -31,14 +30,11 @@ export default function ExperienceSubHelpResponse() {
                     <strong>{shortcut}</strong>
                   </p>
                 ))}
-              </div>{" "}
-              - {/* @ts-ignore */}
-              {COMMANDS[`experience`].subCommands[`${command}`]?.description}
+              </div>
+              - {CONTACTCOMMANDS[`${command}`]?.description}
             </div>
           );
         })}
-
-          <p className="mt-3">usage: experience [-a | all]</p>
     </ResponseWrapperUI>
   );
 }

@@ -29,6 +29,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const isDev = import.meta.env.MODE === "development";
   const getStyle = getStyledType();
 
   useEffect(() => {
@@ -38,10 +39,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
     );
 
     const preventRightClick = (e: Event) => {
-        // e.preventDefault();
+      if (isDev) return;
+      e.preventDefault();
     };
 
     const disableDevTools = (e: any) => {
+      if (isDev) return;
       if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
         e.preventDefault();
       }

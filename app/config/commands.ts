@@ -17,8 +17,9 @@ import SocialsResponse from "~/components/response/socials.response";
 import IntroResponse from "~/components/response/intro.response";
 import GUIResponse from "~/components/response/gui.response";
 import InfoResponse from "~/components/response/info.response";
+import ContactTerminalResponse from "~/components/response/contact/contact-terminal.response";
 
-interface Command {
+export interface Command {
   Component?: any;
   description: string;
   shortcut?: string[];
@@ -37,6 +38,10 @@ const COMMANDS: Record<string, Command> = {
   intro: {
     description: "Display an introduction message.",
     Component: IntroResponse,
+  },
+  contact: {
+    description: "Renders a terminal-style prompt for a contact message.",
+    Component: ContactTerminalResponse,
   },
   help: {
     description:

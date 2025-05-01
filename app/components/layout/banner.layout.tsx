@@ -108,10 +108,10 @@ export default function BannerLayout() {
               willChange: "transform",
             }}
             transition={{ type: "spring", delay: 1.2, easel: "easeInOut" }}
-            className="flex gap-2 cursor-pointer items-center bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1 font-anton"
+            className="flex group gap-2 cursor-pointer items-center bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1 font-anton"
             onClick={onSwitchStyle}
           >
-            <TerminalStyledIcon />
+            <TerminalStyledIcon className="-rotate-6 group-hover:animate-bounce" />
             Terminal-Styled
           </motion.button>
           <div className="bounce">

@@ -1,4 +1,3 @@
-import getExperience from "~/utils/experience-computation";
 import ResponseWrapperUI from "../ui/response-wrapper.ui";
 
 export default function IntroResponse() {
