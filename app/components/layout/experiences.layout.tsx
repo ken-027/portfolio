@@ -9,6 +9,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useMemo, useRef } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
+import { Parallax } from "react-scroll-parallax";
 
 export default function ExperiencesLayout() {
   const experienceRef = useRef(null);
@@ -17,14 +18,17 @@ export default function ExperiencesLayout() {
   const experiences = useMemo(() => EXPERIENCES, []);
 
   return (
-    <SectionUI ref={experienceRef} id="experiences">
-      <HeaderUI
-        headerTitle="Experiences"
-        headerSubtitle="Where I’ve Gained Experience"
-        className="experience-animate"
-      />
+    <SectionUI ref={experienceRef} id="experiences" className="lg:mt-32">
+      <Parallax speed={responseSize.lg ? -20 : 0}>
+        <HeaderUI
+          headerTitle="Experiences"
+          headerSubtitle="Where I’ve Gained Experience"
+          className="experience-animate lg:mb-[70vh]!"
+        />
+      </Parallax>
+
       <PaddingWrapperUI className="min-h-[100vh] text-dark">
-        <div className="space-y-[15vh]">
+        <div className="flex flex-col gap-16 lg:gap-[100vh]">
           {experiences.map(
             (
               {
@@ -46,69 +50,84 @@ export default function ExperiencesLayout() {
                 <div
                   key={index}
                   ref={experienceItemRef}
-                  className={`experience-${index}-animate xl:flex xl:gap-10 xl:grid-cols-2`}
+                  className={`xl:flex xl:gap-10 xl:grid-cols-2`}
                 >
                   <div
                     className={`lg:flex-1 ${index % 2 === 0 ? "" : "order-2"}`}
                   >
-                    <div className="flex gap-3 md:gap-6 flex-col items-center justify-center lg:items-start">
-                      <div className="border-1 overflow-hidden border-border p-2 experience-animate bg-light h-[100px] lg:h-[120px] dark:border-border-dark object-center rounded-md flex justify-center items-center object-contain aspect-3/2">
-                        <img
-                          className={`font-open-sauce h-full w-full max-w-full max-h-full experience-${index}-animate`}
-                          src={
-                            companyLogo ||
-                            "/section-illustration/experience-thumbnail.svg"
-                          }
-                          alt={company.toLowerCase()}
-                          width={100}
-                          height={50}
-                        />
+                    <Parallax
+                      speed={responseSize.lg ? -50 : 0}
+                      className="lg:pt-40"
+                    >
+                      <div className="flex gap-3 md:gap-6 flex-col items-center justify-center lg:items-start">
+                        <div
+                          className={`border-1 overflow-hidden border-border p-2 bg-light h-[100px] lg:h-[120px] dark:border-border-dark object-center rounded-md flex justify-center items-center object-contain aspect-3/2  experience-${index}-animate`}
+                        >
+                          <img
+                            className={`font-open-sauce h-full w-full max-w-full max-h-full`}
+                            src={
+                              companyLogo ||
+                              "/section-illustration/experience-thumbnail.svg"
+                            }
+                            alt={company.toLowerCase()}
+                            width={100}
+                            height={50}
+                          />
+                        </div>
+                        <h3
+                          className={`text-xl md:text-2xl lg:text-3xl font-anton dark:text-light/90 experience-${index}-animate`}
+                        >
+                          {company}
+                        </h3>
                       </div>
-                      <h3
-                        className={`text-xl md:text-2xl lg:text-3xl font-anton dark:text-light/90 experience-${index}-animate`}
-                      >
-                        {company}
-                      </h3>
-                    </div>
-                    <div className="dark:border-border-dark mx-4 border-border pt-5 lg:mx-0">
-                      <div className="flex flex-col font-open-sauce dark:text-light/90 md:text-lg md:text-center lg:text-left">
-                        <p className="text-secondary">
-                          <b>{title}</b>
-                        </p>
-                        <small className="text-xs md:text-sm">
-                          <i>
-                            {getDateFormat(startDate)} -{" "}
-                            {getDateFormat(endDate)}
-                          </i>
-                          <b className="ml-1">{`(${getTotalByFormat(
-                            startDate,
-                            endDate
-                          )})`}</b>
-                        </small>
-                        <small>{location}</small>
+                      <div className="dark:border-border-dark mx-4 border-border pt-5 lg:mx-0">
+                        <div className="flex flex-col font-open-sauce dark:text-light/90 md:text-lg md:text-center lg:text-left">
+                          <p
+                            className={`text-secondary experience-${index}-animate`}
+                          >
+                            <b>{title}</b>
+                          </p>
+                          <small
+                            className={`text-xs md:text-sm experience-${index}-animate`}
+                          >
+                            <i>
+                              {getDateFormat(startDate)} -{" "}
+                              {getDateFormat(endDate)}
+                            </i>
+                            <b className="ml-1">{`(${getTotalByFormat(
+                              startDate,
+                              endDate
+                            )})`}</b>
+                          </small>
+                          <small className={`experience-${index}-animate`}>
+                            {location}
+                          </small>
+                        </div>
+                        <ul
+                          className={`mt-5 md:mt-10 font-open-sauce space-y-3`}
+                        >
+                          {descriptions.map((description, _index) => {
+                            return (
+                              <li
+                                className={`flex gap-2 experience-${index}-animate`}
+                                key={_index}
+                              >
+                                <span className="mt-1">
+                                  <CheckIcon className="text-secondary" />
+                                </span>
+                                <small className="text-sm md:text-base lg:text-lg dark:text-light/90">
+                                  {description}
+                                </small>
+                              </li>
+                            );
+                          })}
+                        </ul>
                       </div>
-                      <ul className={`mt-5 md:mt-10 font-open-sauce space-y-3`}>
-                        {descriptions.map((description, _index) => {
-                          return (
-                            <li
-                              className={`flex gap-2 experience-${index}-animate`}
-                              key={_index}
-                            >
-                              <span className="mt-1">
-                                <CheckIcon className="text-secondary" />
-                              </span>
-                              <small className="text-sm md:text-base lg:text-lg dark:text-light/90">
-                                {description}
-                              </small>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
+                    </Parallax>
                   </div>
                   {responseSize.md ? (
                     <div className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block">
-                      <p className="font-open-sauce md:text-lg lg:text-xl font-bold">
+                      <p className="font-open-sauce md:text-lg dark:text-light/90 lg:text-xl font-bold">
                         Projects I Worked On
                       </p>
                       <div className={`mt-4 lg:mt-10 space-y-5`}>

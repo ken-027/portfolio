@@ -11,8 +11,9 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import "swiper/css";
 import NavLayout from "./components/layout/nav.layout";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getDarkMode, getStyledType } from "./shared/local-storage";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -31,6 +32,12 @@ export const links: Route.LinksFunction = () => [
 export function Layout({ children }: { children: React.ReactNode }) {
   const isDev = import.meta.env.MODE === "development";
   const getStyle = getStyledType();
+  const [scrollEl, setScrollElement] = useState<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setScrollElement(ref.current);
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -93,9 +100,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="dark:bg-dark w-[100vw] overflow-x-hidden! select-none">
+      <body
+        className="dark:bg-dark w-[100vw] overflow-x-hidden! select-none"
+        // @ts-ignore
+        ref={ref}
+      >
         {getStyle === "gui" ? <NavLayout /> : null}
-        {children}
+        {/* @ts-ignore */}
+        <ParallaxProvider scrollContainer={scrollEl}>
+          {children}
+        </ParallaxProvider>
         <ScrollRestoration />
         <Scripts />
         {/* <PageLoaderLayout /> */}
