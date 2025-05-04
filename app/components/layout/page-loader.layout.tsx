@@ -31,7 +31,7 @@ export default function PageLoaderLayout() {
         >
           {isDarkMode !== null ? (
             <img
-              className="w-[100px] h-[100px] animate-spin-slow"
+              className="w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] animate-spin-slow"
               src={`/images/${
                 isDarkMode ? "dark" : "light"
               }-logo-with-animation.gif`}
@@ -41,10 +41,10 @@ export default function PageLoaderLayout() {
             />
           ) : null}
           <p className="text-dark dark:text-light/90">Switching style</p>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="animate-bounce h-4 w-4 bg-yellow-300 border-[1px] border-border rounded-full ball-loading" />
-            <div className="animate-bounce h-4 w-4 bg-green-300 animate-100 border-[1px] border-border rounded-full ball-loading" />
-            <div className="animate-bounce h-4 w-4 bg-blue-300 delay-200 border-[1px] border-border rounded-full ball-loading" />
+          <div className="mt-2 flex items-center gap-2 lg:gap-3 lg:mt-4">
+            <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-yellow-300 border-[1px] border-border rounded-full ball-loading" />
+            <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-green-300 animate-100 border-[1px] border-border rounded-full ball-loading" />
+            <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-blue-300 delay-200 border-[1px] border-border rounded-full ball-loading" />
           </div>
         </motion.div>
       )}

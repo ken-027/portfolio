@@ -100,7 +100,7 @@ export default function NavLayout() {
       <div className="hidden absolute top-2 right-2 lg:block scale-[80%]">
         <ToggleDarkModeUI />
       </div>
-      <motion.nav className="hidden lg:flex bg-light dark:bg-dark flex-col fixed justify-between inset-y-0 left-0 items-center z-20 pb-4">
+      <motion.nav className="hidden lg:flex bg-light dark:bg-dark flex-col fixed justify-between inset-y-0 left-0 items-center z-20 pb-10">
         <a href="/">
           <motion.img
             animate={{
@@ -120,11 +120,7 @@ export default function NavLayout() {
         <ul className="flex flex-col gap-10" ref={desktopMenuScope}>
           {centerMenu.map(({ Icon, href, name }, index) => (
             <li key={index}>
-              <LinkAnimatedUI
-                href={href}
-                Icon={<Icon className="xl:scale-125" />}
-                name={name}
-              />
+              <LinkAnimatedUI href={href} Icon={Icon} name={name} />
             </li>
           ))}
         </ul>
@@ -136,7 +132,7 @@ export default function NavLayout() {
           }}
         >
           <LinkAnimatedUI
-            Icon={<ResumeMenuIcon className="xl:scale-125" />}
+            Icon={ResumeMenuIcon}
             name={bottomMenu.name}
             tooltipClassName="min-w-[140px]"
             onClick={onToggleContact}

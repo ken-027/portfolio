@@ -38,7 +38,7 @@ export default function ScrollUpUI({ show }: ScrollUpUIProps) {
             onClick={() => {
               document.body.scrollTop = 0;
             }}
-            className="cursor-pointer group-hover:animate-bounce outline-none dark:bg-light dark:text-dark bg-dark text-light shadow border-[1px] border-border w-[2.4rem] h-10 lg:w-11 lg:h-12 rounded-md grid place-items-center"
+            className="cursor-pointer animate-bounce group-hover:animate-none outline-none dark:bg-light dark:text-dark bg-dark text-light shadow border-[1px] border-border w-[2.4rem] h-10 lg:w-11 lg:h-12 rounded-md grid place-items-center"
           >
             <ArrowUpIcon />
           </button>

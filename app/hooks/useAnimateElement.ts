@@ -12,6 +12,8 @@ export default function useAnimateElement(
   });
 
   const animateElements = () => {
+    if (ref.current === null) return;
+
     const animateClass = `.${prefixClass}-animate`;
     const elementClass = document.querySelectorAll(animateClass);
 
