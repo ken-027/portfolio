@@ -19,7 +19,7 @@ export default function ContactLayout() {
     <SectionUI
       ref={contactRef}
       id="contact"
-      className="dark:bg-dark transition-all lg:hidden pb-10!"
+      className="dark:bg-dark transition-colors lg:hidden pb-10!"
     >
       <ToastUI
         message={

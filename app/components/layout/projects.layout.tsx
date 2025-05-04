@@ -4,7 +4,7 @@ import PROJECTS, { CATEGORIES, type Project } from "~/shared/projects";
 import HeaderUI from "../ui/header.ui";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import BoxUI from "../ui/box.ui";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import SectionUI from "../ui/section.ui";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards, EffectCoverflow, Pagination } from "swiper/modules";
@@ -12,16 +12,18 @@ import useAnimateElement from "~/hooks/useAnimateElement";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import useScreenSize from "~/hooks/useScreenSize";
-const filterProjects = PROJECTS.filter(
-  ({ thumbnailLink }) => thumbnailLink !== undefined
-);
 
 export default function ProjectsLayout() {
-  const [projects, setProjects] = useState<Project[]>(filterProjects);
+  const projects = useMemo(
+    () => PROJECTS.filter(({ thumbnailLink }) => thumbnailLink !== undefined),
+    []
+  );
   const projectRef = useRef(null);
   useAnimateElement("project", projectRef);
 
   const { responseSize } = useScreenSize();
+
+  const categories = useMemo(() => CATEGORIES, []);
 
   const desktopEffect = {
     className: "pb-10!",
@@ -59,9 +61,17 @@ export default function ProjectsLayout() {
         className="project-animate"
       />
       <PaddingWrapperUI className="min-h-[100vh] text-dark lg:space-y-32">
-        {CATEGORIES.map((category, index) => {
+        {categories.map((category, index) => {
           const projectItemRef = useRef(null);
           useAnimateElement(`project-${index}`, projectItemRef);
+
+          const filterProjects = useMemo(
+            () =>
+              projects.filter(
+                ({ category: itemCategory }) => category === itemCategory
+              ),
+            []
+          );
 
           return (
             <div
@@ -77,36 +87,32 @@ export default function ProjectsLayout() {
               <div className="lg:w-1/2 md:mx-auto md:w-[80%]">
                 {/* @ts-ignore */}
                 <Swiper {...effect}>
-                  {projects
-                    .filter(
-                      ({ category: itemCategory }) => category === itemCategory
+                  {filterProjects.map(
+                    (
+                      {
+                        description,
+                        title,
+                        thumbnailLink,
+                        technologies,
+                        githubRepo,
+                        screenshot,
+                        liveDemo,
+                      },
+                      _index
+                    ) => (
+                      <SwiperSlide key={_index}>
+                        <BoxUI
+                          title={title}
+                          thumbnail={thumbnailLink}
+                          description={description}
+                          items={technologies}
+                          website={liveDemo}
+                          repo={githubRepo}
+                          screenshot={screenshot}
+                        />
+                      </SwiperSlide>
                     )
-                    .map(
-                      (
-                        {
-                          description,
-                          title,
-                          thumbnailLink,
-                          technologies,
-                          githubRepo,
-                          screenshot,
-                          liveDemo,
-                        },
-                        _index
-                      ) => (
-                        <SwiperSlide key={_index}>
-                          <BoxUI
-                            title={title}
-                            thumbnail={thumbnailLink}
-                            description={description}
-                            items={technologies}
-                            website={liveDemo}
-                            repo={githubRepo}
-                            screenshot={screenshot}
-                          />
-                        </SwiperSlide>
-                      )
-                    )}
+                  )}
                 </Swiper>
               </div>
             </div>

@@ -67,12 +67,12 @@ export default function BannerLayout() {
               sequence={[
                 1000,
                 "Software Developer",
-                1000,
-                "Frontend Development",
-                1000,
-                "Backend Development",
-                1000,
-                "Fullstack Development",
+                2000,
+                "Handling Frontend Development",
+                2000,
+                "Handling Backend Development",
+                2000,
+                "Handling Fullstack Development",
               ]}
               repeat={Infinity}
               speed={1}
@@ -107,11 +107,11 @@ export default function BannerLayout() {
               y: ["20%", "0%"],
               willChange: "transform",
             }}
-            transition={{ type: "spring", delay: 1.2, easel: "easeInOut" }}
+            transition={{ type: "spring", delay: 0.8, easel: "easeInOut" }}
             className="flex group gap-2 cursor-pointer items-center bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1 font-anton"
             onClick={onSwitchStyle}
           >
-            <TerminalStyledIcon className="-rotate-6 group-hover:animate-bounce" />
+            <TerminalStyledIcon className="terminal-icon" />
             Terminal-Styled
           </motion.button>
           <div className="bounce">

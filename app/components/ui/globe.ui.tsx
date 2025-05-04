@@ -91,9 +91,9 @@ export default function GlobeUI() {
 
   return (
     <motion.div
-      animate={{ opacity: [0.1, 1], y: ["20%", "0%"] }}
-      transition={{ type: "tween" }}
-      className="w-[60%] mx-auto px-10 md:pt-20 banner-animate md:w-[50%] lg:w-full lg:pt-0 lg:ml-10"
+      animate={{ opacity: [0, 1], scale: [0.3, 1], willChange: "transform" }}
+      transition={{ type: "tween", delay: 1.5 }}
+      className="w-[60%] mx-auto px-10 md:pt-20 md:w-[50%] lg:w-full lg:pt-0 lg:ml-10"
     >
       {/* @ts-ignore */}
       <Cloud {...cloudProps}>

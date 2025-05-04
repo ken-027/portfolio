@@ -13,6 +13,7 @@ import UnknownCommandResponse from "../response/unknown-command";
 import UnknownSubCommandResponse from "../response/unknown-sub-command";
 import ContactResponse from "../response/contact/contact-terminal.response";
 import { getOrigin, getOriginOnSubCommands } from "~/utils/commands.utils";
+import TerminalStyledIcon from "../icons/terminal-styled.icon";
 export interface TerminalLog {
   shell?: ReactNode;
   Response?: ReactNode;
@@ -140,10 +141,16 @@ export default function TerminalLayout() {
   }, []);
 
   return (
-    <SectionUI className="fixed inset-0 text-light/90 px-2 pt-2! space-y-2! bg-gradient-to-b from-90% from-dark to bg-gray-700">
-      <h1 className="text-center text-xl font-bold text-blue-300">
-        <span className="text-green-300">Terminal</span>
-        <span className="text-blue-300">Styled</span>
+    <SectionUI
+      id="terminal-layout"
+      className="fixed inset-0 text-light/90 px-2 pt-2! space-y-2! bg-gradient-to-b from-90% from-dark to bg-gray-700"
+    >
+      <h1 className="text-center flex text-xl font-bold text-blue-300 bg-dark w-fit mx-auto border border-border-dark lg:text-3xl">
+        <span className="text-dark flex items-center lg:pl-6 pl-5 relative bg-blue-300 border-r-[1px]  py-1 border-dark">
+          <TerminalStyledIcon className="scale-100 lg:scale-150 lg:mr-4 mr-1 terminal-icon text-black/80" />
+          Terminal
+        </span>
+        <span className="text-dark pr-10 bg-green-300 py-1">Styled</span>
       </h1>
       {/* <small className="block text-center text-light/60">
         type -h or help for more commands
@@ -193,10 +200,10 @@ export default function TerminalLayout() {
         </ContactContext.Provider>
       </TerminalCardUI>
       <footer className="fixed bottom-0 text-center inset-x-0 flex flex-col pb-2">
-        <p className="text-sm lg:text-lg">
+        <p className="text-sm lg:text-lg text-shadow-2xs">
           © 2025 Kenneth Andales. Software Developer
         </p>
-        <small className="text-light/50 text-xs">
+        <small className="text-light/50 text-xs text-shadow-2xs">
           Built with Tailwind and React JS
         </small>
       </footer>

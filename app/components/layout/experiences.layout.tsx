@@ -7,13 +7,14 @@ import SectionUI from "../ui/section.ui";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
 
 export default function ExperiencesLayout() {
   const experienceRef = useRef(null);
   useAnimateElement("experience", experienceRef);
   const { responseSize } = useScreenSize();
+  const experiences = useMemo(() => EXPERIENCES, []);
 
   return (
     <SectionUI ref={experienceRef} id="experiences">
@@ -24,7 +25,7 @@ export default function ExperiencesLayout() {
       />
       <PaddingWrapperUI className="min-h-[100vh] text-dark">
         <div className="space-y-[15vh]">
-          {EXPERIENCES.map(
+          {experiences.map(
             (
               {
                 companyLogo,
@@ -70,7 +71,7 @@ export default function ExperiencesLayout() {
                       </h3>
                     </div>
                     <div className="dark:border-border-dark mx-4 border-border pt-5 lg:mx-0">
-                      <div className="flex flex-col font-open-sauce dark:text-light/90 transition-all md:text-lg md:text-center lg:text-left">
+                      <div className="flex flex-col font-open-sauce dark:text-light/90 md:text-lg md:text-center lg:text-left">
                         <p className="text-secondary">
                           <b>{title}</b>
                         </p>
@@ -96,7 +97,7 @@ export default function ExperiencesLayout() {
                               <span className="mt-1">
                                 <CheckIcon className="text-secondary" />
                               </span>
-                              <small className="text-sm md:text-base lg:text-lg dark:text-light/90 transition-all">
+                              <small className="text-sm md:text-base lg:text-lg dark:text-light/90">
                                 {description}
                               </small>
                             </li>
@@ -127,7 +128,7 @@ export default function ExperiencesLayout() {
                                 className={`xl:pb-10 experience-${index}-animate`}
                               >
                                 <div
-                                  className={`border-1 border-border hover:shadow-md transition-all xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                                  className={`border-1 border-border hover:shadow-md transition-shadow xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
                                     _index % 2 === 0 ? "" : "ml-auto"
                                   }`}
                                 >
@@ -141,7 +142,7 @@ export default function ExperiencesLayout() {
                                     width={182}
                                     height={99}
                                   />
-                                  <div className="p-3 dark:text-light/90 transition-all font-anton lg:px-4 lg:py-5 lg:space-y-4">
+                                  <div className="p-3 dark:text-light/90 font-anton lg:px-4 lg:py-5 lg:space-y-4">
                                     <div className="">
                                       <p className="lg:text-2xl">{title}</p>
                                       <p className="font-open-sauce">
@@ -210,7 +211,7 @@ export default function ExperiencesLayout() {
                                     width={182}
                                     height={99}
                                   />
-                                  <div className="p-3 dark:text-light/90 transition-all font-anton">
+                                  <div className="p-3 dark:text-light/90 font-anton">
                                     <div className="">
                                       <p className="lg:text-xl">{title}</p>
                                       <p className="font-open-sauce">

@@ -9,7 +9,7 @@ export default function PaddingWrapperUI({
 }) {
   return (
     <div
-      className={`px-4 py-2 text-dark dark:text-light/90 transition-all  lg:py-10 md:px-10 lg:pl-20 ${
+      className={`px-4 py-2 text-dark dark:text-light/90  lg:py-10 md:px-10 lg:pl-20 ${
         containerClassName || ""
       }`}
     >

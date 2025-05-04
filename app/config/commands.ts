@@ -18,6 +18,7 @@ import IntroResponse from "~/components/response/intro.response";
 import GUIResponse from "~/components/response/gui.response";
 import InfoResponse from "~/components/response/info.response";
 import ContactTerminalResponse from "~/components/response/contact/contact-terminal.response";
+import ResumeResponse from "~/components/response/resume.response";
 
 export interface Command {
   Component?: any;
@@ -34,6 +35,10 @@ const COMMANDS: Record<string, Command> = {
   info: {
     description: "Display basic personal information.",
     Component: InfoResponse,
+  },
+  resume: {
+    description: "View and download the developer's up-to-date resume.",
+    Component: ResumeResponse,
   },
   intro: {
     description: "Display an introduction message.",

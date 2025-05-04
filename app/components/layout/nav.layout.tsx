@@ -34,7 +34,7 @@ export default function NavLayout() {
       animate(
         "li",
         { x: 0, willChange: "transform" },
-        { duration: 0.2, delay: stagger(0.05) }
+        { duration: 0.2, delay: stagger(0.05), type: "tween" }
       );
 
       setTimeout(() => {
@@ -52,8 +52,8 @@ export default function NavLayout() {
   useEffect(() => {
     animateList(
       "li",
-      { x: ["-200%", "0%"], willChange: "transform" },
-      { duration: 0.2, delay: stagger(0.05) }
+      { x: ["-200%", "0%"], willChange: "transform", scale: [0.2, 1] },
+      { duration: 0.2, delay: stagger(0.05), type: "tween" }
     );
   }, []);
 
@@ -192,13 +192,13 @@ export default function NavLayout() {
                   >
                     <Link
                       onClick={closeNav}
-                      className="hover:text-secondary w-fit p-2 pl-0 cursor-pointer flex items-center gap-2 transition-all"
+                      className="hover:text-secondary w-fit p-2 pl-0 cursor-pointer flex items-center gap-2"
                       to={href}
                     >
                       <Icon />
                       {name}
                     </Link>
-                    <span className="absolute left-0 -bottom-1 will-change-transform -translate-x-[130%] w-full h-0.5 rounded-md bg-secondary transition-all duration-300 group-hover:translate-x-0" />
+                    <span className="absolute left-0 -bottom-1 will-change-transform -translate-x-[130%] w-full h-0.5 rounded-md bg-secondary transition-transform duration-300 group-hover:translate-x-0" />
                   </li>
                 ))}
               </ul>

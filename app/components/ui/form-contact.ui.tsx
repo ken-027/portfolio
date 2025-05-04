@@ -174,7 +174,7 @@ export default function FormContactUI({
             </label>
             <textarea
               placeholder="Type your message here..."
-              className="border-1 border-border lg:placeholder:text-base dark:text-light/90 rounded-sm p-1 px-2 w-full outline-none focus:border-secondary transition-all placeholder:italic placeholder:text-sm dark:border-border-dark"
+              className="border-1 border-border lg:placeholder:text-base dark:text-light/90 rounded-sm p-1 px-2 w-full outline-none focus:border-secondary placeholder:italic placeholder:text-sm dark:border-border-dark"
               rows={5}
             ></textarea>
           </div>

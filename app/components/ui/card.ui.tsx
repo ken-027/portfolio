@@ -16,7 +16,7 @@ export default function CardUI({
 }: CardUIProps) {
   return (
     <div
-      className={`overflow-hidden hover:shadow-md transition-all  items-center flex flex-col border-[1px] text-center border-border dark:border-border-dark rounded-md w-full ${
+      className={`overflow-hidden hover:shadow-md  items-center flex flex-col border-[1px] text-center border-border dark:border-border-dark rounded-md w-full ${
         className || ""
       }`}
       {...props}

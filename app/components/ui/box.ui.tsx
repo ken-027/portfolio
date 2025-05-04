@@ -27,7 +27,7 @@ export default function BoxUI({
 }: BoxUIProps) {
   return (
     <div
-      className={`border-[1px] mb-2 bg-light dark:bg-dark border-border  overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 hover:shadow-lg transition-all`}
+      className={`border-[1px] mb-2 bg-light dark:bg-dark border-border  overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 hover:shadow-lg transition-shadow`}
     >
       <img
         src={thumbnail || "/section-illustration/project.svg"}
@@ -38,10 +38,10 @@ export default function BoxUI({
       />
       <div className="px-3 space-y-3 md:space-y-6">
         <div className="space-y-2 mt-5">
-          <h3 className="text-xl md:text-2xl xl:text-3xl font-anton dark:text-light/90 transition-all">
+          <h3 className="text-xl md:text-2xl xl:text-3xl font-anton dark:text-light/90">
             {title}
           </h3>
-          <p className="text-sm md:text-base font-open-sauce dark:text-light/90 xl:text-lg transition-all">
+          <p className="text-sm md:text-base font-open-sauce dark:text-light/90 xl:text-lg">
             {description}
           </p>
         </div>
@@ -50,13 +50,13 @@ export default function BoxUI({
             <div
               key={index}
               title={name}
-              className="border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark transition-all h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center"
+              className="border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center"
             >
               <Icon className="scale-90" />
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 transition-all md:text-2xl lg:px-2">
+        <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-2xl lg:px-2">
           {website ? (
             <Link
               target="_blank"

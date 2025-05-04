@@ -20,8 +20,8 @@ export default function useAnimateElement(
         elementClass,
         {
           opacity: [0, 1],
-            y: ["10%", "0%"],
-        //   scale: ["0.2", "1"],
+          y: ["10%", "0%"],
+          //   scale: ["0.2", "1"],
           willChange: "transform",
         },
         {
@@ -35,7 +35,7 @@ export default function useAnimateElement(
         {
           opacity: [1, 0],
           y: ["0%", "-10%"],
-        //   scale: ["1", "0.2"],
+          //   scale: ["1", "0.2"],
           willChange: "transform",
         },
         {

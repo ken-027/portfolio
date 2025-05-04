@@ -33,7 +33,7 @@ export default function LinkUI({
       <span className="lg:scale-150 lg:mr-2">{Icon}</span>
       {title}
       <span
-        className={`absolute cursor-pointer left-0 -bottom-[0.5px] will-change-transform -translate-x-[101%] w-full h-1 rounded-md bg-dark dark:bg-light transition-all duration-300 group-hover:translate-x-0 ${borderClassName}`}
+        className={`absolute cursor-pointer left-0 -bottom-[0.5px] will-change-transform -translate-x-[101%] w-full h-1 rounded-md bg-dark dark:bg-light transition-transform duration-300 group-hover:translate-x-0 ${borderClassName}`}
       />
     </motion.a>
   );

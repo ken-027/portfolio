@@ -15,12 +15,12 @@ export default function TextFieldUI({
 }: TextFieldUIProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="dark:text-light/90 transition-all lg:text-lg">
+      <label htmlFor={id} className="dark:text-light/90 lg:text-lg">
         {label}
       </label>
       <input
         id={id}
-        className="border-1 border-border lg:text-lg dark:border-border-dark dark:text-light/90 rounded-sm p-1 px-2 w-full outline-none focus:border-secondary transition-all placeholder:italic placeholder:text-sm placeholder:lg:text-base"
+        className="border-1 border-border lg:text-lg dark:border-border-dark dark:text-light/90 rounded-sm p-1 px-2 w-full outline-none focus:border-secondary placeholder:italic placeholder:text-sm placeholder:lg:text-base"
         type={type || "text"}
         placeholder={placeholder || label}
       />

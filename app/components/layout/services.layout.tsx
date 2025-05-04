@@ -4,11 +4,12 @@ import SERVICES from "~/shared/services";
 import CardUI from "../ui/card.ui";
 import SectionUI from "../ui/section.ui";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 export default function ServicesLayout() {
   const serviceRef = useRef<HTMLDivElement>(null);
   useAnimateElement(`service`, serviceRef);
+  const services = useMemo(() => SERVICES, []);
 
   return (
     <SectionUI id="services" ref={serviceRef}>
@@ -20,7 +21,7 @@ export default function ServicesLayout() {
       <PaddingWrapperUI className="text-dark">
         <div className="flex flex-col items-center justify-center gap-10">
           <div className="flex flex-col gap-5 md:grid md:grid-cols-2 xl:grid-cols-3 xl:gap-y-10 xl:gap-x-10">
-            {SERVICES.map(({ description, title, Illustration }, index) => {
+            {services.map(({ description, title, Illustration }, index) => {
               const serviceItemRef = useRef(null);
               useAnimateElement(`service-${index}`, serviceItemRef);
               return (

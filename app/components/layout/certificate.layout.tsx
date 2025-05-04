@@ -45,6 +45,7 @@ export default function CertificateLayout() {
                   certificateLink,
                   certificateImage,
                   platformLogo,
+                  courseLink,
                 },
                 index
               ) => (
@@ -57,8 +58,9 @@ export default function CertificateLayout() {
                   key={index}
                   platform={platform}
                   platformLogo={platformLogo}
-                  dateCompleted="ongoing"
+                  dateCompleted={dateCompleted}
                   certificateLink={certificateLink}
+                  courseLink={courseLink}
                 />
               )
             )}

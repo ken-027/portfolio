@@ -9,15 +9,21 @@ export default function CertificatesResponse() {
           ({ name, dateCompleted, description, certificateLink }, index) => (
             <li key={index} className="space-y-1">
               <h2 className="text-yellow-300">{name}</h2>
-              <small>{dateCompleted === "ongoing" ? "Ongoing" : "Done"}</small>
+              <small className="italic mb-1 block">
+                {dateCompleted === "ongoing" ? "Ongoing" : "Done"}
+              </small>
               <p dangerouslySetInnerHTML={{ __html: description }} />
-              <a
-                target="_blank"
-                className="text-green-300"
-                href={certificateLink}
-              >
-                Certificate link
-              </a>
+              {certificateLink && dateCompleted !== "ongoing" ? (
+                <a
+                  target="_blank"
+                  className="text-green-300"
+                  href={certificateLink}
+                >
+                  Certificate link
+                </a>
+              ) : (
+                <p className="text-red-300">Certificate Not Available Yet</p>
+              )}
             </li>
           )
         )}

@@ -34,13 +34,15 @@ import TailwindCSSIcon from "~/components/icons/tailwincss.icon";
 import TypescriptIcon from "~/components/icons/typescript.icon";
 import VSCodeIcon from "~/components/icons/vscode.icon";
 
-interface Skill {
+export interface ItemSkill {
   name: string;
-  items: {
-    name: string;
-    Icon: React.FC<any>;
-    proficiency: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-  }[];
+  Icon: React.FC<any>;
+  proficiency: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+}
+
+export interface Skill {
+  name: string;
+  items: ItemSkill[];
 }
 
 const SKILLS: Skill[] = [
@@ -97,7 +99,7 @@ const SKILLS: Skill[] = [
       { name: "Redux Toolkit", Icon: ReduxIcon, proficiency: 6 },
       { name: "Socket.IO", Icon: SocketIOIcon, proficiency: 5 },
       { name: "GIT", Icon: GitIcon, proficiency: 8 },
-    //   { name: "NPM", Icon: NPMIcon, proficiency: 8 },
+      //   { name: "NPM", Icon: NPMIcon, proficiency: 8 },
       { name: "Docker", Icon: DockerIcon, proficiency: 4 },
       { name: "AWS", Icon: AWSIcon, proficiency: 4 },
     ],

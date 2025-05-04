@@ -16,7 +16,7 @@ export default function FooterLayout() {
     <footer
       id="resume"
       ref={footerRef}
-      className="text-center text-xs font-open-sauce pt-2 dark:bg-dark transition-all"
+      className="text-center text-xs font-open-sauce pt-2 dark:bg-dark transition-colors"
     >
       <PaddingWrapperUI className="min-h-fit!">
         <div className="flex flex-col items-center gap-2 mb-10 lg:hidden">

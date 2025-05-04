@@ -22,37 +22,27 @@ export default function ToggleDarkModeUI() {
 
   return (
     <div className="flex gap-1 items-center font-anton">
-      {/* <label className="switch scale-75 transition-all">
-        <input
-          type="checkbox"
-          checked={check}
-          onChange={onToggle}
-          className="transition-all"
-        />
-        <span className="slider round dark:before:bg-dark before:bg-light transition-all"></span>
-      </label>
-      Toggle Dark Mode */}
       <div className="flex items-center overflow-hidden rounded-md">
         <button
           title={"toggle light mode"}
-          className={`transition-all cursor-pointer bg-dark text-light border-1 dark:border-light/90 rounded-l-md border-r-0 border-dark duration-500 flex gap-2 text-sm items-center outline-none font-open-sauce py-1 pl-2 pr-1 `}
+          className={`cursor-pointer bg-dark text-light border-1 dark:border-light/90 rounded-l-md border-r-0 border-dark duration-500 flex gap-2 text-sm items-center outline-none font-open-sauce py-1 pl-2 pr-1 `}
           onClick={() => onToggle("light")}
         >
           <LightIcon
             isActive={!check}
-            className={`transition-all duration-500 ${
+            className={`transition-transform will-change-transform duration-[1000ms] ${
               check ? "scale-[60%]" : "scale-100"
             }`}
           />
         </button>
         <button
           title={"toggle dark mode"}
-          className={`l cursor-pointer bg-light/90 text-dark border-dark rounded-r-md border-1 border-l-0 dark:border-light/90 duration-500 flex gap-2 text-sm items-center outline-none font-open-sauce py-1 pr-2 pl-1`}
+          className={`cursor-pointer bg-light/90 text-dark border-dark rounded-r-md border-1 border-l-0 dark:border-light/90 duration-500 flex gap-2 text-sm items-center outline-none font-open-sauce py-1 pr-2 pl-1`}
           onClick={() => onToggle("dark")}
         >
           <DarkIcon
             isActive={check}
-            className={`transition-all duration-500 ${
+            className={`transition-transform will-change-transform duration-[1000ms] ${
               !check ? "scale-[60%]" : "scale-100"
             }`}
           />

@@ -17,7 +17,7 @@ export default function SectionUI({
     <section
       ref={ref}
       id={id}
-      className={`pt-20 pb-[10vh] lg:pb-52 lg:pt-6 space-y-10 dark:bg-dark transition-all ${
+      className={`pt-20 pb-[10vh] lg:pb-52 lg:pt-6 space-y-10 dark:bg-dark ${
         className || null
       }`}
     >

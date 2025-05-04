@@ -1,3 +1,4 @@
+import moment from "moment";
 import { type Certificate } from "~/shared/certificates";
 
 export interface CertificateCardUIProps extends Certificate {
@@ -12,10 +13,11 @@ export default function CertificateCardUI({
   platformLogo,
   className,
   certificateLink,
+  courseLink,
 }: CertificateCardUIProps) {
   return (
     <div
-      className={`border-[1px] hover:shadow-md transition-all bg-light dark:bg-dark border-border dark:border-border-dark rounded-md min-h-[100px] px-3 space-y-3 lg:space-y-6 lg:px-6 lg:py-8 py-4 ${
+      className={`border-[1px] hover:shadow-md transition-shadow bg-light dark:bg-dark border-border dark:border-border-dark rounded-md min-h-[100px] px-3 space-y-3 lg:space-y-6 lg:px-6 lg:py-8 py-4 ${
         className || ""
       }`}
     >
@@ -24,17 +26,27 @@ export default function CertificateCardUI({
           <h3 className="text-lg font-anton dark:text-light/90  lg:text-2xl">
             {name}
           </h3>
-          <small className="text-secondary block lg:text-base">
-            {platform}
-          </small>
+          {courseLink ? (
+            <a
+              href={courseLink}
+              target="_blank"
+              className="text-secondary block lg:text-base"
+            >
+              {platform} Course Link
+            </a>
+          ) : (
+            <p className="text-secondary block lg:text-base">{platform}</p>
+          )}
           <small className="block italic dark:text-light/90 lg:text-base">
-            {dateCompleted.toString()}
+            {dateCompleted === "ongoing"
+              ? "Ongoing"
+              : moment(dateCompleted).format("MMMM DD, YYYY")}
           </small>
         </div>
         <img
           src={platformLogo}
           alt={platform.toLowerCase()}
-          className="h-[50px] w-[50px] border-1 dark:border-none border-light rounded-md"
+          className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] border-1 dark:border-none border-light rounded-md"
         />
       </div>
       <p
@@ -51,7 +63,7 @@ export default function CertificateCardUI({
         </a>
       ) : (
         <p className="text-red-500 text-xs lg:text-base dark:text-red-300">
-          Certificate not issued
+          Certificate Not Available Yet
         </p>
       )}
     </div>
