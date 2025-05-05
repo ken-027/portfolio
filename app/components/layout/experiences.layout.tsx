@@ -125,140 +125,143 @@ export default function ExperiencesLayout() {
                       </div>
                     </Parallax>
                   </div>
-                  {responseSize.md ? (
-                    <div className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block">
-                      <p className="font-open-sauce md:text-lg dark:text-light/90 lg:text-xl font-bold">
-                        Projects I Worked On
-                      </p>
-                      <div className={`mt-4 lg:mt-10 space-y-5`}>
-                        <div className="w-full md:grid md:grid-cols-2 md:gap-5 justify-center lg:gap-10 xl:block">
-                          {projects?.map(
-                            (
-                              {
-                                thumbnailLink,
-                                title,
-                                technologies,
-                                description,
-                              },
-                              _index
-                            ) => (
-                              <div
-                                key={_index}
-                                className={`xl:pb-10 experience-${index}-animate`}
-                              >
+
+                  {projects ? (
+                    responseSize.md ? (
+                      <div className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block">
+                        <p className="font-open-sauce md:text-lg dark:text-light/90 lg:text-xl font-bold">
+                          Projects I Worked On
+                        </p>
+                        <div className={`mt-4 lg:mt-10 space-y-5`}>
+                          <div className="w-full md:grid md:grid-cols-2 md:gap-5 justify-center lg:gap-10 xl:block">
+                            {projects?.map(
+                              (
+                                {
+                                  thumbnailLink,
+                                  title,
+                                  technologies,
+                                  description,
+                                },
+                                _index
+                              ) => (
                                 <div
-                                  className={`border-1 border-border hover:shadow-md transition-shadow xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
-                                    _index % 2 === 0 ? "" : "ml-auto"
-                                  }`}
+                                  key={_index}
+                                  className={`xl:pb-10 experience-${index}-animate`}
                                 >
-                                  <img
-                                    className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] lg:h-[250px] md:h-[180px] bg-cover object-center aspect-ratio[16/9]"
-                                    src={
-                                      thumbnailLink ||
-                                      "/section-illustration/project.svg"
-                                    }
-                                    alt={title.toLowerCase()}
-                                    width={182}
-                                    height={99}
-                                  />
-                                  <div className="p-3 dark:text-light/90 font-anton lg:px-4 lg:py-5 lg:space-y-4">
-                                    <div className="">
-                                      <p className="lg:text-2xl">{title}</p>
-                                      <p className="font-open-sauce">
-                                        {description}
-                                      </p>
-                                    </div>
-                                    <div className="flex flex-wrap gap-1 md:gap-2 mt-2 lg:gap-3">
-                                      {technologies.map(
-                                        ({ Icon, name }, __index) => (
-                                          <div
-                                            key={__index}
-                                            title={name}
-                                            className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
-                                          >
-                                            <Icon className="scale-75 lg:scale-100" />
-                                          </div>
-                                        )
-                                      )}
+                                  <div
+                                    className={`border-1 border-border hover:shadow-md transition-shadow xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                                      _index % 2 === 0 ? "" : "ml-auto"
+                                    }`}
+                                  >
+                                    <img
+                                      className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] lg:h-[250px] md:h-[180px] bg-cover object-center aspect-ratio[16/9]"
+                                      src={
+                                        thumbnailLink ||
+                                        "/section-illustration/project.svg"
+                                      }
+                                      alt={title.toLowerCase()}
+                                      width={182}
+                                      height={99}
+                                    />
+                                    <div className="p-3 dark:text-light/90 font-anton lg:px-4 lg:py-5 lg:space-y-4">
+                                      <div className="">
+                                        <p className="lg:text-2xl">{title}</p>
+                                        <p className="font-open-sauce">
+                                          {description}
+                                        </p>
+                                      </div>
+                                      <div className="flex flex-wrap gap-1 md:gap-2 mt-2 lg:gap-3">
+                                        {technologies.map(
+                                          ({ Icon, name }, __index) => (
+                                            <div
+                                              key={__index}
+                                              title={name}
+                                              className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
+                                            >
+                                              <Icon className="scale-75 lg:scale-100" />
+                                            </div>
+                                          )
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            )
-                          )}
+                              )
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="mt-5 lg:mt-0 lg:flex-1 lg:hidden">
-                      <p className="font-open-sauce md:text-lg">
-                        Projects I Worked On
-                      </p>
-                      <div
-                        className={`mt-4 space-y-5 experience-${index}-animate`}
-                      >
-                        <Swiper
-                          modules={[Navigation, Pagination]}
-                          className="w-full"
-                          spaceBetween={50}
-                          centeredSlides={true}
-                          slidesPerView={"auto"}
-                          navigation
-                          pagination={{ clickable: true }}
+                    ) : (
+                      <div className="mt-5 lg:mt-0 lg:flex-1 lg:hidden">
+                        <p className="font-open-sauce md:text-lg">
+                          Projects I Worked On
+                        </p>
+                        <div
+                          className={`mt-4 space-y-5 experience-${index}-animate`}
                         >
-                          {projects?.map(
-                            (
-                              {
-                                thumbnailLink,
-                                title,
-                                technologies,
-                                description,
-                              },
-                              _index
-                            ) => (
-                              <SwiperSlide key={_index} className="pb-10">
-                                <div
-                                  className={`border-1 border-border dark:border-border-dark rounded-sm overflow-hidden`}
-                                >
-                                  <img
-                                    className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] md:h-[350px] bg-cover object-center aspect-ratio[16/9]"
-                                    src={
-                                      thumbnailLink ||
-                                      "/section-illustration/project.svg"
-                                    }
-                                    alt={title.toLowerCase()}
-                                    width={182}
-                                    height={99}
-                                  />
-                                  <div className="p-3 dark:text-light/90 font-anton">
-                                    <div className="">
-                                      <p className="lg:text-xl">{title}</p>
-                                      <p className="font-open-sauce">
-                                        {description}
-                                      </p>
-                                    </div>
-                                    <div className="flex flex-wrap gap-1 md:gap-2 mt-2">
-                                      {technologies.map(
-                                        ({ Icon, name }, __index) => (
-                                          <div
-                                            key={__index}
-                                            title={name}
-                                            className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
-                                          >
-                                            <Icon className="scale-75 md:scale-100" />
-                                          </div>
-                                        )
-                                      )}
+                          <Swiper
+                            modules={[Navigation, Pagination]}
+                            className="w-full"
+                            spaceBetween={50}
+                            centeredSlides={true}
+                            slidesPerView={"auto"}
+                            navigation
+                            pagination={{ clickable: true }}
+                          >
+                            {projects?.map(
+                              (
+                                {
+                                  thumbnailLink,
+                                  title,
+                                  technologies,
+                                  description,
+                                },
+                                _index
+                              ) => (
+                                <SwiperSlide key={_index} className="pb-10">
+                                  <div
+                                    className={`border-1 border-border dark:border-border-dark rounded-sm overflow-hidden`}
+                                  >
+                                    <img
+                                      className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] md:h-[350px] bg-cover object-center aspect-ratio[16/9]"
+                                      src={
+                                        thumbnailLink ||
+                                        "/section-illustration/project.svg"
+                                      }
+                                      alt={title.toLowerCase()}
+                                      width={182}
+                                      height={99}
+                                    />
+                                    <div className="p-3 dark:text-light/90 font-anton">
+                                      <div className="">
+                                        <p className="lg:text-xl">{title}</p>
+                                        <p className="font-open-sauce">
+                                          {description}
+                                        </p>
+                                      </div>
+                                      <div className="flex flex-wrap gap-1 md:gap-2 mt-2">
+                                        {technologies.map(
+                                          ({ Icon, name }, __index) => (
+                                            <div
+                                              key={__index}
+                                              title={name}
+                                              className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
+                                            >
+                                              <Icon className="scale-75 md:scale-100" />
+                                            </div>
+                                          )
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </SwiperSlide>
-                            )
-                          )}
-                        </Swiper>
+                                </SwiperSlide>
+                              )
+                            )}
+                          </Swiper>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )
+                  ) : null}
                 </div>
               );
             }

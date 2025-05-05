@@ -13,6 +13,19 @@ export interface Experience {
 
 const EXPERIENCES: Experience[] = [
   {
+    title: "Freelance Software Developer",
+    company: "Self-Employed",
+    location: "WFH",
+    startDate: new Date("2025-04-15"),
+    endDate: "Present",
+    descriptions: [
+      "Building a service offering focused on modern web development using Next.js and Laravel.",
+      "Expanding expertise in AI and DevOps while developing a professional portfolio to showcase skills.",
+      "Proactively seeking freelance projects and collaborative opportunities in the tech industry.",
+    ],
+    projects: [PROJECTS.portfolio, PROJECTS.rustify],
+  },
+  {
     title: "Mid-Software Developer",
     company: "National Confederation of Cooperatives",
     location: "WFH",
@@ -25,11 +38,11 @@ const EXPERIENCES: Experience[] = [
       "Identified and resolved data issues in the legacy system, improving data integrity and system reliability.",
     ],
     companyLogo: "/images/companies/natcco-logo.svg",
-    projects: [PROJECTS[0], PROJECTS[1], PROJECTS[2]],
+    projects: [PROJECTS.casa, PROJECTS.casa_api, PROJECTS.fixed_asset],
   },
   {
     title: "Freelance Web Developer",
-    company: "Freelancing",
+    company: "Self-Employed",
     location: "WFH",
     startDate: new Date("2022-01-05"),
     endDate: new Date("2022-05-20"),
@@ -41,7 +54,12 @@ const EXPERIENCES: Experience[] = [
       "Developed visually engaging and responsive landing pages based on Figma designs, delivering seamless UX across devices.",
       "Collaborated with designer and backend developer to build user interfaces from mockups and integrate API for full functionality.",
     ],
-    projects: [PROJECTS[4], PROJECTS[12], PROJECTS[7], PROJECTS[8]],
+    projects: [
+      PROJECTS.dashboard,
+      PROJECTS.e_commerce,
+      PROJECTS.wiwo,
+      PROJECTS.libre,
+    ],
   },
   {
     title: "Software Developer",
@@ -55,7 +73,7 @@ const EXPERIENCES: Experience[] = [
       "Maintained code quality and best practices through active participation in team code reviews, reducing technical debt and improving maintainability.",
     ],
     companyLogo: "/images/companies/cloud-panda-ph-logo.svg",
-    projects: [PROJECTS[13], PROJECTS[14]],
+    projects: [PROJECTS.mta, PROJECTS.llda],
   },
   {
     title: "Jr. Web Developer",
@@ -69,7 +87,7 @@ const EXPERIENCES: Experience[] = [
       "Implemented a version control strategy by regularly updating and managing code repositories on Bitbucket, ensuring seamless collaboration and code integrity.",
     ],
     companyLogo: "/images/companies/ipp-logo.svg",
-    projects: [PROJECTS[15], PROJECTS[16], PROJECTS[17]],
+    projects: [PROJECTS.csrm, PROJECTS.csrm_api, PROJECTS.ema],
   },
 ];
 

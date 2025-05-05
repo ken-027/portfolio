@@ -9,6 +9,7 @@ import FooterLayout from "~/components/layout/footer.layout";
 import CertificateLayout from "~/components/layout/certificate.layout";
 import TerminalLayout from "~/components/layout/terminal.layout";
 import { getStyledType } from "~/shared/local-storage";
+import { useEffect, useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -22,19 +23,30 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const getStyle = getStyledType();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 200);
+  }, []);
 
   return (
     <>
       {getStyle === "gui" ? (
         <>
-          <BannerLayout />
-          <ServicesLayout />
-          <SkillsLayout />
-          <ExperiencesLayout />
-          <ProjectsLayout />
-          <CertificateLayout />
-          <ContactLayout />
-          <FooterLayout />
+          {show ? (
+            <>
+              <BannerLayout />
+              <ServicesLayout />
+              <SkillsLayout />
+              <ExperiencesLayout />
+              <ProjectsLayout />
+              <CertificateLayout />
+              <ContactLayout />
+              <FooterLayout />
+            </>
+          ) : null}
         </>
       ) : (
         <TerminalLayout />

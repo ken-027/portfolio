@@ -15,7 +15,11 @@ import useScreenSize from "~/hooks/useScreenSize";
 
 export default function ProjectsLayout() {
   const projects = useMemo(
-    () => PROJECTS.filter(({ thumbnailLink }) => thumbnailLink !== undefined),
+    () =>
+      Object.keys(PROJECTS)
+        // @ts-ignore
+        .map((name) => ({ ...PROJECTS[name] }))
+        .filter(({ thumbnailLink }) => thumbnailLink !== undefined),
     []
   );
   const projectRef = useRef(null);

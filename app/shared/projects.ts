@@ -34,8 +34,31 @@ export const CATEGORIES: Category[] = [
   "fullstack",
 ];
 
-const PROJECTS: Project[] = [
-  {
+type PROJECT_NAME =
+  | "casa"
+  | "casa_api"
+  | "fixed_asset"
+  | "portfolio"
+  | "dashboard"
+  | "job_posting"
+  | "invoice_crud"
+  | "wiwo"
+  | "libre"
+  | "educat"
+  | "agency_match"
+  | "trabook"
+  | "e_commerce"
+  | "mta"
+  | "llda"
+  | "csrm"
+  | "csrm_api"
+  | "ema"
+  | "recipe_api"
+  | "order_api"
+  | "rustify";
+
+const PROJECTS: Record<PROJECT_NAME, Project> = {
+  casa: {
     category: "frontend",
     title: "EkoopBanker Plus CASA V3 (UI)",
     thumbnailLink: "/images/projects/casa-thumbnail.png",
@@ -53,7 +76,7 @@ const PROJECTS: Project[] = [
     ],
     screenshot: "/pdf/EKOOPBANKER_PLUS_CASA_V3.pdf",
   },
-  {
+  casa_api: {
     category: "backend",
     title: "EkoopBanker Plus CASA V3 (API)",
     thumbnailLink: "/images/projects/casa-thumbnail.png",
@@ -69,7 +92,7 @@ const PROJECTS: Project[] = [
     ],
     screenshot: "/pdf/EKOOPBANKER_PLUS_CASA_V3.pdf",
   },
-  {
+  fixed_asset: {
     category: "fullstack",
     title: "EkoopBanker Plus Accounting V2",
     thumbnailLink: "/images/projects/accounting-thumbnail.png",
@@ -83,7 +106,7 @@ const PROJECTS: Project[] = [
     ],
     screenshot: "/pdf/EKOOPBANKER_PLUS_ACCOUNTING_V2.pdf",
   },
-  {
+  portfolio: {
     category: "frontend",
     title: "Portfolio Site",
     thumbnailLink: "/images/projects/portfolio-site-thumbnail.png",
@@ -98,7 +121,7 @@ const PROJECTS: Project[] = [
     githubRepo: "https://github.com/ken-027/portfolio",
     liveDemo: "https://kenneth-andales.github.io",
   },
-  {
+  dashboard: {
     category: "fullstack",
     title: "E-commerce Dashboard",
     thumbnailLink: "/images/projects/ecommerce-dashboard-thumbnail.png",
@@ -116,7 +139,24 @@ const PROJECTS: Project[] = [
     ],
     githubRepo: "https://github.com/ken-027/laravel-ecommerce-admin",
   },
-  {
+  rustify: {
+    category: "fullstack",
+    title: "Rustify",
+    thumbnailLink: "/images/projects/rustify.png",
+    liveDemo: "https://rustify-sigma.vercel.app",
+    description:
+      "A simple conversion tool for converting js/ts code to rust code.",
+    technologies: [
+      language.items[0],
+      language.items[2],
+      frontend.items[3],
+      frontend.items[2],
+      backend.items[0],
+      fullstack.items[0],
+    ],
+    githubRepo: "https://github.com/ken-027/rustify",
+  },
+  job_posting: {
     category: "fullstack",
     title: "Job Posting",
     thumbnailLink: "/images/projects/job-posting-thumbnail.png",
@@ -134,7 +174,7 @@ const PROJECTS: Project[] = [
     ],
     githubRepo: "https://github.com/ken-027/laravelfindeasyjob",
   },
-  {
+  invoice_crud: {
     category: "fullstack",
     title: "Invoice CRUD",
     thumbnailLink: "/images/projects/invoice-crud-thumbnail.png",
@@ -152,7 +192,7 @@ const PROJECTS: Project[] = [
     ],
     githubRepo: "https://github.com/ken-027/laravelinvoicecrud",
   },
-  {
+  wiwo: {
     category: "frontend",
     title: "Wilson Works Landing Page",
     thumbnailLink: "/images/projects/wilson-works-thumbnail.png",
@@ -167,7 +207,7 @@ const PROJECTS: Project[] = [
     githubRepo: "https://github.com/ken-027/wiwosite",
     liveDemo: "https://kenneth-andales.github.io/wilson-works/",
   },
-  {
+  libre: {
     category: "frontend",
     title: "Libre Landing Page",
     thumbnailLink: "/images/projects/libre-thumbnail.png",
@@ -183,7 +223,7 @@ const PROJECTS: Project[] = [
     githubRepo: "https://github.com/ken-027/libre-site",
     liveDemo: "https://kenneth-andales.github.io/libre/",
   },
-  {
+  educat: {
     category: "frontend",
     title: "Educat Landing Page",
     thumbnailLink: "/images/projects/educat-thumbnail.png",
@@ -198,7 +238,7 @@ const PROJECTS: Project[] = [
     githubRepo: "https://github.com/ken-027/educat-landing",
     liveDemo: "https://kenneth-andales.github.io/educat/",
   },
-  {
+  agency_match: {
     category: "frontend",
     title: "AgencyMatch Landing Page",
     thumbnailLink: "/images/projects/agency-match-thumbnail.png",
@@ -213,7 +253,7 @@ const PROJECTS: Project[] = [
     githubRepo: "https://github.com/ken-027/agency-match",
     liveDemo: "https://kenneth-andales.github.io/agency-match/",
   },
-  {
+  trabook: {
     category: "frontend",
     title: "TraBook Landing Page",
     thumbnailLink: "/images/projects/trabook-thumbnail.png",
@@ -228,14 +268,14 @@ const PROJECTS: Project[] = [
     githubRepo: "https://github.com/ken-027/trabook",
     liveDemo: "https://kenneth-andales.github.io/trabook/",
   },
-  {
+  e_commerce: {
     category: "frontend",
     title: "Buyback E-commerce Website",
     description:
       "An e-commerce site that allows customers to sell their old devices, with the option to check if their device is listed on the platform before selling.",
     technologies: [language.items[0], language.items[4], frontend.items[4]],
   },
-  {
+  mta: {
     category: "fullstack",
     title: "DSWD Minor Travelling Abroad",
     description:
@@ -251,7 +291,7 @@ const PROJECTS: Project[] = [
       fullstack.items[2],
     ],
   },
-  {
+  llda: {
     category: "fullstack",
     title: "Laguna Lake Development Authority",
     description:
@@ -267,7 +307,7 @@ const PROJECTS: Project[] = [
       fullstack.items[2],
     ],
   },
-  {
+  csrm: {
     category: "frontend",
     title: "Customer Service Record Management System (UI)",
     description:
@@ -279,14 +319,14 @@ const PROJECTS: Project[] = [
       frontend.items[1],
     ],
   },
-  {
+  csrm_api: {
     category: "backend",
     title: "Customer Service Record Management System (API)",
     description:
       "An internal customer service system designed to efficiently manage customer interactions, inquiries, and support requests.",
     technologies: [language.items[4], backend.items[3]],
   },
-  {
+  ema: {
     category: "fullstack",
     title: "EMA V2 E-commerce Website",
     description:
@@ -300,7 +340,7 @@ const PROJECTS: Project[] = [
       backend.items[3],
     ],
   },
-  {
+  recipe_api: {
     category: "backend",
     title: "Recipe API",
     thumbnailLink: "/images/projects/recipe-api.png",
@@ -309,7 +349,7 @@ const PROJECTS: Project[] = [
     technologies: [language.items[4], backend.items[3], fullstack.items[1]],
     githubRepo: "https://github.com/ken-027/laravel-recipe-api",
   },
-  {
+  order_api: {
     category: "backend",
     title: "Order API",
     thumbnailLink: "/images/projects/order-api.png",
@@ -317,6 +357,6 @@ const PROJECTS: Project[] = [
     technologies: [language.items[4], backend.items[3], fullstack.items[1]],
     githubRepo: "https://github.com/ken-027/laravel-orderapi",
   },
-];
+};
 
 export default PROJECTS;

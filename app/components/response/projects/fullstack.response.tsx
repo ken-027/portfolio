@@ -3,10 +3,13 @@ import ResponseWrapperUI from "../../ui/response-wrapper.ui";
 
 export default function FullstackProjectsResponse() {
   const projectCategory = "fullstack";
-  const FRONTEND = PROJECTS.filter(
-    ({ category, thumbnailLink }) =>
-      category === projectCategory && thumbnailLink !== undefined
-  );
+  const FRONTEND = Object.keys(PROJECTS)
+    // @ts-ignore
+    .map((name) => ({ ...PROJECTS[name] }))
+    .filter(
+      ({ category, thumbnailLink }) =>
+        category === projectCategory && thumbnailLink !== undefined
+    );
 
   return (
     <ResponseWrapperUI typeSpeed="fast">
