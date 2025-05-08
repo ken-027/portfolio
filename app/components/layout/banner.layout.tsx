@@ -43,10 +43,10 @@ export default function BannerLayout() {
   return (
     <header
       ref={scope}
-      className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-6 md:gap-20 lg:gap-0 2xl:gap-10 items-center h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
+      className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-6 md:gap-20 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
       id="home"
     >
-      <ScrollUpUI show={!isInView} />
+      {/* <ScrollUpUI show={!isInView} /> */}
       {switching ? <PageLoaderLayout /> : null}
       <GlobeUI />
       <PaddingWrapperUI

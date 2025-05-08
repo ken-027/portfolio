@@ -61,6 +61,7 @@ export default function CertificateLayout() {
                   dateCompleted={dateCompleted}
                   certificateLink={certificateLink}
                   courseLink={courseLink}
+                  certificateImage={certificateImage}
                 />
               )
             )}

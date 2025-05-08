@@ -1,15 +1,29 @@
-import BannerLayout from "~/components/layout/banner.layout";
 import type { Route } from "./+types/home";
-import ServicesLayout from "~/components/layout/services.layout";
-import ExperiencesLayout from "~/components/layout/experiences.layout";
-import SkillsLayout from "~/components/layout/skills.layout";
-import ProjectsLayout from "~/components/layout/projects.layout";
-import ContactLayout from "~/components/layout/contact.layout";
-import FooterLayout from "~/components/layout/footer.layout";
-import CertificateLayout from "~/components/layout/certificate.layout";
-import TerminalLayout from "~/components/layout/terminal.layout";
 import { getStyledType } from "~/shared/local-storage";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import InitialPageLoaderLayout from "~/components/layout/initial-page-loader.layout";
+import { visitor } from "~/api/visitor.api";
+
+const BannerLayout = lazy(() => import("~/components/layout/banner.layout"));
+const TerminalLayout = lazy(
+  () => import("~/components/layout/terminal.layout")
+);
+const ServicesLayout = lazy(
+  () => import("~/components/layout/services.layout")
+);
+const SkillsLayout = lazy(() => import("~/components/layout/skills.layout"));
+const ProjectsLayout = lazy(
+  () => import("~/components/layout/projects.layout")
+);
+const ExperiencesLayout = lazy(
+  () => import("~/components/layout/experiences.layout")
+);
+const ContactLayout = lazy(() => import("~/components/layout/contact.layout"));
+const FooterLayout = lazy(() => import("~/components/layout/footer.layout"));
+const ChatBotLayout = lazy(() => import("~/components/layout/chatbot.layout"));
+const CertificateLayout = lazy(
+  () => import("~/components/layout/certificate.layout")
+);
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -26,27 +40,33 @@ export default function Home() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    visitor();
+
     setTimeout(() => {
       setShow(true);
-    }, 200);
+    }, 400);
   }, []);
 
   return (
     <>
+      <InitialPageLoaderLayout />
       {getStyle === "gui" ? (
         <>
-          {show ? (
-            <>
-              <BannerLayout />
-              <ServicesLayout />
-              <SkillsLayout />
-              <ExperiencesLayout />
-              <ProjectsLayout />
-              <CertificateLayout />
-              <ContactLayout />
-              <FooterLayout />
-            </>
-          ) : null}
+          <Suspense fallback={null}>
+            {show ? (
+              <>
+                <BannerLayout />
+                <ServicesLayout />
+                <SkillsLayout />
+                <ExperiencesLayout />
+                <ProjectsLayout />
+                <CertificateLayout />
+                <ContactLayout />
+                <FooterLayout />
+                <ChatBotLayout />
+              </>
+            ) : null}
+          </Suspense>
         </>
       ) : (
         <TerminalLayout />

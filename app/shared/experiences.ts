@@ -12,19 +12,19 @@ export interface Experience {
 }
 
 const EXPERIENCES: Experience[] = [
-  {
-    title: "Freelance Software Developer",
-    company: "Self-Employed",
-    location: "WFH",
-    startDate: new Date("2025-04-15"),
-    endDate: "Present",
-    descriptions: [
-      "Building a service offering focused on modern web development using Next.js and Laravel.",
-      "Expanding expertise in AI and DevOps while developing a professional portfolio to showcase skills.",
-      "Proactively seeking freelance projects and collaborative opportunities in the tech industry.",
-    ],
-    projects: [PROJECTS.portfolio, PROJECTS.rustify],
-  },
+//   {
+//     title: "Freelance Software Developer",
+//     company: "Self-Employed",
+//     location: "WFH",
+//     startDate: new Date("2025-04-15"),
+//     endDate: "Present",
+//     descriptions: [
+//       "Building a service offering focused on modern web development using Next.js and Laravel.",
+//       "Expanding expertise in AI and DevOps while developing a professional portfolio to showcase skills.",
+//       "Proactively seeking freelance projects and collaborative opportunities in the tech industry.",
+//     ],
+//     projects: [PROJECTS.portfolio, PROJECTS.rustify, PROJECTS.anime_dialog_translator, PROJECTS.py_to_any],
+//   },
   {
     title: "Mid-Software Developer",
     company: "National Confederation of Cooperatives",

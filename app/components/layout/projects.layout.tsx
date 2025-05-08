@@ -14,20 +14,16 @@ import "swiper/css/pagination";
 import useScreenSize from "~/hooks/useScreenSize";
 
 export default function ProjectsLayout() {
-  const projects = useMemo(
-    () =>
-      Object.keys(PROJECTS)
-        // @ts-ignore
-        .map((name) => ({ ...PROJECTS[name] }))
-        .filter(({ thumbnailLink }) => thumbnailLink !== undefined),
-    []
-  );
+  const projects = Object.keys(PROJECTS)
+    // @ts-ignore
+    .map((name) => ({ ...PROJECTS[name] }))
+    .filter(({ thumbnailLink }) => thumbnailLink !== undefined);
   const projectRef = useRef(null);
   useAnimateElement("project", projectRef);
 
   const { responseSize } = useScreenSize();
 
-  const categories = useMemo(() => CATEGORIES, []);
+  const categories = CATEGORIES;
 
   const desktopEffect = {
     className: "pb-10!",
@@ -86,7 +82,7 @@ export default function ProjectsLayout() {
               <h3
                 className={`text-center text-xl md:text-2xl font-anton dark:text-light/90 lg:text-3xl capitalize project-${index}-animate`}
               >
-                {category} development
+                {category} applications
               </h3>
               <div className="lg:w-1/2 md:mx-auto md:w-[80%]">
                 {/* @ts-ignore */}

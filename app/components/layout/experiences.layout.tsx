@@ -23,7 +23,7 @@ export default function ExperiencesLayout() {
         <HeaderUI
           headerTitle="Experiences"
           headerSubtitle="Where I’ve Gained Experience"
-          className="experience-animate lg:mb-[70vh]!"
+          className="experience-animate lg:mb-[40vh]!"
         />
       </Parallax>
 
@@ -128,7 +128,10 @@ export default function ExperiencesLayout() {
 
                   {projects ? (
                     responseSize.md ? (
-                      <div className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block">
+                      <Parallax
+                        speed={responseSize.lg ? 100 : 0}
+                        className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block"
+                      >
                         <p className="font-open-sauce md:text-lg dark:text-light/90 lg:text-xl font-bold">
                           Projects I Worked On
                         </p>
@@ -190,7 +193,7 @@ export default function ExperiencesLayout() {
                             )}
                           </div>
                         </div>
-                      </div>
+                      </Parallax>
                     ) : (
                       <div className="mt-5 lg:mt-0 lg:flex-1 lg:hidden">
                         <p className="font-open-sauce md:text-lg">

@@ -8,7 +8,7 @@ export default function ProjectsResponse() {
         {CATEGORIES.map((category, index) => (
           <div key={index}>
             <h2 className="capitalize text-yellow-300 mb-1">
-              {category} development
+              {category} applications
             </h2>
             <div className="space-y-1">
               {Object.keys(PROJECTS)

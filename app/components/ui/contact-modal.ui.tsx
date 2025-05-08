@@ -33,7 +33,7 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
           animate={{ opacity: [0, 1] }}
           exit={{ opacity: [1, 0] }}
           transition={{ duration: 0.5 }}
-          className="fixed inset-0 backdrop-blur-xs bg-dark/50 z-50 dark:bg-light/20 grid place-items-center overflow-y-auto py-10 px-20 gap-10"
+          className="fixed inset-0 backdrop-blur-xs overflow-x-hidden bg-dark/50 z-50 dark:bg-light/20 grid place-items-center overflow-y-auto py-10 px-20 gap-10"
         >
           <div className="flex items-center justify-center gap-10 w-full">
             <motion.div

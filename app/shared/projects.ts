@@ -14,7 +14,7 @@ const backend = SKILLS[2];
 const fullstack = SKILLS[3];
 const tools = SKILLS[4];
 
-export type Category = "all" | "fullstack" | "frontend" | "backend";
+export type Category = "fullstack" | "frontend" | "backend" | "AI-powered";
 
 export interface Project {
   thumbnailLink?: string;
@@ -28,10 +28,10 @@ export interface Project {
 }
 
 export const CATEGORIES: Category[] = [
-  //   "all",
   "frontend",
   "backend",
   "fullstack",
+  "AI-powered",
 ];
 
 type PROJECT_NAME =
@@ -55,7 +55,10 @@ type PROJECT_NAME =
   | "ema"
   | "recipe_api"
   | "order_api"
-  | "rustify";
+  | "rustify"
+  | "anime_dialog_translator"
+  | "py_to_any"
+  | "portfolio_chatbot_api";
 
 const PROJECTS: Record<PROJECT_NAME, Project> = {
   casa: {
@@ -139,13 +142,30 @@ const PROJECTS: Record<PROJECT_NAME, Project> = {
     ],
     githubRepo: "https://github.com/ken-027/laravel-ecommerce-admin",
   },
+  portfolio_chatbot_api: {
+    category: "AI-powered",
+    title: "Portfolio Chatbot API",
+    thumbnailLink: "/images/projects/portfolio-chatbot-api.png",
+    liveDemo: "https://portfolio-chatbot-api.vercel.app",
+    description:
+      "Built a simple chatbot API that combines OpenAI's language model with Retrieval-Augmented Generation (RAG), using MongoDB's Vector Search for embedding-based document retrieval to provide more relevant and context-aware responses.",
+    technologies: [
+      language.items[0],
+      language.items[2],
+      frontend.items[3],
+      frontend.items[2],
+      backend.items[0],
+      fullstack.items[0],
+    ],
+    githubRepo: "https://github.com/ken-027/portfolio-chatbot-api",
+  },
   rustify: {
-    category: "fullstack",
+    category: "AI-powered",
     title: "Rustify",
     thumbnailLink: "/images/projects/rustify.png",
     liveDemo: "https://rustify-sigma.vercel.app",
     description:
-      "A simple conversion tool for converting js/ts code to rust code.",
+      "A simple conversion tool for converting js/ts code to rust code using Anthropic AI.",
     technologies: [
       language.items[0],
       language.items[2],
@@ -356,6 +376,24 @@ const PROJECTS: Record<PROJECT_NAME, Project> = {
     description: "A simple authentication and CRUD application for orders.",
     technologies: [language.items[4], backend.items[3], fullstack.items[1]],
     githubRepo: "https://github.com/ken-027/laravel-orderapi",
+  },
+  anime_dialog_translator: {
+    category: "AI-powered",
+    title: "Anime Audio Translator",
+    thumbnailLink: "/images/projects/anime-audio-translator.png",
+    description:
+      "Translate Japanese anime audio into English and Filipino (Tagalog) using Gradio, OpenAI and HuggingFace open-source models running on google colab.",
+    technologies: [language.items[6]],
+    githubRepo: "https://github.com/ken-027/anime-dialog-translator",
+  },
+  py_to_any: {
+    category: "AI-powered",
+    title: "Python Code to Any",
+    thumbnailLink: "/images/projects/code_conversion.png",
+    description:
+      "A simple code conversion tool that converts Python code to any programming language like cpp, javascript and php using openai and anthropic",
+    technologies: [language.items[6]],
+    githubRepo: "https://github.com/ken-027/py-to-any",
   },
 };
 
