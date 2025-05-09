@@ -4,9 +4,26 @@ import { chatStream } from "~/api/chat-stream.api";
 import ShareIcon from "../icons/share.icon";
 import CloseIcon from "../icons/close.icon";
 import { marked } from "marked";
+import botSound from "../../assets/sounds/chatbot-sound.mp3";
+import useSound from "use-sound";
+import generateRandomNumber from "~/utils/generate-random.util";
 
 export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
+  const preMessages = [
+    "What services do you offer?",
+    "How many experiences do you have?",
+    "Can you show some of your past projects?",
+    "What technologies are you most proficient in?",
+    "Have you worked with clients or teams before?",
+    "Do you have experience with mobile or responsive design?",
+    "Can you build custom features based on client requirements?",
+    "Are you open to freelance or full-time opportunities?",
+    "",
+  ];
   const [show, setShow] = useState(false);
+  const [randomIndex, setRandomIndex] = useState<number>(
+    generateRandomNumber(0, preMessages.length)
+  );
   const [streaming, setStreaming] = useState(false);
   const [reply, setReply] = useState("");
   const [replies, setReplies] = useState<string[]>([
@@ -16,8 +33,16 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const messageRef = useRef<HTMLInputElement>(null);
   const historyRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [play] = useSound(botSound);
 
-  const toggleChat = () => setShow((prevState) => !prevState);
+  const toggleChat = () =>
+    setShow((prevState) => {
+      if (prevState) {
+        setRandomIndex(generateRandomNumber(0, preMessages.length));
+      }
+
+      return !prevState;
+    });
 
   const onChat = async () => {
     let _reply = "";
@@ -34,6 +59,8 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
 
       const stream_replies = await chatStream(message);
 
+      play();
+
       const decoder = new TextDecoder("utf-8");
       while (stream_replies) {
         const { value, done } = await stream_replies.read();
@@ -43,6 +70,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
         _reply += chunk;
       }
     } catch (err) {
+      play();
       // @ts-ignore
       _reply = err.message;
       console.error(err);
@@ -74,6 +102,16 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  };
+
+  const onKeyDown = (e: any) => {
+    if (!messageRef?.current) return;
+
+    const message = messageRef.current.value.trim();
+
+    if (e.key === "Tab" && message === "") {
+      messageRef.current.value = preMessages[randomIndex] || "";
+    }
   };
 
   useEffect(scrollDown, [reply]);
@@ -108,8 +146,15 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
               className="flex-1 relative"
               onSubmit={(e) => e.preventDefault()}
             >
-              <h3 className="lg:text-xl bg-dark text-light py-3 flex justify-between px-4">
-                🤖 Welcome to my Personal Chatbot
+              <div className="lg:text-xl bg-dark text-light py-3 flex justify-between px-4 items-center">
+                <div className="flex gap-2 items-center">
+                  <img
+                    alt="chatbot"
+                    src="/images/chatbot.png"
+                    className="h-8 w-8"
+                  />
+                  <h3>Welcome to my Personal Chatbot</h3>
+                </div>
                 <button
                   className="hover:text-yellow-300 cursor-pointer"
                   type="button"
@@ -117,7 +162,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                 >
                   <CloseIcon className="transition-colors" />
                 </button>
-              </h3>
+              </div>
               <div
                 ref={historyRef}
                 className="max-h-[400px] px-2 overflow-y-auto space-y-3 message-history pt-4 pb-10"
@@ -143,7 +188,11 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                   <input
                     ref={messageRef}
                     type="text"
-                    className="w-full outline-none group border-[1px] border-border pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark"
+                    placeholder={
+                      preMessages[randomIndex] || "Your question here..."
+                    }
+                    onKeyDown={onKeyDown}
+                    className="w-full outline-none placeholder:italic group border-[1px] border-border pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark"
                   />
                   <button
                     className="cursor-pointer w-fit bottom-3 group outline-none absolute right-3"
@@ -163,7 +212,11 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
             className="cursor-pointer text-4xl! lg:text-5xl! translate-x-2 wave"
             onClick={toggleChat}
           >
-            🤖
+            <img
+              alt="chatbot"
+              src="/images/chatbot.png"
+              className="h-12 w-12 lg:h-16 lg:w-16"
+            />
           </button>
         )}
       </AnimatePresence>

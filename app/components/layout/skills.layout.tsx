@@ -1,15 +1,13 @@
-"use client";
-
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
-import SKILLS, { type ItemSkill, type Skill } from "~/shared/skills";
+import { type ItemSkill, type Skill } from "~/shared/skills";
 import SectionUI from "../ui/section.ui";
 import ImageUI from "../ui/image.ui";
 import { useEffect, useRef, useState } from "react";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import useScreenSize from "~/hooks/useScreenSize";
 
-export default function SkillsLayout() {
+export default function SkillsLayout({ skills }: { skills: Skill[] }) {
   const skillRef = useRef(null);
 
   useAnimateElement("skill", skillRef, 0.05);
@@ -33,8 +31,12 @@ export default function SkillsLayout() {
             />
           </div>
           <div className="flex flex-col items-center justify-center md:grid gap-10 md:gap-16 lg:grid lg:grid-cols-2 lg:items-start">
-            {SKILLS.map((skill, index) => (
-              <SkillWrapper key={index} index={index} {...skill} />
+            {skills.map((skill, index) => (
+              <SkillWrapper
+                key={index}
+                lastItem={index === skills.length - 1}
+                {...skill}
+              />
             ))}
           </div>
         </div>
@@ -43,12 +45,15 @@ export default function SkillsLayout() {
   );
 }
 
-const SkillWrapper = ({ items, name, index }: Skill & { index: number }) => {
+const SkillWrapper = ({
+  items,
+  name,
+  lastItem,
+}: Skill & { lastItem: boolean }) => {
   return (
     <div
-      key={index}
       className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center lg:items-start ${
-        index === SKILLS.length - 1 ? "lg:col-span-2" : ""
+        lastItem ? "lg:col-span-2" : ""
       }`}
     >
       <h3
@@ -58,7 +63,7 @@ const SkillWrapper = ({ items, name, index }: Skill & { index: number }) => {
       </h3>
       <div
         className={` grid grid-cols-3 gap-3 md:flex md:gap-8 md:flex-wrap md:justify-center lg:grid-cols-2 xl:grid-cols-3 lg:grid w-full ${
-          index === SKILLS.length - 1 ? "xl:grid-cols-6 lg:grid-cols-4" : ""
+          lastItem ? "xl:grid-cols-6 lg:grid-cols-4" : ""
         }`}
       >
         {items.map((item, _index) => (
@@ -70,7 +75,7 @@ const SkillWrapper = ({ items, name, index }: Skill & { index: number }) => {
 };
 
 const SkillComponent = ({
-  Icon,
+  icon,
   proficiency,
   index,
   name,
@@ -146,7 +151,13 @@ const SkillComponent = ({
             }`}
           />
         </div>
-        <Icon className="scale-90 lg:scale-100" />
+        {/* <Icon className="scale-90 lg:scale-100" /> */}
+        <img
+          src={icon}
+          alt={name}
+          crossOrigin="anonymous"
+          className="scale-90 lg:scale-100"
+        />
       </div>
       {name}
     </div>

@@ -37,6 +37,7 @@ import VSCodeIcon from "~/components/icons/vscode.icon";
 export interface ItemSkill {
   name: string;
   Icon: React.FC<any>;
+  icon?: string;
   proficiency: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 }
 

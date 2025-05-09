@@ -6,6 +6,7 @@ export interface Technology {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Icon: React.FC<any>;
+  icon?: string;
 }
 
 const language = SKILLS[0];

@@ -3,6 +3,18 @@ import { getStyledType } from "~/shared/local-storage";
 import { lazy, Suspense, useEffect, useState } from "react";
 import InitialPageLoaderLayout from "~/components/layout/initial-page-loader.layout";
 import { visitor } from "~/api/visitor.api";
+import type { Experience } from "~/shared/experiences";
+import {
+  getCertificates,
+  getExperiences,
+  getProjects,
+  getServices,
+  getSkills,
+} from "~/api/portfolio.api";
+import type { Service } from "~/shared/services";
+import type { Certificate } from "~/shared/certificates";
+import type { Skill } from "~/shared/skills";
+import type { Project } from "~/shared/projects";
 
 const BannerLayout = lazy(() => import("~/components/layout/banner.layout"));
 const TerminalLayout = lazy(
@@ -38,9 +50,32 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   const getStyle = getStyledType();
   const [show, setShow] = useState(false);
+  const [experiences, setExperiences] = useState<Experience[]>();
+  const [services, setServices] = useState<Service[]>();
+  const [certificates, setCertificates] = useState<Certificate[]>();
+  const [skills, setSkills] = useState<Skill[]>();
+  const [projects, setProjects] = useState<Project[]>();
+
+  const loadData = async () => {
+    const [_experiences, _services, _certificates, _skills, _projects] =
+      await Promise.all([
+        getExperiences(),
+        getServices(),
+        getCertificates(),
+        getSkills(),
+        getProjects(),
+      ]);
+
+    setExperiences(_experiences);
+    setServices(_services);
+    setCertificates(_certificates);
+    setSkills(_skills);
+    setProjects(_projects);
+  };
 
   useEffect(() => {
     visitor();
+    loadData();
 
     setTimeout(() => {
       setShow(true);
@@ -56,11 +91,11 @@ export default function Home() {
             {show ? (
               <>
                 <BannerLayout />
-                <ServicesLayout />
-                <SkillsLayout />
-                <ExperiencesLayout />
-                <ProjectsLayout />
-                <CertificateLayout />
+                <ServicesLayout services={services || []} />
+                <SkillsLayout skills={skills || []} />
+                <ExperiencesLayout experiences={experiences || []} />
+                <ProjectsLayout projects={projects || []} />
+                <CertificateLayout certificates={certificates || []} />
                 <ContactLayout />
                 <FooterLayout />
                 <ChatBotLayout />
@@ -68,9 +103,8 @@ export default function Home() {
             ) : null}
           </Suspense>
         </>
-      ) : (
-        <TerminalLayout />
-      )}
+      ) : // <TerminalLayout />
+      null}
     </>
   );
 }

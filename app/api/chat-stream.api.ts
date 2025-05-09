@@ -1,7 +1,7 @@
-const chatBotURL = import.meta.env.VITE_CHATBOT_API;
+import { CHATBOT_API } from "~/config/env.config";
 
 export const chatStream = async (message: string): Promise<any> => {
-  const response = await fetch(`${chatBotURL}/chat`, {
+  const response = await fetch(`${CHATBOT_API}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -9,8 +9,11 @@ export const chatStream = async (message: string): Promise<any> => {
     body: JSON.stringify({ message }),
   });
 
-  if (!response.ok) {
-    let errMessage: string = response.statusText;
+  if (response.status >= 400) {
+    let errMessage: string =
+      response.statusText || response.status === 400
+        ? "Bad Request"
+        : "Something went wrong";
 
     if (response.status === 429) {
       errMessage = (await response.json()).message;

@@ -23,6 +23,7 @@ export default function ImageUI({
         alt={alt}
         height={height}
         width={width}
+        crossOrigin="anonymous"
       />
     </div>
   );

@@ -35,6 +35,7 @@ export default function BoxUI({
         width={205}
         height={111}
         className="w-full border-b-[1px] border-border bg-light dark:border-border-dark h-full aspect-4/2 object-cover"
+        crossOrigin="anonymous"
       />
       <div className="px-3 space-y-3 md:space-y-6">
         <div className="space-y-2 mt-5">
@@ -46,13 +47,13 @@ export default function BoxUI({
           </p>
         </div>
         <div className="flex flex-wrap gap-2 lg:gap-3">
-          {items.map(({ Icon, name }, index) => (
+          {items.map(({ icon, name }, index) => (
             <div
               key={index}
               title={name}
               className="border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center"
             >
-              <Icon className="scale-90" />
+              <img src={icon} alt={name} className="scale-75" crossOrigin="anonymous" />
             </div>
           ))}
         </div>

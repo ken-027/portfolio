@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import ProgressBarUI from "../ui/progress-bar.ui";
 import { AnimatePresence, motion } from "motion/react";
-import { getDarkMode } from "~/shared/local-storage";
 import useDarkMode from "~/hooks/useDarkMode";
 
 export default function PageLoaderLayout() {

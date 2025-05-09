@@ -11,7 +11,6 @@ import GlobeUI from "../ui/globe.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
 import PageLoaderLayout from "./page-loader.layout";
-import ScrollUpUI from "../ui/scroll-up.ui";
 import { stagger } from "motion";
 
 export default function BannerLayout() {
@@ -97,13 +96,13 @@ export default function BannerLayout() {
             Icon={<ProjectIcon />}
             className="banner-animate"
           />
-          <button
+          {/* <button
             className="flex group gap-2 cursor-pointer items-center banner-animate bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1 font-anton"
             onClick={onSwitchStyle}
           >
             <TerminalStyledIcon className="terminal-icon" />
             Terminal-Styled
-          </button>
+          </button> */}
           <div className="bounce">
             <motion.div
               animate={{

@@ -1,5 +1,8 @@
 import moment from "moment";
 import { type Certificate } from "~/shared/certificates";
+// @ts-expect-error @ts-ignore
+import { decode } from "he";
+
 
 export interface CertificateCardUIProps extends Certificate {
   className?: string;
@@ -30,6 +33,7 @@ export default function CertificateCardUI({
             src={certificateImage}
             alt={platform.toLowerCase()}
             className="w-full h-full aspect-6/4 border-1 dark:border-none border-light rounded-md"
+            crossOrigin="anonymous"
           />
         </a>
       ) : (
@@ -60,11 +64,14 @@ export default function CertificateCardUI({
               src={platformLogo}
               alt={platform.toLowerCase()}
               className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] border-1 dark:border-none border-light rounded-md"
+              crossOrigin="anonymous"
             />
           </div>
           <p
             className="text-sm lg:text-lg font-open-sauce dark:text-light/90"
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{
+              __html: decode(description),
+            }}
           />
           {certificateLink && dateCompleted !== "ongoing" ? (
             <a

@@ -3,7 +3,7 @@ import type { RefObject } from "react";
 type CardUIProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
   title: string;
   description: string;
-  Illustration: React.FC<any>;
+  image: string;
   ref?: RefObject<any>;
 };
 
@@ -11,7 +11,7 @@ export default function CardUI({
   title,
   description,
   className,
-  Illustration,
+  image,
   ...props
 }: CardUIProps) {
   return (
@@ -27,7 +27,13 @@ export default function CardUI({
           alt={title}
           src={illustration || "/"}
         /> */}
-        <Illustration className="w-full h-[150px] lg:h-[200px] pb-2 pt-4" />
+        {/* <Illustration className="w-full h-[150px] lg:h-[200px] pb-2 pt-4" /> */}
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-[150px] lg:h-[200px]"
+          crossOrigin="anonymous"
+        />
       </div>
       <div className="space-y-2 lg:space-y-4 px-2 py-4 flex-3/4 dark:bg-dark lg:px-6 lg:text-left">
         <h3 className="text-lg font-anton dark:text-light/90 lg:text-2xl">

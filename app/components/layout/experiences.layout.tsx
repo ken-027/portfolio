@@ -1,6 +1,6 @@
 import HeaderUI from "../ui/header.ui";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
-import EXPERIENCES from "~/shared/experiences";
+import EXPERIENCES, { type Experience } from "~/shared/experiences";
 import { getDateFormat, getTotalByFormat } from "~/utils/date.utils";
 import CheckIcon from "../icons/check.icon";
 import SectionUI from "../ui/section.ui";
@@ -11,11 +11,14 @@ import { useMemo, useRef } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
 import { Parallax } from "react-scroll-parallax";
 
-export default function ExperiencesLayout() {
+export default function ExperiencesLayout({
+  experiences,
+}: {
+  experiences: Experience[];
+}) {
   const experienceRef = useRef(null);
   useAnimateElement("experience", experienceRef);
   const { responseSize } = useScreenSize();
-  const experiences = useMemo(() => EXPERIENCES, []);
 
   return (
     <SectionUI ref={experienceRef} id="experiences" className="lg:mt-32">
@@ -69,6 +72,7 @@ export default function ExperiencesLayout() {
                               companyLogo ||
                               "/section-illustration/experience-thumbnail.svg"
                             }
+                            crossOrigin="anonymous"
                             alt={company.toLowerCase()}
                             width={100}
                             height={50}
@@ -163,6 +167,7 @@ export default function ExperiencesLayout() {
                                         "/section-illustration/project.svg"
                                       }
                                       alt={title.toLowerCase()}
+                                      crossOrigin="anonymous"
                                       width={182}
                                       height={99}
                                     />
@@ -175,13 +180,18 @@ export default function ExperiencesLayout() {
                                       </div>
                                       <div className="flex flex-wrap gap-1 md:gap-2 mt-2 lg:gap-3">
                                         {technologies.map(
-                                          ({ Icon, name }, __index) => (
+                                          ({ icon, name }, __index) => (
                                             <div
                                               key={__index}
                                               title={name}
                                               className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
                                             >
-                                              <Icon className="scale-75 lg:scale-100" />
+                                              <img
+                                                alt={name}
+                                                src={icon}
+                                                crossOrigin="anonymous"
+                                                className="scale-75 md:scale-100"
+                                              />
                                             </div>
                                           )
                                         )}
@@ -227,6 +237,7 @@ export default function ExperiencesLayout() {
                                   >
                                     <img
                                       className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] md:h-[350px] bg-cover object-center aspect-ratio[16/9]"
+                                      crossOrigin="anonymous"
                                       src={
                                         thumbnailLink ||
                                         "/section-illustration/project.svg"
@@ -244,13 +255,18 @@ export default function ExperiencesLayout() {
                                       </div>
                                       <div className="flex flex-wrap gap-1 md:gap-2 mt-2">
                                         {technologies.map(
-                                          ({ Icon, name }, __index) => (
+                                          ({ icon, name }, __index) => (
                                             <div
                                               key={__index}
                                               title={name}
                                               className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
                                             >
-                                              <Icon className="scale-75 md:scale-100" />
+                                              <img
+                                                alt={name}
+                                                src={icon}
+                                                crossOrigin="anonymous"
+                                                className="scale-75 md:scale-100"
+                                              />
                                             </div>
                                           )
                                         )}

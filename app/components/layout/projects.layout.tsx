@@ -1,6 +1,6 @@
 "use client";
 
-import PROJECTS, { CATEGORIES, type Project } from "~/shared/projects";
+import { CATEGORIES, type Project } from "~/shared/projects";
 import HeaderUI from "../ui/header.ui";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import BoxUI from "../ui/box.ui";
@@ -13,10 +13,14 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import useScreenSize from "~/hooks/useScreenSize";
 
-export default function ProjectsLayout() {
-  const projects = Object.keys(PROJECTS)
+export default function ProjectsLayout({
+  projects: _projects,
+}: {
+  projects: Project[];
+}) {
+  const projects = Object.keys(_projects)
     // @ts-ignore
-    .map((name) => ({ ...PROJECTS[name] }))
+    .map((name) => ({ ..._projects[name] }))
     .filter(({ thumbnailLink }) => thumbnailLink !== undefined);
   const projectRef = useRef(null);
   useAnimateElement("project", projectRef);

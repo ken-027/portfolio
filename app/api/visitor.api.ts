@@ -1,7 +1,7 @@
-const apiURL = import.meta.env.VITE_EMAIL_API;
+import { EMAIL_API } from "~/config/env.config";
 
 export const visitor = async (): Promise<undefined> => {
-  fetch(`${apiURL}/visitor`, {
+  fetch(`${EMAIL_API}/visitor`, {
     method: "POST",
   });
 };

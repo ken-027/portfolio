@@ -1,4 +1,4 @@
-const apiURL = import.meta.env.VITE_EMAIL_API;
+import { EMAIL_API } from "~/config/env.config";
 
 interface EmailRequestBody {
   name: string;
@@ -18,7 +18,7 @@ export const sendEmail = async ({
   subject,
   message,
 }: EmailRequestBody): Promise<EmailResponseBody> => {
-  const response = await fetch(`${apiURL}/send-email`, {
+  const response = await fetch(`${EMAIL_API}/send-email`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

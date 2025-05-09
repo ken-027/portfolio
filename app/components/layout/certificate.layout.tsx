@@ -2,7 +2,7 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
 import ImageUI from "../ui/image.ui";
-import CERTIFICATES from "~/shared/certificates";
+import CERTIFICATES, { type Certificate } from "~/shared/certificates";
 import CertificateCardUI from "../ui/certificate-card.ui";
 
 import "swiper/css/pagination";
@@ -11,7 +11,11 @@ import "swiper/css/effect-cards";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useRef } from "react";
 
-export default function CertificateLayout() {
+export default function CertificateLayout({
+  certificates,
+}: {
+  certificates: Certificate[];
+}) {
   const certificateRef = useRef(null);
 
   useAnimateElement("certificate", certificateRef);
@@ -35,7 +39,7 @@ export default function CertificateLayout() {
             />
           </div>
           <div className="flex flex-col space-y-5 xl:space-y-10 lg:grid lg:grid-cols-2 lg:gap-10">
-            {CERTIFICATES.map(
+            {certificates.map(
               (
                 {
                   description,
