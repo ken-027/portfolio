@@ -1,11 +1,13 @@
-import PROJECTS from "~/shared/projects";
 import ResponseWrapperUI from "../../ui/response-wrapper.ui";
+import { usePortfolioContext } from "~/components/layout/terminal.layout";
 
 export default function BackendProjectsResponse() {
   const projectCategory = "backend";
-  const FRONTEND = Object.keys(PROJECTS)
+  const { projects } = usePortfolioContext();
+
+  const FRONTEND = Object.keys(projects)
     // @ts-ignore
-    .map((name) => ({ ...PROJECTS[name] }))
+    .map((name) => ({ ...projects[name] }))
     .filter(
       ({ category, thumbnailLink }) =>
         category === projectCategory && thumbnailLink !== undefined

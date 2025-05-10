@@ -1,6 +1,5 @@
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import ProjectIcon from "../icons/project.icon";
-import getExperience from "~/utils/experience-computation";
 import { TypeAnimation } from "react-type-animation";
 import { useEffect, useState } from "react";
 import { motion, useAnimate, useInView } from "motion/react";
@@ -8,19 +7,29 @@ import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
 import GlobeUI from "../ui/globe.ui";
-import TerminalStyledIcon from "../icons/terminal-styled.icon";
-import { switchStyle } from "~/shared/local-storage";
-import PageLoaderLayout from "./page-loader.layout";
 import { stagger } from "motion";
+import ScrollUpUI from "../ui/scroll-up.ui";
+import { getTotalExperience } from "~/api/portfolio.api";
 
 export default function BannerLayout() {
-  const { months, years } = getExperience();
-  const [switching, setSwitching] = useState(false);
+  const [years, setYears] = useState(0);
+  const [months, setMonths] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [scope, animate] = useAnimate();
 
   const isInView = useInView(scope);
 
-  useEffect(() => {
+  const loadExperience = async () => {
+    setLoading(true);
+    const { years, months } = await getTotalExperience();
+    setYears(years);
+    setMonths(months);
+    setLoading(false);
+  };
+
+  const initialEffect = () => {
+    loadExperience();
+
     animate(
       ".banner-animate",
       {
@@ -29,15 +38,9 @@ export default function BannerLayout() {
       },
       { delay: stagger(0.3), type: "tween" }
     );
-  }, []);
-
-  const onSwitchStyle = () => {
-    setSwitching(true);
-    switchStyle("terminal");
-    setTimeout(() => {
-      location.reload();
-    }, 3000);
   };
+
+  useEffect(initialEffect, []);
 
   return (
     <header
@@ -46,7 +49,6 @@ export default function BannerLayout() {
       id="home"
     >
       {/* <ScrollUpUI show={!isInView} /> */}
-      {switching ? <PageLoaderLayout /> : null}
       <GlobeUI />
       <PaddingWrapperUI
         className="flex flex-col items-center gap-4 lg:gap-6 dark lg:text-left lg:items-start xl:gap-6 min-h-fit!"
@@ -81,13 +83,19 @@ export default function BannerLayout() {
           </span>
         </p>
         <p className="font-open-sauce dark:text-light/90 banner-animate md:text-lg lg:text-xl">
-          With {years > 1 && months > 3 ? "over" : null}{" "}
-          <span className="mr-1">{years}</span>
-          year
-          {years > 1 ? "s" : null} of experience in web development, I
-          specialize in building and maintaining web applications. I’m committed
-          to writing clean, efficient code, crafting intuitive user experiences,
-          and delivering reliable, results-driven solutions.
+          With{" "}
+          {loading ? null : (
+            <>
+              {years > 1 && months > 3 ? "over" : null}{" "}
+              <span className="mr-1">{years}</span>
+              year
+              {years > 1 ? "s" : null} of
+            </>
+          )}{" "}
+          experience in web development, I specialize in building and
+          maintaining web applications. I’m committed to writing clean,
+          efficient code, crafting intuitive user experiences, and delivering
+          reliable, results-driven solutions.
         </p>
         <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI
@@ -96,13 +104,6 @@ export default function BannerLayout() {
             Icon={<ProjectIcon />}
             className="banner-animate"
           />
-          {/* <button
-            className="flex group gap-2 cursor-pointer items-center banner-animate bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1 font-anton"
-            onClick={onSwitchStyle}
-          >
-            <TerminalStyledIcon className="terminal-icon" />
-            Terminal-Styled
-          </button> */}
           <div className="bounce">
             <motion.div
               animate={{
@@ -118,6 +119,8 @@ export default function BannerLayout() {
           </div>
         </div>
       </PaddingWrapperUI>
+
+      <ScrollUpUI show={!isInView} />
 
       <div className="bounce hidden lg:block col-span-2">
         <div>

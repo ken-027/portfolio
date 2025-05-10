@@ -1,5 +1,3 @@
-"use client";
-
 import CertificateIcon from "~/components/icons/certificate.icon";
 import ContactIcon from "~/components/icons/contact.icon";
 import ExperienceIcon from "~/components/icons/experience.icon";

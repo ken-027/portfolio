@@ -1,14 +1,15 @@
-import PROJECTS, { CATEGORIES } from "~/shared/projects";
+import { usePortfolioContext } from "~/components/layout/terminal.layout";
 import ResponseWrapperUI from "../../ui/response-wrapper.ui";
-import EXPERIENCES from "~/shared/experiences";
 import { getDateFormat } from "~/utils/date.utils";
 
 export default function ExperiencesResponse() {
+  const { experiences } = usePortfolioContext();
+
   return (
     <ResponseWrapperUI typeSpeed="fast">
       <div className="space-y-2">
         <div className="space-y-3">
-          {EXPERIENCES.map(
+          {experiences.map(
             ({ company, title, startDate, endDate, descriptions }, index) => (
               <div key={index}>
                 <div className="space-y-1">

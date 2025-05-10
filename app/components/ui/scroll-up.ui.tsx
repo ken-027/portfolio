@@ -22,23 +22,23 @@ export default function ScrollUpUI({ show }: ScrollUpUIProps) {
       {!show ? null : (
         <motion.div
           animate={{
-            y: ["200%", "0%"],
+            x: ["200%", "0%"],
             opacity: [0, 1],
             willChange: "transform",
           }}
           exit={{
-            y: ["0%", "200%"],
+            x: ["0%", "200%"],
             opacity: [1, 0],
             willChange: "transform",
           }}
-          transition={{ type: "spring" }}
-          className="fixed bottom-6 right-4 lg:right-10 z-40 group"
+          transition={{ type: "tween" }}
+          className="fixed bottom-22 right-4 lg:bottom-32 lg:right-10 z-30 group"
         >
           <button
             onClick={() => {
               document.body.scrollTop = 0;
             }}
-            className="cursor-pointer animate-bounce group-hover:animate-none outline-none dark:bg-light dark:text-dark bg-dark text-light shadow border-[1px] border-border w-[2.4rem] h-10 lg:w-11 lg:h-12 rounded-md grid place-items-center"
+            className="cursor-pointer group-hover:animate-none outline-none dark:bg-light rounded-md dark:text-dark bg-dark text-light shadow border-[1px] border-border w-10 h-10 lg:w-12 lg:h-12 grid place-items-center"
           >
             <ArrowUpIcon />
           </button>

@@ -1,7 +1,10 @@
-import PROJECTS, { CATEGORIES } from "~/shared/projects";
+import { CATEGORIES } from "~/shared/projects";
 import ResponseWrapperUI from "../../ui/response-wrapper.ui";
+import { usePortfolioContext } from "~/components/layout/terminal.layout";
 
 export default function ProjectsResponse() {
+  const { projects } = usePortfolioContext();
+
   return (
     <ResponseWrapperUI typeSpeed="fast">
       <div className="space-y-2">
@@ -11,9 +14,9 @@ export default function ProjectsResponse() {
               {category} applications
             </h2>
             <div className="space-y-1">
-              {Object.keys(PROJECTS)
+              {Object.keys(projects)
                 // @ts-ignore
-                .map((name) => ({ ...PROJECTS[name] }))
+                .map((name) => ({ ...projects[name] }))
                 .filter(
                   ({ category: _category, thumbnailLink }) =>
                     _category === category && thumbnailLink !== undefined

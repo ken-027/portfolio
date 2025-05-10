@@ -1,30 +1,34 @@
 import ResponseWrapperUI from "../../ui/response-wrapper.ui";
-import EXPERIENCES from "~/shared/experiences";
-import ExperienceContentResponse from "./expereince-content.response";
+import ExperienceContentResponse from "./experience-content.response";
+import { usePortfolioContext } from "~/components/layout/terminal.layout";
 
 export default function ExperienceNATCCOResponse() {
-  const filteredCompany = EXPERIENCES[1].company;
+  const { experiences } = usePortfolioContext();
+
+  const filteredCompany = experiences[1].company;
 
   return (
     <ResponseWrapperUI typeSpeed="fast">
       <div className="space-y-2">
         <div className="space-y-3">
-          {EXPERIENCES.filter(({ company }) => company === filteredCompany).map(
-            (
-              { company, title, startDate, endDate, descriptions, projects },
-              index
-            ) => (
-              <ExperienceContentResponse
-                company={company}
-                title={title}
-                startDate={startDate}
-                endDate={endDate}
-                descriptions={descriptions}
-                projects={projects}
-                key={index}
-              />
-            )
-          )}
+          {experiences
+            .filter(({ company }) => company === filteredCompany)
+            .map(
+              (
+                { company, title, startDate, endDate, descriptions, projects },
+                index
+              ) => (
+                <ExperienceContentResponse
+                  company={company}
+                  title={title}
+                  startDate={startDate}
+                  endDate={endDate}
+                  descriptions={descriptions}
+                  projects={projects}
+                  key={index}
+                />
+              )
+            )}
         </div>
       </div>
     </ResponseWrapperUI>

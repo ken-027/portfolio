@@ -2,13 +2,23 @@
 
 import useAnimateElement from "~/hooks/useAnimateElement";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
-import { useRef } from "react";
-import ResumeIcon from "../icons/resume.icon";
+import { useRef, useState } from "react";
 import ResumeMenuIcon from "../icons/resume-menu.icon";
 import LinkUI from "../ui/link.ui";
-
+import TerminalStyledIcon from "../icons/terminal-styled.icon";
+import { switchStyle } from "~/shared/local-storage";
+import PageLoaderLayout from "./page-loader.layout";
 export default function FooterLayout() {
+  const [switching, setSwitching] = useState(false);
   const footerRef = useRef(null);
+
+  const onSwitchStyle = () => {
+    setSwitching(true);
+    switchStyle("terminal");
+    // setTimeout(() => {
+    location.reload();
+    // }, 3500);
+  };
 
   useAnimateElement("footer", footerRef);
 
@@ -18,6 +28,8 @@ export default function FooterLayout() {
       ref={footerRef}
       className="text-center text-xs font-open-sauce pt-2 dark:bg-dark transition-colors"
     >
+      {/* {switching ? <PageLoaderLayout /> : null}
+      <PageLoaderLayout /> */}
       <PaddingWrapperUI className="min-h-fit!">
         <div className="flex flex-col items-center gap-2 mb-10 lg:hidden">
           <p className="text-lg footer-animate">
@@ -45,6 +57,26 @@ export default function FooterLayout() {
             alt="profile photo"
             width={210}
             height={260}
+          />
+        </div>
+        {/* <div className="flex justify-center mb-4 text-base" id="terminal-styled">
+          <button
+            className="flex group gap-2 font-anton cursor-pointer items-center banner-animate bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1"
+            onClick={onSwitchStyle}
+          >
+            <TerminalStyledIcon className="terminal-icon" />
+            Try Terminal-Styled
+          </button>
+        </div> */}
+        <div
+          className="flex justify-center mb-4 text-base"
+          id="terminal-styled"
+        >
+          <LinkUI
+            title="Try Terminal-Styled"
+            onClick={onSwitchStyle}
+            Icon={<TerminalStyledIcon className="terminal-icon" />}
+            className="footer-animate text-base"
           />
         </div>
         <p className="footer-animate lg:text-lg">

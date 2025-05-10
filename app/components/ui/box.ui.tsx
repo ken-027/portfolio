@@ -25,6 +25,8 @@ export default function BoxUI({
   screenshot,
   repo,
 }: BoxUIProps) {
+  const isUrl = website?.match(/(https?:\/\/)/);
+
   return (
     <div
       className={`border-[1px] mb-2 bg-light dark:bg-dark border-border  overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 hover:shadow-lg transition-shadow`}
@@ -53,14 +55,19 @@ export default function BoxUI({
               title={name}
               className="border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center"
             >
-              <img src={icon} alt={name} className="scale-75" crossOrigin="anonymous" />
+              <img
+                src={icon}
+                alt={name}
+                className="scale-75"
+                crossOrigin="anonymous"
+              />
             </div>
           ))}
         </div>
         <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-2xl lg:px-2">
           {website ? (
             <Link
-              target="_blank"
+              target={isUrl ? "_blank" : "_self"}
               to={website}
               className="flex items-center gap-2 lg:gap-4"
             >

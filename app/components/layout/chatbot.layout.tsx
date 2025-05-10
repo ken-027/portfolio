@@ -27,7 +27,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const [streaming, setStreaming] = useState(false);
   const [reply, setReply] = useState("");
   const [replies, setReplies] = useState<string[]>([
-    "Hi there! I'm here to assist you 😊. How can I help today?",
+    "Welcome 😊! Have questions about my work or skills? Ask me anything",
   ]);
   const [messages, setMessages] = useState<string[]>([]);
   const messageRef = useRef<HTMLInputElement>(null);

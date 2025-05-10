@@ -2,7 +2,7 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
 import ImageUI from "../ui/image.ui";
-import CERTIFICATES, { type Certificate } from "~/shared/certificates";
+import { type Certificate } from "~/shared/certificates";
 import CertificateCardUI from "../ui/certificate-card.ui";
 
 import "swiper/css/pagination";

@@ -47,64 +47,64 @@ export interface Skill {
 }
 
 const SKILLS: Skill[] = [
-  {
-    name: "Programming & Markup Languages",
-    items: [
-      { name: "HTML", Icon: HTMLIcon, proficiency: 8 },
-      { name: "Sass", Icon: SassIcon, proficiency: 5 },
-      { name: "Typescript", Icon: TypescriptIcon, proficiency: 7 },
-      { name: "Javascript", Icon: JavascriptIcon, proficiency: 8 },
-      { name: "PHP", Icon: PhpIcon, proficiency: 8 },
-      { name: "Csharp", Icon: CSharpIcon, proficiency: 5 },
-      { name: "Python", Icon: PythonIcon, proficiency: 5 },
-      { name: "Bash", Icon: BashIcon, proficiency: 4 },
-    ],
-  },
-  {
-    name: "Frontend Development",
-    items: [
-      { name: "CSS", Icon: CSSIcon, proficiency: 7 },
-      { name: "JQuery", Icon: JQueryIcon, proficiency: 7 },
-      { name: "React JS", Icon: ReactJSIcon, proficiency: 8 },
-      { name: "Tailwind CSS", Icon: TailwindCSSIcon, proficiency: 8 },
-      { name: "Bootstrap", Icon: BootstrapIcon, proficiency: 8 },
-    ],
-  },
-  {
-    name: "Backend Development",
-    items: [
-      { name: "Node JS", Icon: NodeJSIcon, proficiency: 7 },
-      { name: "Express JS", Icon: ExpressJSIcon, proficiency: 7 },
-      { name: "SQL Server", Icon: SQLServerIcon, proficiency: 8 },
-      { name: "MySQL", Icon: MySQLIcon, proficiency: 6 },
-      { name: "Maria DB", Icon: MariaDBIcon, proficiency: 7 },
-    ],
-  },
-  {
-    name: "Fullstack Development",
-    items: [
-      { name: "Next JS", Icon: NextJSIcon, proficiency: 6 },
-      { name: "Laravel", Icon: LaravelIcon, proficiency: 7 },
-      { name: "CodeIgniter", Icon: CodeIgniterIcon, proficiency: 7 },
-      { name: "ASP.NET", Icon: ASPNETIcon, proficiency: 5 },
-    ],
-  },
-  {
-    name: "Tools and Technologies",
-    items: [
-      { name: "Figma", Icon: FigmaIcon, proficiency: 5 },
-      { name: "Crystal Report", Icon: SAPIcon, proficiency: 6 },
-      { name: "VS Code", Icon: VSCodeIcon, proficiency: 8 },
-      { name: "Postman", Icon: PostmanIcon, proficiency: 7 },
-      { name: "Jest", Icon: JestIcon, proficiency: 5 },
-      { name: "Redux Toolkit", Icon: ReduxIcon, proficiency: 6 },
-      { name: "Socket.IO", Icon: SocketIOIcon, proficiency: 5 },
-      { name: "GIT", Icon: GitIcon, proficiency: 8 },
-      //   { name: "NPM", Icon: NPMIcon, proficiency: 8 },
-      { name: "Docker", Icon: DockerIcon, proficiency: 4 },
-      { name: "AWS", Icon: AWSIcon, proficiency: 4 },
-    ],
-  },
+//   {
+//     name: "Programming & Markup Languages",
+//     items: [
+//       { name: "HTML", Icon: HTMLIcon, proficiency: 8 },
+//       { name: "Sass", Icon: SassIcon, proficiency: 5 },
+//       { name: "Typescript", Icon: TypescriptIcon, proficiency: 7 },
+//       { name: "Javascript", Icon: JavascriptIcon, proficiency: 8 },
+//       { name: "PHP", Icon: PhpIcon, proficiency: 8 },
+//       { name: "Csharp", Icon: CSharpIcon, proficiency: 5 },
+//       { name: "Python", Icon: PythonIcon, proficiency: 5 },
+//       { name: "Bash", Icon: BashIcon, proficiency: 4 },
+//     ],
+//   },
+//   {
+//     name: "Frontend Development",
+//     items: [
+//       { name: "CSS", Icon: CSSIcon, proficiency: 7 },
+//       { name: "JQuery", Icon: JQueryIcon, proficiency: 7 },
+//       { name: "React JS", Icon: ReactJSIcon, proficiency: 8 },
+//       { name: "Tailwind CSS", Icon: TailwindCSSIcon, proficiency: 8 },
+//       { name: "Bootstrap", Icon: BootstrapIcon, proficiency: 8 },
+//     ],
+//   },
+//   {
+//     name: "Backend Development",
+//     items: [
+//       { name: "Node JS", Icon: NodeJSIcon, proficiency: 7 },
+//       { name: "Express JS", Icon: ExpressJSIcon, proficiency: 7 },
+//       { name: "SQL Server", Icon: SQLServerIcon, proficiency: 8 },
+//       { name: "MySQL", Icon: MySQLIcon, proficiency: 6 },
+//       { name: "Maria DB", Icon: MariaDBIcon, proficiency: 7 },
+//     ],
+//   },
+//   {
+//     name: "Fullstack Development",
+//     items: [
+//       { name: "Next JS", Icon: NextJSIcon, proficiency: 6 },
+//       { name: "Laravel", Icon: LaravelIcon, proficiency: 7 },
+//       { name: "CodeIgniter", Icon: CodeIgniterIcon, proficiency: 7 },
+//       { name: "ASP.NET", Icon: ASPNETIcon, proficiency: 5 },
+//     ],
+//   },
+//   {
+//     name: "Tools and Technologies",
+//     items: [
+//       { name: "Figma", Icon: FigmaIcon, proficiency: 5 },
+//       { name: "Crystal Report", Icon: SAPIcon, proficiency: 6 },
+//       { name: "VS Code", Icon: VSCodeIcon, proficiency: 8 },
+//       { name: "Postman", Icon: PostmanIcon, proficiency: 7 },
+//       { name: "Jest", Icon: JestIcon, proficiency: 5 },
+//       { name: "Redux Toolkit", Icon: ReduxIcon, proficiency: 6 },
+//       { name: "Socket.IO", Icon: SocketIOIcon, proficiency: 5 },
+//       { name: "GIT", Icon: GitIcon, proficiency: 8 },
+//       //   { name: "NPM", Icon: NPMIcon, proficiency: 8 },
+//       { name: "Docker", Icon: DockerIcon, proficiency: 4 },
+//       { name: "AWS", Icon: AWSIcon, proficiency: 4 },
+//     ],
+//   },
 ];
 
 export default SKILLS;

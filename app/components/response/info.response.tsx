@@ -1,8 +1,8 @@
-import getExperience from "~/utils/experience-computation";
+import { useYearsExperienceContext } from "../layout/terminal.layout";
 import ResponseWrapperUI from "../ui/response-wrapper.ui";
 
 export default function InfoResponse() {
-  const { months, years } = getExperience();
+  const { months, years } = useYearsExperienceContext();
 
   return (
     <ResponseWrapperUI>

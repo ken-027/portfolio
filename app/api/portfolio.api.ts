@@ -5,7 +5,12 @@ import type { Project } from "~/shared/projects";
 import type { Service } from "~/shared/services";
 import type { Skill } from "~/shared/skills";
 
-export const getExperiences = async (): Promise<Experience[] | undefined> => {
+interface YearsMonthExperience {
+  years: number;
+  months: number;
+}
+
+export const getExperiences = async (): Promise<Experience[]> => {
   const response = await fetch(`${PORTFOLIO_API}/experiences`);
 
   const { experiences } = await response.json();
@@ -13,7 +18,7 @@ export const getExperiences = async (): Promise<Experience[] | undefined> => {
   return experiences;
 };
 
-export const getServices = async (): Promise<Service[] | undefined> => {
+export const getServices = async (): Promise<Service[]> => {
   const response = await fetch(`${PORTFOLIO_API}/services`);
 
   const { services } = await response.json();
@@ -21,7 +26,7 @@ export const getServices = async (): Promise<Service[] | undefined> => {
   return services;
 };
 
-export const getCertificates = async (): Promise<Certificate[] | undefined> => {
+export const getCertificates = async (): Promise<Certificate[]> => {
   const response = await fetch(`${PORTFOLIO_API}/certificates`);
 
   const { certificates } = await response.json();
@@ -29,7 +34,7 @@ export const getCertificates = async (): Promise<Certificate[] | undefined> => {
   return certificates;
 };
 
-export const getSkills = async (): Promise<Skill[] | undefined> => {
+export const getSkills = async (): Promise<Skill[]> => {
   const response = await fetch(`${PORTFOLIO_API}/skills`);
 
   const { skills } = await response.json();
@@ -37,10 +42,23 @@ export const getSkills = async (): Promise<Skill[] | undefined> => {
   return skills;
 };
 
-export const getProjects = async (): Promise<Project[] | undefined> => {
+export const getProjects = async (): Promise<Project[]> => {
   const response = await fetch(`${PORTFOLIO_API}/projects`);
 
   const { projects } = await response.json();
 
   return projects;
+};
+
+export const getTotalExperience = async (): Promise<YearsMonthExperience> => {
+  const response = await fetch(
+    `${PORTFOLIO_API}/experiences/years-of-experience`
+  );
+
+  const { years, months } = (await response.json()) as {
+    years: number;
+    months: number;
+  };
+
+  return { years, months };
 };

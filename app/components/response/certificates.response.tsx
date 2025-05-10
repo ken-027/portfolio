@@ -1,11 +1,13 @@
-import CERTIFICATES from "~/shared/certificates";
+import { usePortfolioContext } from "../layout/terminal.layout";
 import ResponseWrapperUI from "../ui/response-wrapper.ui";
 
 export default function CertificatesResponse() {
+  const { certificates } = usePortfolioContext();
+
   return (
     <ResponseWrapperUI typeSpeed="fast">
       <ul className="space-y-2">
-        {CERTIFICATES.map(
+        {certificates.map(
           ({ name, dateCompleted, description, certificateLink }, index) => (
             <li key={index} className="space-y-1">
               <h2 className="text-yellow-300">{name}</h2>
