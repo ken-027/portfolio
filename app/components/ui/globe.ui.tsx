@@ -93,7 +93,7 @@ export default function GlobeUI() {
     <motion.div
       animate={{ opacity: [0, 1], scale: [0.3, 1], willChange: "transform" }}
       transition={{ type: "tween", delay: 0.5, ease: "easeOut" }}
-      className="w-[60%] mx-auto px-10 md:pt-20 md:w-[50%] lg:w-full lg:pt-0 lg:ml-10"
+      className="w-[80%] mx-auto px-10 md:pt-20 md:w-[50%] lg:w-full lg:pt-0 lg:ml-10"
     >
       {/* @ts-ignore */}
       <Cloud {...cloudProps}>

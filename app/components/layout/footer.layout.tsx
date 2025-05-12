@@ -8,6 +8,7 @@ import LinkUI from "../ui/link.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
 import PageLoaderLayout from "./page-loader.layout";
+import { PORTFOLIO_API } from "~/config/env.config";
 export default function FooterLayout() {
   const [switching, setSwitching] = useState(false);
   const footerRef = useRef(null);
@@ -46,7 +47,10 @@ export default function FooterLayout() {
           <LinkUI
             title="Get my resume"
             download
-            href="/resume/software-developer.pdf"
+            href={`${PORTFOLIO_API.replace(
+              "/api/v1/portfolio",
+              ""
+            )}/resume/software-developer.pdf`}
             Icon={<ResumeMenuIcon />}
             className="mt-2"
           />
@@ -59,15 +63,6 @@ export default function FooterLayout() {
             height={260}
           />
         </div>
-        {/* <div className="flex justify-center mb-4 text-base" id="terminal-styled">
-          <button
-            className="flex group gap-2 font-anton cursor-pointer items-center banner-animate bg-dark dark:bg-light/90 dark:text-dark text-light px-4 justify-center shadow-md text-center lg:text-xl rounded-md py-1"
-            onClick={onSwitchStyle}
-          >
-            <TerminalStyledIcon className="terminal-icon" />
-            Try Terminal-Styled
-          </button>
-        </div> */}
         <div
           className="flex justify-center mb-4 text-base"
           id="terminal-styled"

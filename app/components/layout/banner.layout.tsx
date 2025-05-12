@@ -1,7 +1,7 @@
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import ProjectIcon from "../icons/project.icon";
 import { TypeAnimation } from "react-type-animation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useAnimate, useInView } from "motion/react";
 import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
@@ -9,27 +9,13 @@ import LinkUI from "../ui/link.ui";
 import GlobeUI from "../ui/globe.ui";
 import { stagger } from "motion";
 import ScrollUpUI from "../ui/scroll-up.ui";
-import { getTotalExperience } from "~/api/portfolio.api";
 
 export default function BannerLayout() {
-  const [years, setYears] = useState(0);
-  const [months, setMonths] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [scope, animate] = useAnimate();
 
   const isInView = useInView(scope);
 
-  const loadExperience = async () => {
-    setLoading(true);
-    const { years, months } = await getTotalExperience();
-    setYears(years);
-    setMonths(months);
-    setLoading(false);
-  };
-
   const initialEffect = () => {
-    loadExperience();
-
     animate(
       ".banner-animate",
       {
@@ -83,19 +69,11 @@ export default function BannerLayout() {
           </span>
         </p>
         <p className="font-open-sauce dark:text-light/90 banner-animate md:text-lg lg:text-xl">
-          With{" "}
-          {loading ? null : (
-            <>
-              {years > 1 && months > 3 ? "over" : null}{" "}
-              <span className="mr-1">{years}</span>
-              year
-              {years > 1 ? "s" : null} of
-            </>
-          )}{" "}
-          experience in web development, I specialize in building and
-          maintaining web applications. I’m committed to writing clean,
-          efficient code, crafting intuitive user experiences, and delivering
-          reliable, results-driven solutions.
+          With years of experience in web development, I specialize in
+          designing, building, and maintaining high-performance web
+          applications. I focus on writing clean, efficient code, creating
+          intuitive user experiences, and delivering reliable, results-oriented
+          solutions that drive real impact.
         </p>
         <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI

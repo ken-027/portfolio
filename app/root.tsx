@@ -81,7 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           property="og:image"
           content="https://kenneth-andales.github.io/images/profile.png"
         />
-        <meta property="og:url" content="https://kenneth-andales.github.io" />
+        <meta property="og:url" content="https://portfolio.ksoftdev.site" />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -94,7 +94,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           name="twitter:image"
           content="https://kenneth-andales.github.io/images/profile.png"
         />
-        <meta name="twitter:url" content="https://kenneth-andales.github.io" />
+        <meta name="twitter:url" content="https://portfolio.ksoftdev.site" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ffffff" />
         <Meta />
@@ -139,14 +139,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+    <main className="pt-16 p-4 w-full h-[100vh] container grid place-items-center mx-auto">
+      <img src="/images/404.svg" alt="404 not found" className="lg:w-3/4 lg:h-3/4" />
     </main>
   );
 }

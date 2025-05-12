@@ -22,17 +22,10 @@ export default function CardUI({
       {...props}
     >
       <div className="bg-light dark:bg-[#42566b] w-full flex item-center justify-center">
-        {/* <img
-          className="w-full max-w-[40%] bg-light lg:max-w-1/2"
-          alt={title}
-          src={illustration || "/"}
-        /> */}
-        {/* <Illustration className="w-full h-[150px] lg:h-[200px] pb-2 pt-4" /> */}
         <img
           src={image}
           alt={title}
           className="w-full h-[150px] lg:h-[200px]"
-          crossOrigin="anonymous"
         />
       </div>
       <div className="space-y-2 lg:space-y-4 px-2 py-4 flex-3/4 dark:bg-dark lg:px-6 lg:text-left">

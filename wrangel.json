@@ -1,0 +1,7 @@
+{
+    "name": "personal-site",
+    "compatibility_date": "2025-05-11",
+    "assets": {
+        "directory": "./build/client"
+    }
+}

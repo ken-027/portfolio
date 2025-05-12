@@ -65,7 +65,7 @@ const ExperienceItem = ({
       className={`xl:flex xl:gap-10 xl:grid-cols-2`}
     >
       <div className={`lg:flex-1 ${index % 2 === 0 ? "" : "order-2"}`}>
-        <Parallax speed={responseSize.lg ? -50 : 0} className="lg:pt-40">
+        <Parallax speed={responseSize.xl ? -50 : 0} className="lg:pt-40">
           <div className="flex gap-3 md:gap-6 flex-col items-center justify-center lg:items-start">
             <div
               className={`border-1 overflow-hidden border-border p-2 bg-light h-[100px] lg:h-[120px] dark:border-border-dark object-center rounded-md flex justify-center items-center object-contain aspect-3/2  experience-${index}-animate`}
@@ -76,7 +76,6 @@ const ExperienceItem = ({
                   companyLogo ||
                   "/section-illustration/experience-thumbnail.svg"
                 }
-                crossOrigin="anonymous"
                 alt={company.toLowerCase()}
                 width={100}
                 height={50}
@@ -132,7 +131,7 @@ const ExperienceItem = ({
       {projects ? (
         responseSize.md ? (
           <Parallax
-            speed={responseSize.lg ? 100 : 0}
+            speed={responseSize.xl ? 100 : 0}
             className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block"
           >
             <p className="font-open-sauce md:text-lg dark:text-light/90 lg:text-xl font-bold">
@@ -160,7 +159,6 @@ const ExperienceItem = ({
                             thumbnailLink || "/section-illustration/project.svg"
                           }
                           alt={title.toLowerCase()}
-                          crossOrigin="anonymous"
                           width={182}
                           height={99}
                         />
@@ -179,7 +177,6 @@ const ExperienceItem = ({
                                 <img
                                   alt={name}
                                   src={icon}
-                                  crossOrigin="anonymous"
                                   className="scale-75 md:scale-100"
                                 />
                               </div>
@@ -217,7 +214,6 @@ const ExperienceItem = ({
                       >
                         <img
                           className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] md:h-[350px] bg-cover object-center aspect-ratio[16/9]"
-                          crossOrigin="anonymous"
                           src={
                             thumbnailLink || "/section-illustration/project.svg"
                           }
@@ -240,7 +236,6 @@ const ExperienceItem = ({
                                 <img
                                   alt={name}
                                   src={icon}
-                                  crossOrigin="anonymous"
                                   className="scale-75 md:scale-100"
                                 />
                               </div>

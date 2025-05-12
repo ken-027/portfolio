@@ -37,7 +37,6 @@ export default function BoxUI({
         width={205}
         height={111}
         className="w-full border-b-[1px] border-border bg-light dark:border-border-dark h-full aspect-4/2 object-cover"
-        crossOrigin="anonymous"
       />
       <div className="px-3 space-y-3 md:space-y-6">
         <div className="space-y-2 mt-5">
@@ -59,7 +58,6 @@ export default function BoxUI({
                 src={icon}
                 alt={name}
                 className="scale-75"
-                crossOrigin="anonymous"
               />
             </div>
           ))}

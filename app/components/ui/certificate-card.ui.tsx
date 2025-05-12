@@ -32,8 +32,7 @@ export default function CertificateCardUI({
           <img
             src={certificateImage}
             alt={platform.toLowerCase()}
-            className="w-full h-full aspect-6/4 border-1 dark:border-none border-light rounded-md"
-            crossOrigin="anonymous"
+            className="w-full h-full aspect-6/4.5 lg:aspect-6/4 border-1 dark:border-none border-light rounded-md"
           />
         </a>
       ) : (
@@ -64,7 +63,7 @@ export default function CertificateCardUI({
               src={platformLogo}
               alt={platform.toLowerCase()}
               className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] border-1 dark:border-none border-light rounded-md"
-              crossOrigin="anonymous"
+
             />
           </div>
           <p

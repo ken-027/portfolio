@@ -155,8 +155,12 @@ const SkillComponent = ({
         <img
           src={icon}
           alt={name}
-          crossOrigin="anonymous"
           className="scale-90 lg:scale-100"
+          onError={(e) => {
+            console.error("image fetch error:", icon);
+            // @ts-ignore
+            e.target.src = icon;
+          }}
         />
       </div>
       {name}

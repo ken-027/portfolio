@@ -5,6 +5,7 @@ import LinkUI from "./link.ui";
 import ResumeMenuIcon from "../icons/resume-menu.icon";
 import ToastUI from "./toast.ui";
 import { useState } from "react";
+import { PORTFOLIO_API } from "~/config/env.config";
 
 interface ContactModalUIProps {
   show: boolean;
@@ -128,7 +129,10 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
                 <LinkUI
                   title="Get my resume"
                   download
-                  href="/resume/software-developer.pdf"
+                  href={`${PORTFOLIO_API.replace(
+                    "/api/v1/portfolio",
+                    ""
+                  )}/resume/software-developer.pdf`}
                   Icon={<ResumeMenuIcon />}
                   className="mt-2 text-light border-light dark:text-dark dark:border-dark text-shadow-lg"
                   borderClassName="bg-light dark:bg-dark"

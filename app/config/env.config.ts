@@ -8,6 +8,6 @@ export const CHATBOT_API = isDev
   ? import.meta.env.VITE_CHATBOT_API_DEV
   : import.meta.env.VITE_CHATBOT_API;
 
-export const PORTFOLIO_API = isDev
+export const PORTFOLIO_API: string = isDev
   ? import.meta.env.VITE_PORTFOLIIO_API_DEV
   : import.meta.env.VITE_PORTFOLIIO_API;

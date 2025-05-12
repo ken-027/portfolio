@@ -1,12 +1,12 @@
 import { CHATBOT_API } from "~/config/env.config";
 
-export const chatStream = async (message: string): Promise<any> => {
+export const chatStream = async (message: string, history: string[]): Promise<any> => {
   const response = await fetch(`${CHATBOT_API}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, history }),
   });
 
   if (response.status >= 400) {

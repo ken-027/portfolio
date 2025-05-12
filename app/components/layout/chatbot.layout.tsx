@@ -7,6 +7,8 @@ import { marked } from "marked";
 import botSound from "../../assets/sounds/chatbot-sound.mp3";
 import useSound from "use-sound";
 import generateRandomNumber from "~/utils/generate-random.util";
+import useScreenSize from "~/hooks/useScreenSize";
+import HandIcon from "../icons/hand.icon";
 
 export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const preMessages = [
@@ -26,14 +28,15 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   );
   const [streaming, setStreaming] = useState(false);
   const [reply, setReply] = useState("");
-  const [replies, setReplies] = useState<string[]>([
-    "Welcome 😊! Have questions about my work or skills? Ask me anything",
+  const [messages, setMessages] = useState<string[]>([
+    "Hi there! Got questions? Feel free to ask me anything.",
   ]);
-  const [messages, setMessages] = useState<string[]>([]);
   const messageRef = useRef<HTMLInputElement>(null);
   const historyRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [play] = useSound(botSound);
+
+  const { responseSize } = useScreenSize();
 
   const toggleChat = () =>
     setShow((prevState) => {
@@ -57,7 +60,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       setStreaming(true);
       setMessages((prevState) => [...prevState, message]);
 
-      const stream_replies = await chatStream(message);
+      const stream_replies = await chatStream(message, messages);
 
       play();
 
@@ -75,7 +78,8 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       _reply = err.message;
       console.error(err);
     } finally {
-      setReplies((prevState) => [...prevState, _reply]);
+      //   setReplies((prevState) => [...prevState, _reply]);
+      setMessages((prevState) => [...prevState, _reply]);
       setReply("");
       setStreaming(false);
     }
@@ -112,6 +116,12 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
     if (e.key === "Tab" && message === "") {
       messageRef.current.value = preMessages[randomIndex] || "";
     }
+  };
+
+  const onDoubleClick = (e: any) => {
+    if (!messageRef?.current || responseSize.lg) return;
+
+    messageRef.current.value = preMessages[randomIndex] || "";
   };
 
   useEffect(scrollDown, [reply]);
@@ -167,21 +177,18 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                 ref={historyRef}
                 className="max-h-[400px] px-2 overflow-y-auto space-y-3 message-history pt-4 pb-10"
               >
-                <ReplyCard replyHistory={replies[0]} />
-                {messages.map((message, index) => (
-                  <Fragment key={index}>
+                {messages.map((message, index) =>
+                  (index + 1) % 2 === 0 ? (
                     <MessageCard messageHistory={message} />
-                    {streaming && index === messages.length - 1 ? (
-                      reply ? (
-                        <ReplyCard replyHistory={reply} />
-                      ) : (
-                        <ChattingIndicator />
-                      )
-                    ) : (
-                      <ReplyCard replyHistory={marked(replies[index + 1])} />
-                    )}
-                  </Fragment>
-                ))}
+                  ) : (
+                    <ReplyCard replyHistory={marked(message)} />
+                  )
+                )}
+                {streaming && !reply ? (
+                  <ChattingIndicator />
+                ) : reply ? (
+                  <ReplyCard replyHistory={reply} />
+                ) : null}
               </div>
               <div className="flex border-t-[1px] border-border px-4 py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
                 <div className="relative w-full">
@@ -192,6 +199,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                       preMessages[randomIndex] || "Your question here..."
                     }
                     onKeyDown={onKeyDown}
+                    onDoubleClick={onDoubleClick}
                     className="w-full outline-none placeholder:italic group border-[1px] border-border pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark"
                   />
                   <button
@@ -232,9 +240,10 @@ const ReplyCard = ({
   return (
     <motion.div
       animate={{
-        opacity: [0, 1],
-        y: ["100%", "0%"],
+        // opacity: [0, 1],
+        y: ["10px", "0%"],
       }}
+      transition={{ type: "tween" }}
       className="p-2 w-[80%] flex items-start gap-2"
     >
       <img
@@ -254,8 +263,8 @@ const MessageCard = ({ messageHistory }: { messageHistory: string }) => {
   return (
     <motion.div
       animate={{
-        opacity: [0, 1],
-        y: ["100%", "0%"],
+        // opacity: [0, 1],
+        y: ["10px", "0%"],
       }}
       transition={{ type: "tween" }}
       className="bg-green-300 mr-2 p-2 max-w-[80%] w-fit rounded-md border-green-500 ml-auto break-words"

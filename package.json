@@ -7,11 +7,12 @@
         "dev": "react-router dev",
         "start": "react-router-serve ./build/server/index.js",
         "typecheck": "react-router typegen && tsc",
+        "build:cloudflare": "npm run build && npx wrangler pages deploy ./build/client",
         "build:move": "cp -r build/client/* deploy",
         "build:directory": "[ -d ./deploy ] && npm run build:move || mkdir deploy && npm run build:move && npm run build:git-init",
         "build:push": "cd deploy && git add . & git commit -m 'deployment' & git push origin main --force",
         "build:git-init": "cd deploy && git init && git branch -M main && git remote add origin https://github.com/kenneth-andales/kenneth-andales.github.io.git",
-        "build:automate": "npm run clear-deployments && npm run build & npm run build:directory & npm run build:push",
+        "build:automate": "npm run clear-deployments && npm run build & npm run build:directory & npm run build:push && npx vercel",
         "clear-deployments": "rm -rf deploy/{assets,fonts,icons,images,pdf,resume,section-illustration}"
     },
     "dependencies": {
@@ -45,6 +46,7 @@
         "tailwindcss": "^4.0.0",
         "typescript": "^5.7.2",
         "vite": "^5.4.11",
-        "vite-tsconfig-paths": "^5.1.4"
+        "vite-tsconfig-paths": "^5.1.4",
+        "wrangler": "^4.14.4"
     }
 }
