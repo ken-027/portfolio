@@ -8,12 +8,11 @@ import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
 import GlobeUI from "../ui/globe.ui";
 import { stagger } from "motion";
-import ScrollUpUI from "../ui/scroll-up.ui";
 
 export default function BannerLayout() {
   const [scope, animate] = useAnimate();
 
-  const isInView = useInView(scope);
+//   const isInView = useInView(scope);
 
   const initialEffect = () => {
     animate(
@@ -98,7 +97,7 @@ export default function BannerLayout() {
         </div>
       </PaddingWrapperUI>
 
-      <ScrollUpUI show={!isInView} />
+      {/* <ScrollUpUI show={!isInView} /> */}
 
       <div className="bounce hidden lg:block col-span-2">
         <div>

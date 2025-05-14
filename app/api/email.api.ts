@@ -1,4 +1,4 @@
-import { EMAIL_API } from "~/config/env.config";
+import { PORTFOLIO_API } from "~/config/env.config";
 
 interface EmailRequestBody {
   name: string;
@@ -18,7 +18,7 @@ export const sendEmail = async ({
   subject,
   message,
 }: EmailRequestBody): Promise<EmailResponseBody> => {
-  const response = await fetch(`${EMAIL_API}/send-email`, {
+  const response = await fetch(`${PORTFOLIO_API}/email/send`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

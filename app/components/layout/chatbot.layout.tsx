@@ -8,7 +8,6 @@ import botSound from "../../assets/sounds/chatbot-sound.mp3";
 import useSound from "use-sound";
 import generateRandomNumber from "~/utils/generate-random.util";
 import useScreenSize from "~/hooks/useScreenSize";
-import HandIcon from "../icons/hand.icon";
 
 export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const preMessages = [
@@ -27,11 +26,12 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
     generateRandomNumber(0, preMessages.length)
   );
   const [streaming, setStreaming] = useState(false);
+  const [showChatBot, setShowChatBot] = useState(false);
   const [reply, setReply] = useState("");
+  const [currentMessage, setCurrentMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([
     "Hi there! Got questions? Feel free to ask me anything.",
   ]);
-  const messageRef = useRef<HTMLInputElement>(null);
   const historyRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [play] = useSound(botSound);
@@ -47,13 +47,15 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       return !prevState;
     });
 
+  const onChange = (e: any) => setCurrentMessage(e.target.value);
+
   const onChat = async () => {
     let _reply = "";
     try {
-      if (!messageRef?.current) return;
+      if (currentMessage.trim() === "") return;
 
-      const message = messageRef.current.value.trim();
-      messageRef.current.value = "";
+      const message = currentMessage.trim();
+      setCurrentMessage("");
 
       scrollDown();
 
@@ -109,128 +111,190 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   };
 
   const onKeyDown = (e: any) => {
-    if (!messageRef?.current) return;
-
-    const message = messageRef.current.value.trim();
+    const message = currentMessage.trim();
 
     if (e.key === "Tab" && message === "") {
-      messageRef.current.value = preMessages[randomIndex] || "";
+      setCurrentMessage(preMessages[randomIndex] || "");
     }
   };
 
   const onDoubleClick = (e: any) => {
-    if (!messageRef?.current || responseSize.lg) return;
+    if (responseSize.lg) return;
 
-    messageRef.current.value = preMessages[randomIndex] || "";
+    setCurrentMessage(preMessages[randomIndex] || "");
   };
 
   useEffect(scrollDown, [reply]);
   useEffect(handleOutsideClick, [onClose]);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowChatBot(true);
+    }, 3000);
+  }, []);
 
   return (
-    <motion.div
-      animate={{ y: ["100%", "0%"], opacity: [0, 1], willChange: "transform" }}
-      transition={{ type: "spring", delay: 3 }}
-      className="fixed bottom-5 lg:bottom-10 lg:w-fit lg:right-10 z-30 inset-x-5 flex justify-end lg:inset-x-[unset]"
-    >
-      <AnimatePresence initial={false}>
-        {show ? (
-          <motion.section
-            ref={sectionRef}
-            initial={{
-              opacity: 0,
-              x: "100%",
-            }}
-            animate={{
-              opacity: 1,
-              x: "0%",
-            }}
-            exit={{
-              opacity: 0,
-              x: "100%",
-            }}
-            transition={{ type: "tween" }}
-            className="border-1 rounded-md border-border dark:border-0 mx-auto min-h-[500px] w-full lg:w-[450px] flex flex-col justify-center overflow-hidden shadow-lg bg-light"
-          >
-            <form
-              className="flex-1 relative"
-              onSubmit={(e) => e.preventDefault()}
+    <>
+      <>
+        <AnimatePresence>
+          {show ? (
+            <motion.div
+              ref={sectionRef}
+              initial={{
+                opacity: 0,
+                scale: 0,
+                x: "50%",
+                y: "50%",
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: "0%",
+                x: "0%",
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0,
+                y: "50%",
+                x: "50%",
+              }}
+              transition={{ type: "tween" }}
+              className="border-1 rounded-md fixed inset-0 dark:bg-dark dark:border-border-dark lg:inset-[unset] lg:right-10 lg:bottom-24 z-40 border-border mx-auto min-h-[500px] lg:min-h-[600px] w-full lg:w-[550px] flex flex-col justify-center overflow-hidden shadow-lg bg-light"
             >
-              <div className="lg:text-xl bg-dark text-light py-3 flex justify-between px-4 items-center">
-                <div className="flex gap-2 items-center">
-                  <img
-                    alt="chatbot"
-                    src="/images/chatbot.png"
-                    className="h-8 w-8"
-                  />
-                  <h3>Welcome to my Personal Chatbot</h3>
-                </div>
-                <button
-                  className="hover:text-yellow-300 cursor-pointer"
-                  type="button"
-                  onClick={toggleChat}
-                >
-                  <CloseIcon className="transition-colors" />
-                </button>
-              </div>
-              <div
-                ref={historyRef}
-                className="max-h-[400px] px-2 overflow-y-auto space-y-3 message-history pt-4 pb-10"
+              <form
+                className="flex-1 relative"
+                onSubmit={(e) => e.preventDefault()}
               >
-                {messages.map((message, index) =>
-                  (index + 1) % 2 === 0 ? (
-                    <MessageCard messageHistory={message} />
-                  ) : (
-                    <ReplyCard replyHistory={marked(message)} />
-                  )
-                )}
-                {streaming && !reply ? (
-                  <ChattingIndicator />
-                ) : reply ? (
-                  <ReplyCard replyHistory={reply} />
-                ) : null}
-              </div>
-              <div className="flex border-t-[1px] border-border px-4 py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
-                <div className="relative w-full">
-                  <input
-                    ref={messageRef}
-                    type="text"
-                    placeholder={
-                      preMessages[randomIndex] || "Your question here..."
-                    }
-                    onKeyDown={onKeyDown}
-                    onDoubleClick={onDoubleClick}
-                    className="w-full outline-none placeholder:italic group border-[1px] border-border pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark"
-                  />
+                <div className="lg:text-xl bg-dark dark:bg-light/90 dark:text-dark text-light py-3 flex justify-between px-4 items-center">
+                  <div className="flex gap-2 items-center">
+                    <img
+                      alt="chatbot"
+                      src="/images/chatbot.png"
+                      className="h-8 w-8"
+                    />
+                    <h3>Welcome to my Personal Chatbot</h3>
+                  </div>
                   <button
-                    className="cursor-pointer w-fit bottom-3 group outline-none absolute right-3"
-                    disabled={streaming}
-                    type="submit"
-                    onClick={onChat}
-                    title="Submit"
+                    className="hover:text-yellow-300 lg:hidden cursor-pointer"
+                    type="button"
+                    onClick={toggleChat}
                   >
-                    <ShareIcon className="rotate-[34deg] scale-125 group-focus:text-dark text-dark/70" />
+                    <CloseIcon className="transition-colors" />
                   </button>
                 </div>
-              </div>
-            </form>
-          </motion.section>
-        ) : (
-          <button
-            className="cursor-pointer text-4xl! lg:text-5xl! translate-x-2 wave"
-            onClick={toggleChat}
+                <div
+                  ref={historyRef}
+                  className="max-h-[85vh] dark:bg-dark lg:max-h-[500px] px-2 overflow-y-auto space-y-3 message-history pt-4 pb-10"
+                >
+                  {messages.map((message, index) => (
+                    <Fragment key={index}>
+                      {(index + 1) % 2 === 0 ? (
+                        <MessageCard messageHistory={message} />
+                      ) : (
+                        <ReplyCard replyHistory={marked(message)} />
+                      )}
+                    </Fragment>
+                  ))}
+                  {streaming && !reply ? (
+                    <ChattingIndicator />
+                  ) : reply ? (
+                    <ReplyCard replyHistory={reply} />
+                  ) : null}
+                </div>
+                <div className="flex border-t-[1px] border-border dark:border-border-dark px-4 dark:bg-dark py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
+                  <div className="relative w-full">
+                    <input
+                      type="text"
+                      placeholder={
+                        preMessages[randomIndex] || "Your question here..."
+                      }
+                      onKeyDown={onKeyDown}
+                      onChange={onChange}
+                      value={currentMessage}
+                      onDoubleClick={onDoubleClick}
+                      className="w-full outline-none placeholder:italic group border-[1px] border-border dark:border-border-dark pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark dark:bg-dark dark:text-light/90"
+                    />
+                    <button
+                      className="cursor-pointer w-fit bottom-3 group outline-none absolute right-3"
+                      disabled={streaming || currentMessage.trim() === ""}
+                      type="submit"
+                      onClick={onChat}
+                      title="Submit"
+                    >
+                      <ShareIcon className="rotate-[34deg] scale-125 group-focus:text-dark text-dark/70" />
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+
+        {showChatBot ? (
+          <motion.div
+            animate={{
+              x: ["100%", "0%"],
+              opacity: [0, 1],
+              willChange: "transform",
+            }}
+            transition={{ type: "tween" }}
+            className="fixed bottom-5 right-5 flex gap-2 lg:right-10"
           >
-            <img
-              alt="chatbot"
-              src="/images/chatbot.png"
-              className="h-12 w-12 lg:h-16 lg:w-16"
-            />
-          </button>
-        )}
-      </AnimatePresence>
-    </motion.div>
+            <GreetingsMessage />
+            <motion.button
+              className={`cursor-pointer text-4xl! lg:text-5xl! translate-x-2 outline-none group ${
+                !show ? "wave" : null
+              }`}
+              onClick={toggleChat}
+            >
+              {show ? (
+                <CloseIcon className="transition-colors h-12 w-12 lg:h-16 lg:w-16 scale-50 group-hover:text-yellow-300 text-dark dark:text-light/90" />
+              ) : (
+                <img
+                  alt="chatbot"
+                  src="/images/chatbot.png"
+                  className="h-12 w-12 lg:h-16 lg:w-16"
+                />
+              )}
+            </motion.button>
+          </motion.div>
+        ) : null}
+      </>
+    </>
   );
 }
+
+const GreetingsMessage = () => {
+  const [show, setShow] = useState(false);
+
+  const initialLoad = () => {
+    setTimeout(() => {
+      setShow(true);
+
+      setTimeout(() => {
+        setShow(false);
+      }, 3000);
+    }, 2000);
+  };
+
+  useEffect(initialLoad, []);
+
+  return (
+    <AnimatePresence>
+      {show ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0, x: "70%" }}
+          animate={{ opacity: 1, scale: 1, x: "0%" }}
+          exit={{ opacity: 0, scale: 0, x: "70%" }}
+          transition={{ type: "tween", duration: 0.6, delay: 0.3 }}
+          className="relative inline-block dark:bg-light/90 dark:text-dark bg-dark text-light top-1 text-center h-fit rounded-md py-1 px-2 w-fit shadow-lg"
+        >
+          Hey! Feel free to ask me anything.
+          <div className="absolute h-4 w-4 bg-dark dark:bg-light/90 rotate-45 scale-110 left-[95%] top-[25%] shadow-lg -z-10" />
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+};
 
 const ReplyCard = ({
   replyHistory,
@@ -244,14 +308,14 @@ const ReplyCard = ({
         y: ["10px", "0%"],
       }}
       transition={{ type: "tween" }}
-      className="p-2 w-[80%] flex items-start gap-2"
+      className="p-2 w-[90%] flex items-start gap-2"
     >
       <img
         src="/images/avatar.jpg"
         className="w-10 h-10 mt-[1px] rounded-full"
       />
       <div
-        className="bg-dark rounded-md border-dark text-light p-2 max-w-[100%] break-words"
+        className="bg-dark dark:bg-light/90 dark:text-dark rounded-md border-dark text-light p-2 max-w-[100%] break-words"
         // @ts-ignore
         dangerouslySetInnerHTML={{ __html: replyHistory }}
       />
@@ -267,7 +331,7 @@ const MessageCard = ({ messageHistory }: { messageHistory: string }) => {
         y: ["10px", "0%"],
       }}
       transition={{ type: "tween" }}
-      className="bg-green-300 mr-2 p-2 max-w-[80%] w-fit rounded-md border-green-500 ml-auto break-words"
+      className="bg-green-300 mr-2 p-2 max-w-[90%] w-fit rounded-md border-green-500 ml-auto break-words"
     >
       {messageHistory}
     </motion.div>

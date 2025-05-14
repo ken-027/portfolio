@@ -11,7 +11,7 @@ interface YearsMonthExperience {
 }
 
 export const getExperiences = async (): Promise<Experience[]> => {
-  const response = await fetch(`${PORTFOLIO_API}/experiences`);
+  const response = await fetch(`${PORTFOLIO_API}/portfolio/experiences`);
 
   const { experiences } = await response.json();
 
@@ -19,7 +19,7 @@ export const getExperiences = async (): Promise<Experience[]> => {
 };
 
 export const getServices = async (): Promise<Service[]> => {
-  const response = await fetch(`${PORTFOLIO_API}/services`);
+  const response = await fetch(`${PORTFOLIO_API}/portfolio/services`);
 
   const { services } = await response.json();
 
@@ -27,7 +27,7 @@ export const getServices = async (): Promise<Service[]> => {
 };
 
 export const getCertificates = async (): Promise<Certificate[]> => {
-  const response = await fetch(`${PORTFOLIO_API}/certificates`);
+  const response = await fetch(`${PORTFOLIO_API}/portfolio/certificates`);
 
   const { certificates } = await response.json();
 
@@ -35,7 +35,7 @@ export const getCertificates = async (): Promise<Certificate[]> => {
 };
 
 export const getSkills = async (): Promise<Skill[]> => {
-  const response = await fetch(`${PORTFOLIO_API}/skills`);
+  const response = await fetch(`${PORTFOLIO_API}/portfolio/skills`);
 
   const { skills } = await response.json();
 
@@ -43,7 +43,7 @@ export const getSkills = async (): Promise<Skill[]> => {
 };
 
 export const getProjects = async (): Promise<Project[]> => {
-  const response = await fetch(`${PORTFOLIO_API}/projects`);
+  const response = await fetch(`${PORTFOLIO_API}/portfolio/projects`);
 
   const { projects } = await response.json();
 
@@ -52,7 +52,7 @@ export const getProjects = async (): Promise<Project[]> => {
 
 export const getTotalExperience = async (): Promise<YearsMonthExperience> => {
   const response = await fetch(
-    `${PORTFOLIO_API}/experiences/years-of-experience`
+    `${PORTFOLIO_API}/portfolio/experiences/years-of-experience`
   );
 
   const { years, months } = (await response.json()) as {

@@ -1,7 +1,7 @@
-import { CHATBOT_API } from "~/config/env.config";
+import { PORTFOLIO_API } from "~/config/env.config";
 
 export const chatStream = async (message: string, history: string[]): Promise<any> => {
-  const response = await fetch(`${CHATBOT_API}/chat`, {
+  const response = await fetch(`${PORTFOLIO_API}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
