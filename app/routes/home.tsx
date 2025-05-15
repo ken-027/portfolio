@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
 import { getStyledType } from "~/shared/local-storage";
-import { lazy, useEffect, useState } from "react";
-import { visitor } from "~/api/visitor.api";
+import { useEffect, useState } from "react";
+import { access } from "~/api/access.api";
 import type { Experience } from "~/shared/experiences";
 import {
   getCertificates,
@@ -70,7 +70,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    visitor();
+    access();
     loadData();
 
     setTimeout(() => {
