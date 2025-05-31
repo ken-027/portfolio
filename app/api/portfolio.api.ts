@@ -1,9 +1,9 @@
 import { PORTFOLIO_API } from "~/config/env.config";
-import type { Certificate } from "~/shared/certificates";
-import type { Experience } from "~/shared/experiences";
-import type { Project } from "~/shared/projects";
-import type { Service } from "~/shared/services";
-import type { Skill } from "~/shared/skills";
+import type { Certificate } from "~/types";
+import type { Experience } from "~/types";
+import type { Project } from "~/types";
+import type { Service } from "~/types";
+import type { Skill } from "~/types";
 
 interface YearsMonthExperience {
   years: number;
