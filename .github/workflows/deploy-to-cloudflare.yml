@@ -6,17 +6,6 @@ on:
       - main
 
 jobs:
-  TEST_COMPONENTS:
-    name: Test Components
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Code checkout
-        uses: actions/checkout@v4
-
-      - name: Test components
-        run: echo "Test success"
-
   DEPLOY_TO_CLOUDFLARE:
     name: Build and Deploy
     runs-on: ubuntu-latest
