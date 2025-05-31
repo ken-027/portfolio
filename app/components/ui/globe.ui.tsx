@@ -2,7 +2,7 @@ import { Cloud, renderSimpleIcon } from "react-icon-cloud";
 import { motion, useAnimate } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { getSkills } from "~/api/portfolio.api";
-import type { ItemSkill } from "~/shared/skills";
+import type { ItemSkill } from "~/types";
 import { delay, stagger } from "motion";
 
 const icons = [
