@@ -3,7 +3,7 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches:
-      - main
+      - sdf
 
 jobs:
   DEPLOY_TO_CLOUDFLARE:
