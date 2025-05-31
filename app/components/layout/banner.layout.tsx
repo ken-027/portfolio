@@ -47,7 +47,7 @@ export default function BannerLayout() {
             <span className="lg:hidden">
               <HandIcon className="wave inline mr-3" />
             </span>
-            I'm Koan
+            I'm Kenneth Andales
           </span>
 
           <span className="text-xl md:mt-1 md:text-2xl lg:text-3xl font-bold dark:text-light/90 xl:mt-2">
@@ -76,7 +76,11 @@ export default function BannerLayout() {
         </p>
         <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI
+<<<<<<< HEAD
             title="View Projects"
+=======
+            title="My Projects"
+>>>>>>> dev
             href="#projects"
             Icon={<ProjectIcon />}
             className="banner-animate"
