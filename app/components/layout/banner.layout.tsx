@@ -47,7 +47,7 @@ export default function BannerLayout() {
             <span className="lg:hidden">
               <HandIcon className="wave inline mr-3" />
             </span>
-            I'm Kenneth Andales
+            I'm Koan
           </span>
 
           <span className="text-xl md:mt-1 md:text-2xl lg:text-3xl font-bold dark:text-light/90 xl:mt-2">
