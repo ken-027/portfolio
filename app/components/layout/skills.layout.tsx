@@ -1,11 +1,11 @@
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
-import { type ItemSkill, type Skill } from "~/shared/skills";
 import SectionUI from "../ui/section.ui";
 import ImageUI from "../ui/image.ui";
 import { useEffect, useRef, useState } from "react";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import useScreenSize from "~/hooks/useScreenSize";
+import type { ItemSkill, Proficiency, Skill } from "~/types";
 
 export default function SkillsLayout({ skills }: { skills: Skill[] }) {
   const skillRef = useRef(null);
@@ -79,6 +79,7 @@ const SkillComponent = ({
   proficiency,
   index,
   name,
+  level,
 }: ItemSkill & { index: number }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const { responseSize, width } = useScreenSize();
@@ -103,6 +104,12 @@ const SkillComponent = ({
     "8": "w-[80%]",
     "9": "w-[90%]",
     "10": "w-[100%]",
+  };
+
+  const proficiencyColor: Record<Proficiency, string> = {
+    confident: "text-green-500",
+    comfortable: "text-blue-500",
+    exploring: "text-yellow-500",
   };
   const toggleTooltip = () => {
     if (responseSize.lg) return;
@@ -129,7 +136,7 @@ const SkillComponent = ({
           <span
             className={`bg-cyan-400/30! inset-x-0 border-t-[1px] border-cyan-500 ${
               //@ts-ignore
-              className[`${proficiency}`]
+              className[`${level}`]
             } bottom-0 block absolute ${
               index % 2 === 0 ? "sea-wave" : "sea-wave-odd"
             }`}
@@ -140,16 +147,12 @@ const SkillComponent = ({
             showTooltip ? "opacity-100 -translate-x-10" : ""
           }`}
         >
-          <div className="flex gap-2 bg-light text-dark">
-            Proficiency:
-            <span className="font-bold">{proficiency}</span>
-          </div>
-          <div
-            className={`h-2 border-[1px] border-cyan-500 bg-cyan-400 rounded-full ${
-              // @ts-ignore
-              widthClassName[`${proficiency}`]
-            }`}
-          />
+          <div className="flex gap-2 bg-light text-dark">Proficiency:</div>
+          <span
+            className={`font-bold capitalize ${proficiencyColor[proficiency]}`}
+          >
+            {proficiency}
+          </span>
         </div>
         {/* <Icon className="scale-90 lg:scale-100" /> */}
         <img

@@ -1,6 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-
 import { Fade as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useAnimate } from "motion/react";

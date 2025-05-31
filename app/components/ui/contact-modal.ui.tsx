@@ -102,7 +102,7 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
                       willChange: "transform",
                     }}
                     transition={{ type: "tween", delay: 0.2 }}
-                    className="xl:text-2xl footer-animate text-shadow-lg"
+                    className="xl:text-2xl footer-animate text-shadow-lg/30"
                   >
                     🤗 Thank you for visiting my portfolio
                   </motion.p>
@@ -118,7 +118,7 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
                       willChange: "transform",
                     }}
                     transition={{ type: "tween", delay: 0.3 }}
-                    className="footer-animate text-shadow-lg"
+                    className="footer-animate text-shadow-lg/30"
                   >
                     I appreciate you taking the time to explore my work.
                     I&apos;m always open to new opportunities, collaborations,
@@ -135,7 +135,7 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
                       ""
                     )}/resume/software-developer.pdf`}
                     Icon={<ResumeMenuIcon />}
-                    className="mt-2 text-light border-light dark:text-dark dark:border-dark text-shadow-lg"
+                    className="mt-2 text-light border-light dark:text-dark dark:border-dark text-shadow-lg/30"
                     borderClassName="bg-light dark:bg-dark"
                   />
                 </div>

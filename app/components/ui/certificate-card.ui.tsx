@@ -1,8 +1,7 @@
 import moment from "moment";
-import { type Certificate } from "~/shared/certificates";
 // @ts-expect-error @ts-ignore
 import { decode } from "he";
-
+import type { Certificate } from "~/types";
 
 export interface CertificateCardUIProps extends Certificate {
   className?: string;
@@ -63,7 +62,6 @@ export default function CertificateCardUI({
               src={platformLogo}
               alt={platform.toLowerCase()}
               className="h-[50px] w-[50px] lg:h-[80px] lg:w-[80px] border-1 dark:border-none border-light rounded-md"
-
             />
           </div>
           <p

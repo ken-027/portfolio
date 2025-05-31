@@ -30,11 +30,12 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const [reply, setReply] = useState("");
   const [currentMessage, setCurrentMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([
-    "Hi there! Got questions? Feel free to ask me anything.",
+    "Hi! Want to know more about me? I'm happy to answer!",
   ]);
   const historyRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [play] = useSound(botSound);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { responseSize } = useScreenSize();
 
@@ -46,6 +47,15 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
 
       return !prevState;
     });
+
+  const renderer = new marked.Renderer();
+  renderer.link = function ({ href, text }) {
+    return `<a href="${href}" target="_blank" class="text-green-300 dark:text-green-500">${text}</a>`;
+  };
+
+  //   renderer.strong = function (strong) {
+  //     return `<strong class="italic">${strong.text}</strong>`;
+  //   };
 
   const onChange = (e: any) => setCurrentMessage(e.target.value);
 
@@ -62,7 +72,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       setStreaming(true);
       setMessages((prevState) => [...prevState, message]);
 
-      const stream_replies = await chatStream(message, messages);
+      const stream_replies = await chatStream(message);
 
       play();
 
@@ -84,6 +94,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       setMessages((prevState) => [...prevState, _reply]);
       setReply("");
       setStreaming(false);
+      setRandomIndex(generateRandomNumber(0, preMessages.length));
     }
   };
 
@@ -119,13 +130,20 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   };
 
   const onDoubleClick = (e: any) => {
-    if (responseSize.lg) return;
+    const message = currentMessage.trim();
+
+    if (responseSize.lg || message !== "") return;
 
     setCurrentMessage(preMessages[randomIndex] || "");
   };
 
+  const focusTextInput = () => {
+    show && inputRef.current?.focus();
+  };
+
   useEffect(scrollDown, [reply]);
   useEffect(handleOutsideClick, [onClose]);
+  useEffect(focusTextInput, [show]);
   useEffect(() => {
     setTimeout(() => {
       setShowChatBot(true);
@@ -190,19 +208,22 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                       {(index + 1) % 2 === 0 ? (
                         <MessageCard messageHistory={message} />
                       ) : (
-                        <ReplyCard replyHistory={marked(message)} />
+                        <ReplyCard
+                          replyHistory={marked(message, { renderer })}
+                        />
                       )}
                     </Fragment>
                   ))}
                   {streaming && !reply ? (
                     <ChattingIndicator />
                   ) : reply ? (
-                    <ReplyCard replyHistory={reply} />
+                    <ReplyCard replyHistory={reply.replaceAll("*", "")} />
                   ) : null}
                 </div>
                 <div className="flex border-t-[1px] border-border dark:border-border-dark px-4 dark:bg-dark py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
                   <div className="relative w-full">
                     <input
+                      ref={inputRef}
                       type="text"
                       placeholder={
                         preMessages[randomIndex] || "Your question here..."
@@ -211,7 +232,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                       onChange={onChange}
                       value={currentMessage}
                       onDoubleClick={onDoubleClick}
-                      className="w-full outline-none placeholder:italic group border-[1px] border-border dark:border-border-dark pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark dark:bg-dark dark:text-light/90"
+                      className="w-full outline-none placeholder:italic group border-[1px] border-border dark:border-border-dark pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark dark:focus:border-light/90 dark:bg-dark dark:text-light/90"
                     />
                     <button
                       className="cursor-pointer w-fit bottom-3 group outline-none absolute right-3"
@@ -220,7 +241,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                       onClick={onChat}
                       title="Submit"
                     >
-                      <ShareIcon className="rotate-[34deg] scale-125 group-focus:text-dark text-dark/70" />
+                      <ShareIcon className="rotate-[34deg] scale-125 group-focus:text-dark dark:group-focus:text-light text-dark/70 dark:text-light/60 transition-colors" />
                     </button>
                   </div>
                 </div>
@@ -286,10 +307,10 @@ const GreetingsMessage = () => {
           animate={{ opacity: 1, scale: 1, x: "0%" }}
           exit={{ opacity: 0, scale: 0, x: "70%" }}
           transition={{ type: "tween", duration: 0.6, delay: 0.3 }}
-          className="relative inline-block dark:bg-light/90 dark:text-dark bg-dark text-light top-1 text-center h-fit rounded-md py-1 px-2 w-fit shadow-lg"
+          className="relative inline-block dark:bg-light/90 dark:text-dark bg-dark text-light top-1 md:top-1 lg:top-2 text-center h-fit rounded-md py-1 px-2 w-fit shadow-lg"
         >
-          Hey! Feel free to ask me anything.
-          <div className="absolute h-4 w-4 bg-dark dark:bg-light/90 rotate-45 scale-110 left-[95%] top-[25%] shadow-lg -z-10" />
+          Hi! Want to know more about me?
+          <div className="absolute h-4 w-4 bg-dark dark:bg-light/90 rotate-45 scale-110 left-[95%] top-[25%] lg:top-[25%] shadow-lg -z-10" />
         </motion.div>
       ) : null}
     </AnimatePresence>

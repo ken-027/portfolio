@@ -1,4 +1,4 @@
-import type { Experience } from "~/shared/experiences";
+import type { Experience } from "~/types";
 import { getDateFormat, getTotalByFormat } from "~/utils/date.utils";
 
 type ExperienceContentResponseProps = Omit<

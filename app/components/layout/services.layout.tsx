@@ -1,10 +1,11 @@
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
-import { type Service } from "~/shared/services";
 import CardUI from "../ui/card.ui";
 import SectionUI from "../ui/section.ui";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useRef } from "react";
+import type { Service } from "~/types";
+import useScreenSize from "~/hooks/useScreenSize";
 
 export default function ServicesLayout({ services }: { services: Service[] }) {
   const serviceRef = useRef<HTMLDivElement>(null);
@@ -37,11 +38,15 @@ const ServiceCard = ({
   index,
 }: Service & { index: number }) => {
   const serviceItemRef = useRef(null);
-  useAnimateElement(`service-${index}`, serviceItemRef);
+  const {
+    responseSize: { md },
+  } = useScreenSize();
+
+  useAnimateElement(`service-${md ? 0 : index}`, serviceItemRef);
   return (
     <CardUI
       ref={serviceItemRef}
-      className={`service-${index}-animate`}
+      className={`service-${md ? 0 : index}-animate`}
       description={description}
       title={title}
       image={image!}

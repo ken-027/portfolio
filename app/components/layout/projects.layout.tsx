@@ -1,6 +1,5 @@
 "use client";
 
-import { CATEGORIES, type Project } from "~/shared/projects";
 import HeaderUI from "../ui/header.ui";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import BoxUI from "../ui/box.ui";
@@ -12,6 +11,9 @@ import useAnimateElement from "~/hooks/useAnimateElement";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import useScreenSize from "~/hooks/useScreenSize";
+import type { Category, Project } from "~/types";
+
+type CategoryWithAI = Category | "AI-powered";
 
 export default function ProjectsLayout({
   projects: _projects,
@@ -26,6 +28,13 @@ export default function ProjectsLayout({
   useAnimateElement("project", projectRef);
 
   const { responseSize } = useScreenSize();
+
+  const CATEGORIES: CategoryWithAI[] = [
+    "frontend",
+    "backend",
+    "fullstack",
+    "AI-powered",
+  ];
 
   const categories = CATEGORIES;
 
@@ -46,7 +55,7 @@ export default function ProjectsLayout({
     modules: [EffectCoverflow, Pagination],
   };
 
-  const mobileEffect = {
+  const _mobileEffect = {
     className: "w-full",
     effect: "cards",
     touchEventsTarget: "container",
@@ -55,7 +64,8 @@ export default function ProjectsLayout({
     modules: [EffectCards],
   };
 
-  const effect = responseSize.lg ? desktopEffect : mobileEffect;
+  //   const effect = responseSize.lg ? desktopEffect : mobileEffect;
+  const effect = desktopEffect;
 
   return (
     <SectionUI id="projects" ref={projectRef}>
@@ -71,8 +81,10 @@ export default function ProjectsLayout({
 
           const filterProjects = useMemo(
             () =>
-              projects.filter(
-                ({ category: itemCategory }) => category === itemCategory
+              projects.filter(({ category: itemCategory, aiPowered }) =>
+                category === "AI-powered"
+                  ? aiPowered
+                  : category === itemCategory
               ),
             []
           );
@@ -91,32 +103,37 @@ export default function ProjectsLayout({
               <div className="lg:w-1/2 md:mx-auto md:w-[80%]">
                 {/* @ts-ignore */}
                 <Swiper {...effect}>
-                  {filterProjects.map(
-                    (
-                      {
-                        description,
-                        title,
-                        thumbnailLink,
-                        technologies,
-                        githubRepo,
-                        screenshot,
-                        liveDemo,
-                      },
-                      _index
-                    ) => (
-                      <SwiperSlide key={_index}>
-                        <BoxUI
-                          title={title}
-                          thumbnail={thumbnailLink}
-                          description={description}
-                          items={technologies}
-                          website={liveDemo}
-                          repo={githubRepo}
-                          screenshot={screenshot}
-                        />
-                      </SwiperSlide>
+                  {filterProjects
+                    .filter(
+                      ({ type: projectType }: Project) =>
+                        projectType !== "company"
                     )
-                  )}
+                    .map(
+                      (
+                        {
+                          description,
+                          title,
+                          thumbnailLink,
+                          technologies,
+                          githubRepo,
+                          screenshot,
+                          liveDemo,
+                        },
+                        _index
+                      ) => (
+                        <SwiperSlide key={_index}>
+                          <BoxUI
+                            title={title}
+                            thumbnail={thumbnailLink}
+                            description={description}
+                            items={technologies}
+                            website={liveDemo}
+                            repo={githubRepo}
+                            screenshot={screenshot}
+                          />
+                        </SwiperSlide>
+                      )
+                    )}
                 </Swiper>
               </div>
             </div>

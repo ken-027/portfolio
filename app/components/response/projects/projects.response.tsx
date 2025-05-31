@@ -1,9 +1,11 @@
-import { CATEGORIES } from "~/shared/projects";
+import type { Category } from "~/types";
 import ResponseWrapperUI from "../../ui/response-wrapper.ui";
 import { usePortfolioContext } from "~/components/layout/terminal.layout";
 
 export default function ProjectsResponse() {
   const { projects } = usePortfolioContext();
+
+  const CATEGORIES: Category[] = ["frontend", "backend", "fullstack"];
 
   return (
     <ResponseWrapperUI typeSpeed="fast">

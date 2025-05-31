@@ -1,6 +1,5 @@
 import HeaderUI from "../ui/header.ui";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
-import { type Experience } from "~/shared/experiences";
 import { getDateFormat, getTotalByFormat } from "~/utils/date.utils";
 import CheckIcon from "../icons/check.icon";
 import SectionUI from "../ui/section.ui";
@@ -10,6 +9,11 @@ import useAnimateElement from "~/hooks/useAnimateElement";
 import { useMemo, useRef } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
 import { Parallax } from "react-scroll-parallax";
+import type { Experience } from "~/types";
+import { Link } from "react-router";
+import ViewIcon from "../icons/view.icon";
+import DownloadImageIcon from "../icons/download-image.icon";
+import RepoIcon from "../icons/repo.icon";
 
 export default function ExperiencesLayout({
   experiences,
@@ -141,7 +145,15 @@ const ExperienceItem = ({
               <div className="w-full md:grid md:grid-cols-2 md:gap-5 justify-center lg:gap-10 xl:block">
                 {projects?.map(
                   (
-                    { thumbnailLink, title, technologies, description },
+                    {
+                      thumbnailLink,
+                      title,
+                      technologies,
+                      description,
+                      liveDemo,
+                      screenshot,
+                      githubRepo,
+                    },
                     _index
                   ) => (
                     <div
@@ -182,6 +194,40 @@ const ExperienceItem = ({
                               </div>
                             ))}
                           </div>
+                          {liveDemo || githubRepo || screenshot ? (
+                            <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-2xl lg:px-2">
+                              {liveDemo ? (
+                                <Link
+                                  target={"_blank"}
+                                  to={liveDemo}
+                                  className="flex items-center gap-2 lg:gap-4"
+                                >
+                                  <ViewIcon className="scale-125 lg:scale-200" />
+                                  Demo
+                                </Link>
+                              ) : null}
+                              {githubRepo ? (
+                                <Link
+                                  target="_blank"
+                                  to={githubRepo}
+                                  className="flex items-center gap-2 lg:gap-4"
+                                >
+                                  <RepoIcon className="scale-125 lg:scale-200" />{" "}
+                                  Code
+                                </Link>
+                              ) : null}
+                              {screenshot ? (
+                                <Link
+                                  target="_blank"
+                                  to={screenshot}
+                                  className="flex items-center gap-2 lg:gap-4"
+                                >
+                                  <DownloadImageIcon className="scale-125 lg:scale-200" />
+                                  Screenshots
+                                </Link>
+                              ) : null}
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </div>
@@ -205,7 +251,15 @@ const ExperienceItem = ({
               >
                 {projects?.map(
                   (
-                    { thumbnailLink, title, technologies, description },
+                    {
+                      thumbnailLink,
+                      title,
+                      technologies,
+                      description,
+                      liveDemo,
+                      githubRepo,
+                      screenshot,
+                    },
                     _index
                   ) => (
                     <SwiperSlide key={_index} className="pb-10">
@@ -226,7 +280,7 @@ const ExperienceItem = ({
                             <p className="lg:text-xl">{title}</p>
                             <p className="font-open-sauce">{description}</p>
                           </div>
-                          <div className="flex flex-wrap gap-1 md:gap-2 mt-2">
+                          <div className="flex flex-wrap gap-1.5 md:gap-2 mt-2">
                             {technologies.map(({ icon, name }, __index) => (
                               <div
                                 key={__index}
@@ -241,6 +295,40 @@ const ExperienceItem = ({
                               </div>
                             ))}
                           </div>
+                          {liveDemo || githubRepo || screenshot ? (
+                            <div className="flex flex-wrap gap-5 mt-2 font-anton dark:text-light/90 md:text-2xl lg:px-2">
+                              {liveDemo ? (
+                                <Link
+                                  target={"_blank"}
+                                  to={liveDemo}
+                                  className="flex items-center gap-2 lg:gap-4"
+                                >
+                                  <ViewIcon className="scale-125 lg:scale-200" />
+                                  Demo
+                                </Link>
+                              ) : null}
+                              {githubRepo ? (
+                                <Link
+                                  target="_blank"
+                                  to={githubRepo}
+                                  className="flex items-center gap-2 lg:gap-4"
+                                >
+                                  <RepoIcon className="scale-125 lg:scale-200" />{" "}
+                                  Code
+                                </Link>
+                              ) : null}
+                              {screenshot ? (
+                                <Link
+                                  target="_blank"
+                                  to={screenshot}
+                                  className="flex items-center gap-2 lg:gap-4"
+                                >
+                                  <DownloadImageIcon className="scale-125 lg:scale-200" />
+                                  Screenshots
+                                </Link>
+                              ) : null}
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </SwiperSlide>

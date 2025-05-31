@@ -7,7 +7,6 @@ import ResumeMenuIcon from "../icons/resume-menu.icon";
 import LinkUI from "../ui/link.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
-import PageLoaderLayout from "./page-loader.layout";
 import { PORTFOLIO_API } from "~/config/env.config";
 export default function FooterLayout() {
   const [switching, setSwitching] = useState(false);

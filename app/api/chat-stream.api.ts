@@ -1,12 +1,13 @@
 import { PORTFOLIO_API } from "~/config/env.config";
 
-export const chatStream = async (message: string, history: string[]): Promise<any> => {
+export const chatStream = async (message: string): Promise<any> => {
   const response = await fetch(`${PORTFOLIO_API}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ message }),
+    credentials: "include",
   });
 
   if (response.status >= 400) {
@@ -24,4 +25,14 @@ export const chatStream = async (message: string, history: string[]): Promise<an
   const result = response.body?.getReader();
 
   return result;
+};
+
+export const storeChat = async () => {
+  await fetch(`${PORTFOLIO_API}/chat/store`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
 };

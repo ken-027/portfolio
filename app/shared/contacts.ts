@@ -1,16 +1,8 @@
-"use client";
-
 import GmailIcon from "~/components/icons/gmail.icon";
 import LinkedInIcon from "~/components/icons/linkedin.icon";
 import MicrosoftTeamsIcon from "~/components/icons/microsoft-teams.icon";
 import UpworkIcon from "~/components/icons/upwork.icon";
-
-interface Contact {
-  name: string;
-  link: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Icon: React.FC<any>;
-}
+import type { Contact } from "~/types";
 
 const CONTACTS: Contact[] = [
   {

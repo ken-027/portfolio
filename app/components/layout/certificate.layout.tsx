@@ -2,7 +2,6 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
 import ImageUI from "../ui/image.ui";
-import { type Certificate } from "~/shared/certificates";
 import CertificateCardUI from "../ui/certificate-card.ui";
 
 import "swiper/css/pagination";
@@ -10,6 +9,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/effect-cards";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useRef } from "react";
+import type { Certificate } from "~/types";
 
 export default function CertificateLayout({
   certificates,

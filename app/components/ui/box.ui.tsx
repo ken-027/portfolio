@@ -1,10 +1,10 @@
 "use client";
 
-import { type Technology } from "~/shared/projects";
 import RepoIcon from "../icons/repo.icon";
 import ViewIcon from "../icons/view.icon";
 import DownloadImageIcon from "../icons/download-image.icon";
 import { Link } from "react-router";
+import type { Technology } from "~/types";
 
 interface BoxUIProps {
   thumbnail?: string;
@@ -54,11 +54,7 @@ export default function BoxUI({
               title={name}
               className="border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center"
             >
-              <img
-                src={icon}
-                alt={name}
-                className="scale-75"
-              />
+              <img src={icon} alt={name} className="scale-75" />
             </div>
           ))}
         </div>

@@ -2,7 +2,6 @@ import type { Route } from "./+types/home";
 import { getStyledType } from "~/shared/local-storage";
 import { useEffect, useState } from "react";
 import { access } from "~/api/access.api";
-import type { Experience } from "~/shared/experiences";
 import {
   getCertificates,
   getExperiences,
@@ -10,10 +9,6 @@ import {
   getServices,
   getSkills,
 } from "~/api/portfolio.api";
-import type { Service } from "~/shared/services";
-import type { Certificate } from "~/shared/certificates";
-import type { Skill } from "~/shared/skills";
-import type { Project } from "~/shared/projects";
 
 import BannerLayout from "~/components/layout/banner.layout";
 import TerminalLayout from "~/components/layout/terminal.layout";
@@ -25,6 +20,8 @@ import ContactLayout from "~/components/layout/contact.layout";
 import FooterLayout from "~/components/layout/footer.layout";
 import ChatBotLayout from "~/components/layout/chatbot.layout";
 import CertificateLayout from "~/components/layout/certificate.layout";
+import type { Certificate, Experience, Project, Service, Skill } from "~/types";
+import { storeChat } from "~/api/chat-stream.api";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -70,6 +67,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    storeChat();
     access();
     loadData();
 

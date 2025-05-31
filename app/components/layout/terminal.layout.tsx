@@ -13,12 +13,8 @@ import UnknownSubCommandResponse from "../response/unknown-sub-command";
 import ContactResponse from "../response/contact/contact-terminal.response";
 import { getOrigin, getOriginOnSubCommands } from "~/utils/commands.utils";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
-import type { Service } from "~/shared/services";
-import type { Skill } from "~/shared/skills";
-import type { Experience } from "~/shared/experiences";
-import type { Project } from "~/shared/projects";
-import type { Certificate } from "~/shared/certificates";
 import { getTotalExperience } from "~/api/portfolio.api";
+import type { Certificate, Experience, Project, Service, Skill } from "~/types";
 export interface TerminalLog {
   shell?: ReactNode;
   Response?: ReactNode;
