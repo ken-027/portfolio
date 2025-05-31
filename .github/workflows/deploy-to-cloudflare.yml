@@ -30,7 +30,7 @@ jobs:
 
       - name: Publish to Cloudflare Pages
         run: |
-          wrangler pages deploy ./dist \
+          wrangler pages deploy ./build/client \
             --project-name ${{ secrets.CF_PROJECT_NAME }} \
             --account-id ${{ secrets.CF_ACCOUNT_ID }}
         env:
