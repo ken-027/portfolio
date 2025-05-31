@@ -1,9 +1,4 @@
 name: Deploy to Cloudflare Pages
-env:
-  VITE_PORTFOLIO_API_DEV: http://localhost:5000/api/v1
-  VITE_PORTFOLIO_API: https://portfolio-api.ksoftdev.site/api/v1
-  VITE_ACCESS_API: https://portfolio-access-api.ksoftdev.site/api/v1
-  VITE_ACCESS_API_DEV: http://localhost:5001/api/v1
 
 on:
   push:
@@ -30,6 +25,11 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_PORTFOLIO_API_DEV: http://localhost:5000/api/v1
+          VITE_PORTFOLIO_API: https://portfolio-api.ksoftdev.site/api/v1
+          VITE_ACCESS_API: https://portfolio-access-api.ksoftdev.site/api/v1
+          VITE_ACCESS_API_DEV: http://localhost:5001/api/v1
 
       - name: Install Wrangler CLI
         run: npm install -g wrangler
