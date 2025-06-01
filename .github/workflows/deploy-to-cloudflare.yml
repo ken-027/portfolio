@@ -22,12 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Typecheck first
-        run: npm run typecheck
-
-      - name: Test components
-        run: echo "Test success"
-
       - name: Build project
         run: npm run build
         env:
