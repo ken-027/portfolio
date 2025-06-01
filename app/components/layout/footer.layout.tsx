@@ -7,7 +7,7 @@ import ResumeMenuIcon from "../icons/resume-menu.icon";
 import LinkUI from "../ui/link.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
-import { PORTFOLIO_API } from "~/config/env.config";
+import { PORTFOLIO_BASE_URL } from "~/config/env.config";
 export default function FooterLayout() {
   const [switching, setSwitching] = useState(false);
   const footerRef = useRef(null);
@@ -46,10 +46,7 @@ export default function FooterLayout() {
           <LinkUI
             title="Get my resume"
             download
-            href={`${PORTFOLIO_API.replace(
-              "/api/v1/portfolio",
-              ""
-            )}/resume/software-developer.pdf`}
+            href={`${PORTFOLIO_BASE_URL}/resume/software-developer.pdf`}
             Icon={<ResumeMenuIcon />}
             className="mt-2"
           />

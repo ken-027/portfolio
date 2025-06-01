@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import ResponseWrapperUI from "../ui/response-wrapper.ui";
+import { PORTFOLIO_BASE_URL } from "~/config/env.config";
 
 export default function ResumeResponse() {
   const downloadPDF = () => {
@@ -22,7 +23,7 @@ export default function ResumeResponse() {
       <a
         title="Get my resume"
         download
-        href="/resume/software-developer.pdf"
+        href={`${PORTFOLIO_BASE_URL}/resume/software-developer.pdf`}
         className="mt-2 hidden"
       />
       <p>Thanks for downloading my resume</p>

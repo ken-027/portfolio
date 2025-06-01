@@ -7,3 +7,5 @@ export const ACCESS_API = isDev
 export const PORTFOLIO_API: string = isDev
   ? import.meta.env.VITE_PORTFOLIO_API_DEV
   : import.meta.env.VITE_PORTFOLIO_API;
+
+export const PORTFOLIO_BASE_URL: string = PORTFOLIO_API.replace("/api/v1", "");
