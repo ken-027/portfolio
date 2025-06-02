@@ -153,6 +153,8 @@ const ExperienceItem = ({
                       liveDemo,
                       screenshot,
                       githubRepo,
+                      category,
+                      aiPowered,
                     },
                     _index
                   ) => (
@@ -193,6 +195,16 @@ const ExperienceItem = ({
                                 />
                               </div>
                             ))}
+                          </div>
+                          <div className="flex gap-1.5 lg:gap-2 my-2 lg:my-3 font-open-sauce">
+                            <div className="bg-white text-dark border-dark border-1 lowercase font-bold px-3 py-0.5 rounded-md">
+                              {category}
+                            </div>
+                            {aiPowered ? (
+                              <div className="bg-white text-red-800 border-red-800 lowercase border-1 font-bold px-3 py-0.5 rounded-md">
+                                AI Powered
+                              </div>
+                            ) : null}
                           </div>
                           {liveDemo || githubRepo || screenshot ? (
                             <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-2xl lg:px-2">
@@ -259,6 +271,8 @@ const ExperienceItem = ({
                       liveDemo,
                       githubRepo,
                       screenshot,
+                      aiPowered,
+                      category,
                     },
                     _index
                   ) => (
@@ -294,6 +308,16 @@ const ExperienceItem = ({
                                 />
                               </div>
                             ))}
+                          </div>
+                          <div className="flex gap-1.5 my-2 font-open-sauce text-sm">
+                            <div className="bg-white text-dark border-dark border-1 lowercase font-bold px-3 py-0.5 rounded-md">
+                              {category}
+                            </div>
+                            {aiPowered ? (
+                              <div className="bg-white text-red-800 border-red-800 lowercase border-1 font-bold px-3 py-0.5 rounded-md">
+                                AI Powered
+                              </div>
+                            ) : null}
                           </div>
                           {liveDemo || githubRepo || screenshot ? (
                             <div className="flex flex-wrap gap-5 mt-2 font-anton dark:text-light/90 md:text-2xl lg:px-2">
