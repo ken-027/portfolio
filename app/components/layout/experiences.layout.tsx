@@ -197,11 +197,11 @@ const ExperienceItem = ({
                             ))}
                           </div>
                           <div className="flex gap-1.5 lg:gap-2 my-2 lg:my-3 font-open-sauce">
-                            <div className="bg-white text-dark border-dark border-1 lowercase font-bold px-3 py-0.5 rounded-md">
+                            <div className="bg-dark text-light dark:bg-light dark:text-dark lowercase font-bold px-3 py-0.5 rounded-md">
                               {category}
                             </div>
                             {aiPowered ? (
-                              <div className="bg-white text-red-800 border-red-800 lowercase border-1 font-bold px-3 py-0.5 rounded-md">
+                              <div className="bg-red-800 text-light lowercase font-bold px-3 py-0.5 rounded-md">
                                 AI Powered
                               </div>
                             ) : null}
@@ -310,11 +310,11 @@ const ExperienceItem = ({
                             ))}
                           </div>
                           <div className="flex gap-1.5 my-2 font-open-sauce text-sm">
-                            <div className="bg-white text-dark border-dark border-1 lowercase font-bold px-3 py-0.5 rounded-md">
+                            <div className="bg-dark text-light dark:bg-light dark:text-dark lowercase font-bold px-3 py-0.5 rounded-md">
                               {category}
                             </div>
                             {aiPowered ? (
-                              <div className="bg-white text-red-800 border-red-800 lowercase border-1 font-bold px-3 py-0.5 rounded-md">
+                              <div className="bg-red-800 text-light lowercase font-bold px-3 py-0.5 rounded-md">
                                 AI Powered
                               </div>
                             ) : null}

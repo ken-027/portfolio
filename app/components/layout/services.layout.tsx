@@ -9,6 +9,7 @@ import useScreenSize from "~/hooks/useScreenSize";
 
 export default function ServicesLayout({ services }: { services: Service[] }) {
   const serviceRef = useRef<HTMLDivElement>(null);
+  const serviceItemRef = useRef<HTMLDivElement>(null);
   useAnimateElement(`service`, serviceRef);
 
   return (
@@ -20,9 +21,17 @@ export default function ServicesLayout({ services }: { services: Service[] }) {
       />
       <PaddingWrapperUI className="text-dark">
         <div className="flex flex-col items-center justify-center gap-10">
-          <div className="flex flex-col gap-5 md:grid md:grid-cols-2 xl:grid-cols-3 xl:gap-y-10 xl:gap-x-10">
+          <div
+            className="flex flex-col gap-5 md:grid md:grid-cols-2 xl:grid-cols-3 xl:gap-y-10 xl:gap-x-10"
+            ref={serviceItemRef}
+          >
             {services.map(({ ...props }, index) => (
-              <ServiceCard {...props} index={index} key={index} />
+              <ServiceCard
+                {...props}
+                index={index}
+                key={index}
+                ref={serviceItemRef}
+              />
             ))}
           </div>
         </div>
@@ -36,16 +45,16 @@ const ServiceCard = ({
   image,
   title,
   index,
-}: Service & { index: number }) => {
+  ref,
+}: Service & { index: number; ref: any }) => {
   const serviceItemRef = useRef(null);
   const {
     responseSize: { md },
   } = useScreenSize();
 
-  useAnimateElement(`service-${md ? 0 : index}`, serviceItemRef);
+  useAnimateElement(`service-${md ? 0 : index}`, ref);
   return (
     <CardUI
-      ref={serviceItemRef}
       className={`service-${md ? 0 : index}-animate`}
       description={description}
       title={title}
