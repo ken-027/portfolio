@@ -140,7 +140,23 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main className="pt-16 p-4 w-full h-[100vh] container grid place-items-center mx-auto">
-      <img src="/images/404.svg" alt="404 not found" className="lg:w-3/4 lg:h-3/4" />
+      <img
+        // @ts-ignore
+        src={`/images/${error.status === 404 ? "404" : "500"}.svg`}
+        alt={
+          // @ts-ignore
+          error.status === 404 ? "404 not found" : "500 internal server error"
+        }
+        className="lg:w-3/4 lg:h-3/4"
+      />
+      {/* @ts-ignore */}
+      {error.status !== 404 ? (
+        <div className="text-center pb-4 space-y-2">
+          <h1 className="text-2xl">{message}</h1>
+          <p>{details}</p>
+          <p>{stack}</p>
+        </div>
+      ) : null}
     </main>
   );
 }
