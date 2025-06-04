@@ -76,8 +76,8 @@ export default function BannerLayout() {
         </p>
         <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI
-            title="View Projects"
-            href="#projects"
+            title="View Portfolio"
+            href="#portfolios"
             Icon={<ProjectIcon />}
             className="banner-animate"
           />
