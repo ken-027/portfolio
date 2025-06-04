@@ -68,10 +68,10 @@ export default function ProjectsLayout({
   const effect = desktopEffect;
 
   return (
-    <SectionUI id="projects" ref={projectRef}>
+    <SectionUI id="portfolios" ref={projectRef}>
       <HeaderUI
-        headerTitle="Projects"
-        headerSubtitle="Software I've Built and Maintained"
+        headerTitle="Portfolio"
+        headerSubtitle="Web Applications I've Built and Maintained"
         className="project-animate"
       />
       <PaddingWrapperUI className="min-h-[100vh] text-dark lg:space-y-32">
@@ -106,7 +106,7 @@ export default function ProjectsLayout({
                   {filterProjects
                     .filter(
                       ({ type: projectType }: Project) =>
-                        projectType !== "company"
+                        projectType === "personal"
                     )
                     .map(
                       (

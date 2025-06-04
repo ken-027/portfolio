@@ -52,9 +52,7 @@ const SkillWrapper = ({
 }: Skill & { lastItem: boolean }) => {
   return (
     <div
-      className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center lg:items-start ${
-        lastItem ? "lg:col-span-2" : ""
-      }`}
+      className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center lg:items-start`}
     >
       <h3
         className={`font-anton text-lg md:text-xl dark:text-light/90 skill-animate lg:text-2xl`}
@@ -62,9 +60,7 @@ const SkillWrapper = ({
         {name}
       </h3>
       <div
-        className={` grid grid-cols-3 gap-3 md:flex md:gap-8 md:flex-wrap md:justify-center lg:grid-cols-2 xl:grid-cols-3 lg:grid w-full ${
-          lastItem ? "xl:grid-cols-6 lg:grid-cols-4" : ""
-        }`}
+        className={` grid grid-cols-3 gap-3 md:flex md:gap-8 md:flex-wrap md:justify-center lg:grid-cols-2 xl:grid-cols-3 lg:grid w-full`}
       >
         {items.map((item, _index) => (
           <SkillComponent key={_index} index={_index} {...item} />
