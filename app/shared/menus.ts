@@ -18,7 +18,7 @@ const MENUS: Nav[] = [
   { name: "Services", href: "#services", Icon: ServicesIcon },
   { name: "Skills", href: "#skills", Icon: SkillsIcon },
   { name: "Experiences", href: "#experiences", Icon: ExperienceIcon },
-  { name: "Portfolios", href: "#portfolios", Icon: ProjectIcon },
+  { name: "Portfolio", href: "#portfolios", Icon: ProjectIcon },
   { name: "Certificates", href: "#certificates", Icon: CertificateIcon },
   { name: "Contact", href: "#contact", Icon: ContactIcon },
   { name: "My resume", href: "#resume", Icon: ResumeMenuIcon },
