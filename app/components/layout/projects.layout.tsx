@@ -118,6 +118,7 @@ export default function ProjectsLayout({
                           githubRepo,
                           screenshot,
                           liveDemo,
+                          dockerLink,
                         },
                         _index
                       ) => (
@@ -130,6 +131,7 @@ export default function ProjectsLayout({
                             website={liveDemo}
                             repo={githubRepo}
                             screenshot={screenshot}
+                            docker={dockerLink}
                           />
                         </SwiperSlide>
                       )

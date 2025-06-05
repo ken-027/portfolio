@@ -207,7 +207,7 @@ const ExperienceItem = ({
                             ) : null}
                           </div>
                           {liveDemo || githubRepo || screenshot ? (
-                            <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-2xl lg:px-2">
+                            <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-xl lg:px-2">
                               {liveDemo ? (
                                 <Link
                                   target={"_blank"}
@@ -320,7 +320,7 @@ const ExperienceItem = ({
                             ) : null}
                           </div>
                           {liveDemo || githubRepo || screenshot ? (
-                            <div className="flex flex-wrap gap-5 mt-2 font-anton dark:text-light/90 md:text-2xl lg:px-2">
+                            <div className="flex flex-wrap gap-5 mt-2 font-anton dark:text-light/90 md:text-xl lg:px-2">
                               {liveDemo ? (
                                 <Link
                                   target={"_blank"}

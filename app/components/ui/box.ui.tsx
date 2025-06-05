@@ -5,6 +5,7 @@ import ViewIcon from "../icons/view.icon";
 import DownloadImageIcon from "../icons/download-image.icon";
 import { Link } from "react-router";
 import type { Technology } from "~/types";
+import DockerLinkIcon from "../icons/docker-link.icon";
 
 interface BoxUIProps {
   thumbnail?: string;
@@ -14,6 +15,7 @@ interface BoxUIProps {
   screenshot?: string;
   repo?: string;
   website?: string;
+  docker?: string;
 }
 
 export default function BoxUI({
@@ -24,6 +26,7 @@ export default function BoxUI({
   website,
   screenshot,
   repo,
+  docker,
 }: BoxUIProps) {
   const isUrl = website?.match(/(https?:\/\/)/);
 
@@ -58,7 +61,7 @@ export default function BoxUI({
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-2xl lg:px-2">
+        <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-xl lg:px-2">
           {website ? (
             <Link
               target={isUrl ? "_blank" : "_self"}
@@ -86,6 +89,16 @@ export default function BoxUI({
             >
               <DownloadImageIcon className="scale-125 lg:scale-200" />
               Screenshots
+            </Link>
+          ) : null}
+          {docker ? (
+            <Link
+              target="_blank"
+              to={docker}
+              className="flex items-center gap-2 lg:gap-4"
+            >
+              <DockerLinkIcon className="scale-125 lg:scale-200" />
+              Docker Image
             </Link>
           ) : null}
         </div>
