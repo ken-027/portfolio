@@ -1,22 +1,23 @@
-FROM node:20-alpine AS development-dependencies-env
-COPY . /app
+# Step 1: Build the static files
+FROM node:22-alpine AS build
+
 WORKDIR /app
+
+COPY package.json package-lock.json ./
 RUN npm ci
 
-FROM node:20-alpine AS production-dependencies-env
-COPY ./package.json package-lock.json /app/
-WORKDIR /app
-RUN npm ci --omit=dev
-
-FROM node:20-alpine AS build-env
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
-WORKDIR /app
+COPY . /app
 RUN npm run build
 
-FROM node:20-alpine
-COPY ./package.json package-lock.json /app/
-COPY --from=production-dependencies-env /app/node_modules /app/node_modules
-COPY --from=build-env /app/build /app/build
-WORKDIR /app
-CMD ["npm", "run", "start"]
+# Step 2: Serve using Nginx
+FROM nginx:stable-alpine
+
+# Remove default nginx static content
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy built files from previous stage
+COPY --from=build /app/build/client /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
