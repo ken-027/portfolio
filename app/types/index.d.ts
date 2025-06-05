@@ -20,6 +20,7 @@ export interface Project {
   category: Category;
   type: ProjectType;
   aiPowered?: boolean;
+  dockerLink?: string;
 }
 
 export interface Service {
