@@ -41,7 +41,7 @@ const icons = [
   "git",
 ];
 
-export default function GlobeUI() {
+export default function GlobeUI({ className }: { className?: string }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [icons, setIcons] = useState<ItemSkill[]>([]);
@@ -135,7 +135,7 @@ export default function GlobeUI() {
 
     return (
       <div
-        className="h-[60vw] w-[60vw] max-w-full lg:h-[600px] lg:w-[600px] mx-auto rounded-full overflow-hidden relative shadow-lg border-1 border-border/30 dark:border-border-dark/30"
+        className={`h-[60vw] w-[60vw] max-w-full lg:h-[600px] lg:w-[600px] mx-auto rounded-full overflow-hidden relative shadow-lg border-1 border-border/30 dark:border-border-dark/30 ${className}`}
         ref={scope}
       >
         <div className="lg:h-10 lg:w-10 h-4 w-4 bg-gray-200 dark:bg-gray-700 animate-pulse absolute top-[30%] left-[10%] rounded-full" />

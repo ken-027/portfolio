@@ -6,13 +6,12 @@ import { motion, useAnimate, useInView } from "motion/react";
 import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
-import GlobeUI from "../ui/globe.ui";
 import { stagger } from "motion";
 
 export default function BannerLayout() {
   const [scope, animate] = useAnimate();
 
-//   const isInView = useInView(scope);
+  //   const isInView = useInView(scope);
 
   const initialEffect = () => {
     animate(
@@ -30,11 +29,17 @@ export default function BannerLayout() {
   return (
     <header
       ref={scope}
-      className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-6 md:gap-20 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
+      className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-2 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
       id="home"
     >
       {/* <ScrollUpUI show={!isInView} /> */}
-      <GlobeUI />
+      <div className="w-fit rounded-2xl overflow-hidden bg-light lg:ml-auto banner-animate">
+        <img
+          className="lg:h-[450px] md:h-[350px] h-[250px] translate-y-5"
+          src="/images/banner.gif"
+        />
+      </div>
+
       <PaddingWrapperUI
         className="flex flex-col items-center gap-4 lg:gap-6 dark lg:text-left lg:items-start xl:gap-6 min-h-fit!"
         containerClassName="lg:pl-6!"
