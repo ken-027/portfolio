@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import useScreenSize from "~/hooks/useScreenSize";
 import type { ItemSkill, Proficiency, Skill } from "~/types";
+import GlobeUI from "../ui/globe.ui";
 
 export default function SkillsLayout({ skills }: { skills: Skill[] }) {
   const skillRef = useRef(null);
@@ -21,14 +22,15 @@ export default function SkillsLayout({ skills }: { skills: Skill[] }) {
       />
       <PaddingWrapperUI className="text-dark">
         <div className="flex flex-col items-center justify-center gap-10 lg:gap-20 skill-animate">
-          <div className="xl:self-start w-1/2 max-w-[400px] mx-auto">
-            <ImageUI
+          <div className="w-full mx-auto grid place-items-center lg:pr-36 max-w-[800px]">
+            {/* <ImageUI
               src="/section-illustration/skills.svg"
               alt="skill illustration"
               width={500}
               height={336}
               wrapperClassName="skill-animate"
-            />
+            /> */}
+            <GlobeUI />
           </div>
           <div className="flex flex-col items-center justify-center md:grid gap-10 md:gap-16 lg:grid lg:grid-cols-2 lg:items-start">
             {skills.map((skill, index) => (
