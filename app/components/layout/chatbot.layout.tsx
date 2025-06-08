@@ -30,7 +30,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const [reply, setReply] = useState("");
   const [currentMessage, setCurrentMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([
-    "Hi! Want to know more about me? I'm happy to answer!",
+    "Hey! Thanks for stopping by my portfolio. I'm your personal guide here - ask me about my projects, skills, or anything else you'd like to know. What interests you most?",
   ]);
   const historyRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -309,7 +309,7 @@ const GreetingsMessage = () => {
           transition={{ type: "tween", duration: 0.6, delay: 0.3 }}
           className="relative inline-block dark:bg-light/90 dark:text-dark bg-dark text-light top-1 md:top-1 lg:top-2 text-center h-fit rounded-md py-1 px-2 w-fit shadow-lg"
         >
-          Hi! Want to know more about me?
+          👋 Ask me about this portfolio!
           <div className="absolute h-4 w-4 bg-dark dark:bg-light/90 rotate-45 scale-110 left-[95%] top-[25%] lg:top-[25%] shadow-lg -z-10" />
         </motion.div>
       ) : null}

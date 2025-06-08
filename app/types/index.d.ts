@@ -30,7 +30,7 @@ export interface Service {
 }
 
 export type Level = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-export type Proficiency = "confident" | "comfortable" | "exploring";
+export type Proficiency = "beginner" | "intermediate" | "expert";
 
 export interface ItemSkill {
   name: string;
