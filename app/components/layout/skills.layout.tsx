@@ -32,7 +32,7 @@ export default function SkillsLayout({ skills }: { skills: Skill[] }) {
             /> */}
             <GlobeUI />
           </div>
-          <div className="flex flex-col items-center justify-center md:grid gap-10 md:gap-16 lg:grid lg:grid-cols-2 lg:items-start">
+          <div className="flex flex-col items-center justify-center md:grid gap-10 md:gap-16 lg:items-start">
             {skills.map((skill, index) => (
               <SkillWrapper
                 key={index}
@@ -54,7 +54,7 @@ const SkillWrapper = ({
 }: Skill & { lastItem: boolean }) => {
   return (
     <div
-      className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center lg:items-start`}
+      className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center w-full`}
     >
       <h3
         className={`font-anton text-lg md:text-xl dark:text-light/90 skill-animate lg:text-2xl`}
@@ -62,7 +62,7 @@ const SkillWrapper = ({
         {name}
       </h3>
       <div
-        className={` grid grid-cols-3 gap-3 md:flex md:gap-8 md:flex-wrap md:justify-center lg:grid-cols-2 xl:grid-cols-3 lg:grid w-full`}
+        className={` grid grid-cols-3 gap-3 md:gap-8 md:justify-center md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:grid w-full`}
       >
         {items.map((item, _index) => (
           <SkillComponent key={_index} index={_index} {...item} />
@@ -93,22 +93,18 @@ const SkillComponent = ({
     "10": "h-[100%]",
   };
 
-  const widthClassName = {
-    "3": "w-[30%]",
-    "4": "w-[40%]",
-    "5": "w-[50%]",
-    "6": "w-[60%]",
-    "7": "w-[70%]",
-    "8": "w-[80%]",
-    "9": "w-[90%]",
-    "10": "w-[100%]",
+  const proficiencyColor: Record<Proficiency, string> = {
+    expert: "text-green-500",
+    intermediate: "text-blue-500",
+    beginner: "text-yellow-500",
   };
 
-  const proficiencyColor: Record<Proficiency, string> = {
-    confident: "text-green-500",
-    comfortable: "text-blue-500",
-    exploring: "text-yellow-500",
+  const hoverCardColor: Record<Proficiency, string> = {
+    expert: "hover:shadow-green-300/40 hover:border-green-500",
+    intermediate: "hover:shadow-blue-300/40 hover:border-blue-500",
+    beginner: "hover:shadow-yellow-300/40 hover:border-yellow-500",
   };
+
   const toggleTooltip = () => {
     if (responseSize.lg) return;
 
@@ -129,42 +125,34 @@ const SkillComponent = ({
       onMouseLeave={offTooltip}
       className="font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate"
     >
-      <div className="border-1  border-border relative z-0  dark:bg-light dark:border-0 dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center">
-        <div className="absolute overflow-hidden inset-0">
-          <span
-            className={`bg-cyan-400/30! inset-x-0 border-t-[1px] border-cyan-500 ${
-              //@ts-ignore
-              className[`${level}`]
-            } bottom-0 block absolute ${
-              index % 2 === 0 ? "sea-wave" : "sea-wave-odd"
-            }`}
+      <div
+        className={`border border-border w-full grid place-items-center transition-shadow-b-colors duration-1000 hover:shadow-2xl p-3 pt-2 rounded-md space-y-2 bg-light dark:bg-dark dark:border-border-dark dark:shadow-light/5 shadow-md ${hoverCardColor[proficiency]}`}
+      >
+        <div className="border-1  border-border relative z-0  dark:bg-light dark:border-0 dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center">
+          <div className="absolute overflow-hidden inset-0">
+            <span
+              className={`bg-cyan-400/30! inset-x-0 border-t-[1px] border-cyan-500 ${
+                //@ts-ignore
+                className[`${level}`]
+              } bottom-0 block absolute ${
+                index % 2 === 0 ? "sea-wave" : "sea-wave-odd"
+              }`}
+            />
+          </div>
+          <img
+            src={icon}
+            alt={name}
+            className="scale-90 lg:scale-100"
+            onError={(e) => {
+              console.error("image fetch error:", icon);
+              // @ts-ignore
+              e.target.src = icon;
+            }}
           />
         </div>
-        <div
-          className={`group-hover:opacity-100 opacity-0 z-50 lg:translate-y-[40%] transition-transform group-hover:translate-y-0 absolute left-[110%] bg-light border-1 border-border rounded-md py-1 text-xs px-3 space-y-1 ${
-            showTooltip ? "opacity-100 -translate-x-10" : ""
-          }`}
-        >
-          <div className="flex gap-2 bg-light text-dark">Proficiency:</div>
-          <span
-            className={`font-bold capitalize ${proficiencyColor[proficiency]}`}
-          >
-            {proficiency}
-          </span>
-        </div>
-        {/* <Icon className="scale-90 lg:scale-100" /> */}
-        <img
-          src={icon}
-          alt={name}
-          className="scale-90 lg:scale-100"
-          onError={(e) => {
-            console.error("image fetch error:", icon);
-            // @ts-ignore
-            e.target.src = icon;
-          }}
-        />
+        <p className="font-anton">{name}</p>
+        <small className={`${proficiencyColor[proficiency]}`}>{proficiency}</small>
       </div>
-      {name}
     </div>
   );
 };

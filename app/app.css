@@ -111,6 +111,12 @@ html {
   scrollbar-width: none;
 }
 
+.transition-shadow-b-colors {
+  transition-property: box-shadow, border-color;
+  transition-timing-function: var(cubic-bezier(0.4, 0, 0.2, 1));
+  transition-duration: 500ms;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;
