@@ -32,7 +32,7 @@ export default function BoxUI({
 
   return (
     <div
-      className={`border-[1px] mb-2 bg-light dark:bg-dark border-border  overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 hover:shadow-lg transition-shadow`}
+      className={`border-[1px] mb-2 bg-light dark:bg-dark border-border transition-shadow-b-colors dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 transition-shadow`}
     >
       <img
         src={thumbnail || "/section-illustration/project.svg"}

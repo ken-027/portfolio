@@ -57,6 +57,7 @@ const ExperienceItem = ({
   descriptions,
   projects,
   index,
+  companyLink,
 }: Experience & { index: number }) => {
   const experienceItemRef = useRef(null);
   useAnimateElement(`experience-${index}`, experienceItemRef);
@@ -72,7 +73,7 @@ const ExperienceItem = ({
         <Parallax speed={responseSize.xl ? -50 : 0} className="lg:pt-40">
           <div className="flex gap-3 md:gap-6 flex-col items-center justify-center lg:items-start">
             <div
-              className={`border-1 overflow-hidden border-border p-2 bg-light h-[100px] lg:h-[120px] dark:border-border-dark object-center rounded-md flex justify-center items-center object-contain aspect-3/2  experience-${index}-animate`}
+              className={`border-1 overflow-hidden transition-shadow-b-colors dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl border-border p-2 bg-light h-[100px] lg:h-[120px] dark:border-border-dark object-center rounded-md flex justify-center items-center object-contain aspect-3/2  experience-${index}-animate`}
             >
               <img
                 className={`font-open-sauce h-full w-full max-w-full max-h-full`}
@@ -85,11 +86,22 @@ const ExperienceItem = ({
                 height={50}
               />
             </div>
-            <h3
-              className={`text-xl md:text-2xl lg:text-3xl font-anton dark:text-light/90 experience-${index}-animate`}
-            >
-              {company}
-            </h3>
+            <div className="lg:space-y-1 text-center lg:text-left">
+              <h3
+                className={`text-xl md:text-2xl lg:text-3xl font-anton dark:text-light/90 experience-${index}-animate`}
+              >
+                {company}
+              </h3>
+              {companyLink ? (
+                <a
+                  target="_blank"
+                  className="text-lg lg:text-2xl text-secondary duration-500 hover:text-dark"
+                  href={companyLink}
+                >
+                  {companyLink.replaceAll(/(https*:\/\/)|(www.)/g, "")}
+                </a>
+              ) : null}
+            </div>
           </div>
           <div className="dark:border-border-dark mx-4 border-border pt-5 lg:mx-0">
             <div className="flex flex-col font-open-sauce dark:text-light/90 md:text-lg md:text-center lg:text-left">
@@ -163,7 +175,7 @@ const ExperienceItem = ({
                       className={`xl:pb-10 experience-${index}-animate`}
                     >
                       <div
-                        className={`border-1 border-border hover:shadow-md transition-shadow xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                        className={`border-1 border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 hover: transition-shadow xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
                           _index % 2 === 0 ? "" : "ml-auto"
                         }`}
                       >

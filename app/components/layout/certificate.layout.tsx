@@ -38,7 +38,7 @@ export default function CertificateLayout({
               wrapperClassName="certificate-animate"
             />
           </div>
-          <div className="flex flex-col space-y-5 xl:space-y-10 lg:grid lg:grid-cols-2 lg:gap-10">
+          <div className="flex flex-col space-y-5 xl:space-y-10 md:grid md:grid-cols-2 md:gap-3 lg:gap-10">
             {certificates.map(
               (
                 {

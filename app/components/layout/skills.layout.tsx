@@ -62,7 +62,7 @@ const SkillWrapper = ({
         {name}
       </h3>
       <div
-        className={` grid grid-cols-3 gap-3 md:gap-8 md:justify-center md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:grid w-full`}
+        className={` grid grid-cols-3 gap-4 md:gap-8 md:justify-center md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:grid w-full`}
       >
         {items.map((item, _index) => (
           <SkillComponent key={_index} index={_index} {...item} />
@@ -79,7 +79,7 @@ const SkillComponent = ({
   name,
   level,
 }: ItemSkill & { index: number }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [mobileHover, setMobileHover] = useState(false);
   const { responseSize, width } = useScreenSize();
 
   const className = {
@@ -100,23 +100,23 @@ const SkillComponent = ({
   };
 
   const hoverCardColor: Record<Proficiency, string> = {
-    expert: "hover:shadow-green-300/40 hover:border-green-500",
-    intermediate: "hover:shadow-blue-300/40 hover:border-blue-500",
-    beginner: "hover:shadow-yellow-300/40 hover:border-yellow-500",
+    expert: "hover:shadow-green-300/40 hover:border-green-500 hover:border-2",
+    intermediate: "hover:shadow-blue-300/40 hover:border-blue-500 hover:border-2",
+    beginner: "hover:shadow-yellow-300/40 hover:border-yellow-500 hover:border-2",
   };
 
   const toggleTooltip = () => {
     if (responseSize.lg) return;
 
-    setShowTooltip((prevState) => !prevState);
+    setMobileHover((prevState) => !prevState);
   };
 
   const offTooltip = () => {
-    setShowTooltip(false);
+    setMobileHover(false);
   };
 
   useEffect(() => {
-    setShowTooltip(false);
+    setMobileHover(false);
   }, [width]);
 
   return (
@@ -126,7 +126,13 @@ const SkillComponent = ({
       className="font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate"
     >
       <div
-        className={`border border-border w-full grid place-items-center transition-shadow-b-colors duration-1000 hover:shadow-2xl p-3 pt-2 rounded-md space-y-2 bg-light dark:bg-dark dark:border-border-dark dark:shadow-light/5 shadow-md ${hoverCardColor[proficiency]}`}
+        className={`border border-border w-full grid place-items-center transition-shadow-b-colors duration-1000 hover:shadow-2xl p-3 pt-2 rounded-md space-y-2 bg-light dark:bg-dark dark:border-border-dark dark:shadow-light/5 ${
+          hoverCardColor[proficiency]
+        } ${
+          mobileHover
+            ? hoverCardColor[proficiency].replaceAll("hover:", "")
+            : ""
+        }`}
       >
         <div className="border-1  border-border relative z-0  dark:bg-light dark:border-0 dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center">
           <div className="absolute overflow-hidden inset-0">
@@ -151,7 +157,9 @@ const SkillComponent = ({
           />
         </div>
         <p className="font-anton">{name}</p>
-        <small className={`${proficiencyColor[proficiency]}`}>{proficiency}</small>
+        <small className={`${proficiencyColor[proficiency]}`}>
+          {proficiency}
+        </small>
       </div>
     </div>
   );

@@ -309,7 +309,7 @@ const GreetingsMessage = () => {
           transition={{ type: "tween", duration: 0.6, delay: 0.3 }}
           className="relative inline-block dark:bg-light/90 dark:text-dark bg-dark text-light top-1 md:top-1 lg:top-2 text-center h-fit rounded-md py-1 px-2 w-fit shadow-lg"
         >
-          👋 Ask me about this portfolio!
+          👋 What would you like to know?
           <div className="absolute h-4 w-4 bg-dark dark:bg-light/90 rotate-45 scale-110 left-[95%] top-[25%] lg:top-[25%] shadow-lg -z-10" />
         </motion.div>
       ) : null}

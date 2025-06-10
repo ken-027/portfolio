@@ -53,6 +53,7 @@ export interface Experience {
   descriptions: string[];
   companyLogo?: string;
   projects?: Project[];
+  companyLink?: string;
 }
 
 export interface Contact {
