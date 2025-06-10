@@ -20,7 +20,7 @@ export default function CertificateCardUI({
 }: CertificateCardUIProps) {
   return (
     <div
-      className={`border-[1px] hover:shadow-md transition-shadow bg-light dark:bg-dark border-border dark:border-border-dark rounded-md min-h-[100px] space-y-3 lg:space-y-6 ${
+      className={`border-[1px] hover:shadow-2xl hover:shadow-dark/50 hover:border-dark duration-500 dark:hover:shadow-light/30 dark:hover:border-border transition-shadow-b-colors bg-light dark:bg-dark border-border dark:border-border-dark rounded-md min-h-[100px] space-y-3 lg:space-y-6 ${
         className || ""
       }
         ${certificateImage ? null : "px-3 lg:px-6 lg:py-8 py-4"}
