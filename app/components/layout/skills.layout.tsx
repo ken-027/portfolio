@@ -100,9 +100,18 @@ const SkillComponent = ({
   };
 
   const hoverCardColor: Record<Proficiency, string> = {
-    expert: "hover:shadow-green-300/40 hover:border-green-500 hover:border-2",
-    intermediate: "hover:shadow-blue-300/40 hover:border-blue-500 hover:border-2",
-    beginner: "hover:shadow-yellow-300/40 hover:border-yellow-500 hover:border-2",
+    expert:
+      "hover:shadow-green-300/40 hover:border-green-500! hover:border-2 hover:shadow-2xl",
+    intermediate:
+      "hover:shadow-blue-300/40 hover:border-blue-500! hover:border-2 hover:shadow-2xl",
+    beginner:
+      "hover:shadow-yellow-300/40 hover:border-yellow-500! hover:border-2 hover:shadow-2xl",
+  };
+
+  const mobileCardColor: Record<Proficiency, string> = {
+    expert: "shadow-green-300/40 border-green-500! border-2 shadow-2xl",
+    intermediate: "shadow-blue-300/40 border-blue-500! border-2 shadow-2xl",
+    beginner: "shadow-yellow-300/40 border-yellow-500! border-2 shadow-2xl",
   };
 
   const toggleTooltip = () => {
@@ -126,13 +135,9 @@ const SkillComponent = ({
       className="font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate"
     >
       <div
-        className={`border border-border w-full grid place-items-center transition-shadow-b-colors duration-1000 hover:shadow-2xl p-3 pt-2 rounded-md space-y-2 bg-light dark:bg-dark dark:border-border-dark dark:shadow-light/5 ${
+        className={`border border-border w-full grid place-items-center transition-shadow-b-colors duration-1000 p-3 pt-2 rounded-md space-y-2 bg-light dark:bg-dark dark:border-border-dark ${
           hoverCardColor[proficiency]
-        } ${
-          mobileHover
-            ? hoverCardColor[proficiency].replaceAll("hover:", "")
-            : ""
-        }`}
+        } ${mobileHover ? mobileCardColor[proficiency] : ""}`}
       >
         <div className="border-1  border-border relative z-0  dark:bg-light dark:border-0 dark:border-border-dark h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center">
           <div className="absolute overflow-hidden inset-0">
