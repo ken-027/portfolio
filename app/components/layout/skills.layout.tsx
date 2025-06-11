@@ -132,14 +132,15 @@ const SkillComponent = ({
     <div
       onClick={toggleTooltip}
       onMouseLeave={offTooltip}
-      className="font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate border rounded-md border-border dark:border-dark hover:border-transparent duration-300 transition-colors"
+      className={`font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate border rounded-md border-border dark:border-dark hover:border-transparent duration-300 transition-colors ${
+        mobileHover ? "border-transparent! dark:border-transparent!" : ""
+      }`}
     >
       <div
         className={`border-2 border-transparent w-full grid place-items-center transition-shadow-b-colors p-3 pt-2 rounded-md space-y-2 bg-light ${
           hoverCardColor[proficiency]
         } ${mobileHover ? mobileCardColor[proficiency] : ""}`}
       >
-
         <div className="border-1  border-border relative z-0 h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center">
           <div className="absolute overflow-hidden inset-0">
             <span
