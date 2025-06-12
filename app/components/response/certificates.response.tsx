@@ -1,3 +1,4 @@
+import moment from "moment";
 import { usePortfolioContext } from "../layout/terminal.layout";
 import ResponseWrapperUI from "../ui/response-wrapper.ui";
 
@@ -8,14 +9,26 @@ export default function CertificatesResponse() {
     <ResponseWrapperUI typeSpeed="fast">
       <ul className="space-y-2">
         {certificates.map(
-          ({ name, dateCompleted, description, certificateLink }, index) => (
+          (
+            { name, dateCompleted, skills, certificateLink, provider },
+            index
+          ) => (
             <li key={index} className="space-y-1">
               <h2 className="text-yellow-300">{name}</h2>
-              <small className="italic mb-1 block">
-                {dateCompleted === "ongoing" ? "Ongoing" : "Done"}
-              </small>
-              <p dangerouslySetInnerHTML={{ __html: description }} />
-              {certificateLink && dateCompleted !== "ongoing" ? (
+              <small>{provider}</small>
+              <small className="italic mb-1 block">{status}</small>
+              <ul className="text-green-300 list-disc pl-5">
+                {skills.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+              </ul>
+              {dateCompleted ? (
+                <p>
+                  Date Completed:{" "}
+                  {moment(dateCompleted).format("MMMM DD, YYYY")}
+                </p>
+              ) : null}
+              {certificateLink && status === "complete" ? (
                 <a
                   target="_blank"
                   className="text-green-300"
