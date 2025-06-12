@@ -38,7 +38,7 @@ export default function CertificateCardUI({
               `}
     >
       <div className="flex justify-between">
-        <div className="text-center lg:text-left mb-4 px-4 flex-3/4">
+        <div className="mb-4 px-4 flex-3/4">
           <h4 className="font-anton text-xl lg:text-2xl">{name}</h4>
           <p className="block mt-1 text-secondary">{provider}</p>
         </div>
