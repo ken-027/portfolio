@@ -40,14 +40,12 @@ export default function CertificateCardUI({
       <div className="flex justify-between">
         <div className="mb-4 px-4 flex-3/4">
           <h4 className="font-anton text-xl lg:text-2xl">{name}</h4>
-          <p className="block mt-1 text-secondary">{provider}</p>
+          <p className="block mt-1 text-secondary dark:text-blue-400">
+            {provider}
+          </p>
         </div>
-        <div className="w-fit mt-1 flex-1">
-          <img
-            src={platformLogo}
-            alt={platform}
-            className="md:w-12 md:h-12 w-11 h-11 mb-4 mx-auto"
-          />
+        <div className="md:w-12 md:h-12 w-11 h-11 mb-4 mt-1 mr-2 rounded-md overflow-hidden border-border border dark:border-border-dark">
+          <img src={platformLogo} alt={platform} className="w-full h-full" />
         </div>
       </div>
       <div className="space-y-2 px-4">
@@ -77,7 +75,7 @@ export default function CertificateCardUI({
       <div className="flex justify-between flex-wrap px-4">
         <div className="flex items-start">
           <a
-            className="text-secondary flex items-center gap-2 transition-transform hover:scale-110 duration-500"
+            className="text-secondary dark:text-blue-400 flex items-center gap-2"
             href={certificateLink || courseLink}
             title={`View ${certificateLink ? "Certificate" : "Course"}`}
             target="_blank"
@@ -87,12 +85,17 @@ export default function CertificateCardUI({
                 certificateLink ? "certificate-link" : "course"
               }.svg`}
               alt="Certificate Link"
-              className="md:w-10 md:h-10 h-9 w-9"
+              className={`${
+                certificateLink
+                  ? "md:w-9 md:h-9 h-8 w-8"
+                  : "md:w-10 md:h-10 h-9 w-9"
+              }`}
             />
+            {certificateLink ? "Certificate" : "Course"}
           </a>
         </div>
         {status === "ongoing" ? (
-          <i className="text-secondary mt-1 md:mt-2">Learning in Progress</i>
+          <i className="mt-1 md:mt-2">Learning in Progress</i>
         ) : (
           <small className="mt-1 md:mt-2">
             <strong>Issued</strong>:{" "}
