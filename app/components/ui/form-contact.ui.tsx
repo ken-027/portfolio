@@ -204,7 +204,7 @@ export default function FormContactUI({
             <a
               target="_blank"
               key={index}
-              className="contact-animate"
+              className="contact-animate hover:scale-110 duration-500"
               href={link}
               title={name}
             >
