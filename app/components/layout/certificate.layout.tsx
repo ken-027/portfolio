@@ -38,37 +38,13 @@ export default function CertificateLayout({
               wrapperClassName="certificate-animate"
             />
           </div>
-          <div className="flex flex-col space-y-5 xl:space-y-10 md:grid md:grid-cols-2 md:gap-3 lg:gap-10">
-            {certificates.map(
-              (
-                {
-                  description,
-                  name,
-                  platform,
-                  dateCompleted,
-                  certificateLink,
-                  certificateImage,
-                  platformLogo,
-                  courseLink,
-                },
-                index
-              ) => (
-                <CertificateCardUI
-                  className={`w-full h-full ${
-                    (index + 1) % 2 === 0 ? "ml-auto" : ""
-                  } certificate-animate`}
-                  description={description}
-                  name={name}
-                  key={index}
-                  platform={platform}
-                  platformLogo={platformLogo}
-                  dateCompleted={dateCompleted}
-                  certificateLink={certificateLink}
-                  courseLink={courseLink}
-                  certificateImage={certificateImage}
-                />
-              )
-            )}
+          <div className="grid p-4 gap-3 space-y-5 xl:space-y-10 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-3 lg:gap-5">
+            {certificates.map((certificate, index) => (
+              <CertificateCardUI
+                className={`certificate-animate`}
+                {...certificate}
+              />
+            ))}
           </div>
         </div>
       </PaddingWrapperUI>
