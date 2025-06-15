@@ -264,7 +264,7 @@ const ExperienceItem = ({
           <div className="mt-5 lg:mt-0 lg:flex-1 lg:hidden">
             <p className="font-open-sauce md:text-lg">Projects I Worked On</p>
             <div className={`mt-4 space-y-5 experience-${index}-animate`}>
-              <MobileCard projects={projects} />
+              <MobileCard projects={projects} cardIndex={index} />
             </div>
           </div>
         )
@@ -273,7 +273,13 @@ const ExperienceItem = ({
   );
 };
 
-function MobileCard({ projects }: { projects: Project[] }) {
+function MobileCard({
+  projects,
+  cardIndex,
+}: {
+  projects: Project[];
+  cardIndex: number;
+}) {
   return (
     <Swiper
       modules={[Navigation, Pagination]}
@@ -297,7 +303,7 @@ function MobileCard({ projects }: { projects: Project[] }) {
             aiPowered,
             category,
           },
-          index
+          _index
         ) => {
           const [mobileHover, setMobileHover] = useState(false);
           const { responseSize, width } = useScreenSize();
@@ -344,7 +350,7 @@ function MobileCard({ projects }: { projects: Project[] }) {
                       <div
                         key={__index}
                         title={name}
-                        className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
+                        className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${cardIndex}-animate`}
                       >
                         <img
                           alt={name}
