@@ -4,6 +4,10 @@ import { decode } from "he";
 import type { Certificate } from "~/types";
 import SkillsIcon from "../icons/skills.icon";
 import ViewIcon from "../icons/view.icon";
+import RibbonIcon from "../icons/ribbon.icon";
+import CourseIcon from "../icons/course.icon";
+import { useEffect, useState } from "react";
+import useScreenSize from "~/hooks/useScreenSize";
 
 export interface CertificateCardUIProps extends Certificate {
   className?: string;
@@ -23,18 +27,45 @@ export default function CertificateCardUI({
   provider,
 }: CertificateCardUIProps) {
   const shadowColor = {
-    ongoing: "hover:shadow-blue-600/30 hover:shadow-2xl hover:border-blue-600!",
-    plan: "hover:shadow-yellow-600/30 hover:shadow-2xl hover:border-yellow-600!",
+    ongoing:
+      "hover:shadow-blue-600/30! hover:shadow-2xl hover:border-blue-600!",
+    plan: "hover:shadow-yellow-600/30! hover:shadow-2xl hover:border-yellow-600!",
     completed:
-      "hover:shadow-green-600/30 hover:shadow-2xl hover:border-green-600!",
+      "hover:shadow-green-600/30! hover:shadow-2xl hover:border-green-600!",
   };
+
+  const onMobileColor = {
+    ongoing: "shadow-blue-600/30! shadow-2xl border-blue-600!",
+    plan: "shadow-yellow-600/30! shadow-2xl border-yellow-600!",
+    completed: "shadow-green-600/30! shadow-2xl border-green-600!",
+  };
+
+  const [mobileHover, setMobileHover] = useState(false);
+  const { responseSize, width } = useScreenSize();
+
+  const toggleTooltip = () => {
+    if (responseSize.lg) return;
+
+    setMobileHover((prevState) => !prevState);
+  };
+
+  const offTooltip = () => {
+    setMobileHover(false);
+  };
+
+  useEffect(() => {
+    setMobileHover(false);
+  }, [width]);
 
   return (
     <div
-      className={`border-[1px] dark:text-light/90 hover:shadow-2xl h-fit  py-4 lg:pt-6 min-h-[450px] hover:shadow-dark/50 hover:border-dark duration-500 dark:hover:shadow-light/30 dark:hover:border-border transition-shadow-b-colors bg-light dark:bg-dark border-border dark:border-border-dark rounded-md ${
+      onTouchStart={toggleTooltip}
+      onTouchEnd={offTooltip}
+      className={`border-[1px] dark:text-light/90 h-fit  py-4 lg:pt-6 min-h-[450px] duration-500 transition-shadow-b-colors bg-light dark:bg-dark border-border dark:border-border-dark rounded-md ${
         className || ""
       }
         ${shadowColor[status]}
+         ${mobileHover ? onMobileColor[status].replaceAll("hover:", "") : ""}
               `}
     >
       <div className="flex justify-between">
@@ -49,9 +80,7 @@ export default function CertificateCardUI({
         </div>
       </div>
       <div className="space-y-2 px-4">
-        <p className="flex gap-2 font-anton text-lg">
-          <SkillsIcon /> Skills
-        </p>
+        <p className="flex gap-2 font-anton text-lg">Skills</p>
         <ul className="flex items-center gap-2 flex-wrap text-sm">
           {skills.map((skill, index) => (
             <li
@@ -75,29 +104,23 @@ export default function CertificateCardUI({
       <div className="flex justify-between flex-wrap px-4">
         <div className="flex items-start">
           <a
-            className="text-secondary dark:text-blue-400 flex items-center gap-2"
+            className="font-anton flex items-center gap-2"
             href={certificateLink || courseLink}
             title={`View ${certificateLink ? "Certificate" : "Course"}`}
             target="_blank"
           >
-            <img
-              src={`/images/${
-                certificateLink ? "certificate-link" : "course"
-              }.svg`}
-              alt="Certificate Link"
-              className={`${
-                certificateLink
-                  ? "md:w-9 md:h-9 h-8 w-8"
-                  : "md:w-10 md:h-10 h-9 w-9"
-              }`}
-            />
+            {certificateLink ? (
+              <RibbonIcon className="scale-125" />
+            ) : (
+              <CourseIcon className="scale-125" />
+            )}
             {certificateLink ? "Certificate" : "Course"}
           </a>
         </div>
         {status === "ongoing" ? (
-          <i className="mt-1 md:mt-2">Learning in Progress</i>
+          <i>Learning in Progress</i>
         ) : (
-          <small className="mt-1 md:mt-2">
+          <small>
             <strong>Issued</strong>:{" "}
             {moment(dateCompleted).format("MMMM DD, YYYY")}
           </small>

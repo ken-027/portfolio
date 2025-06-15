@@ -1,4 +1,5 @@
-import type { RefObject } from "react";
+import { useEffect, useState, type RefObject } from "react";
+import useScreenSize from "~/hooks/useScreenSize";
 
 type CardUIProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
   title: string;
@@ -14,11 +15,36 @@ export default function CardUI({
   image,
   ...props
 }: CardUIProps) {
+  const [mobileHover, setMobileHover] = useState(false);
+  const { responseSize, width } = useScreenSize();
+
+  const toggleTooltip = () => {
+    if (responseSize.lg) return;
+
+    setMobileHover((prevState) => !prevState);
+  };
+
+  const offTooltip = () => {
+    setMobileHover(false);
+  };
+
+  useEffect(() => {
+    setMobileHover(false);
+  }, [width]);
+
   return (
     <div
+      onTouchStart={toggleTooltip}
+      onTouchEnd={offTooltip}
       className={`overflow-hidden transition-shadow-b-colors dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl items-center flex flex-col border-[1px] text-center border-border dark:border-border-dark rounded-md w-full ${
         className || ""
-      }`}
+      }
+        ${
+          mobileHover
+            ? "dark:shadow-light/30 dark:border-border shadow-dark/50 border-dark shadow-2xl"
+            : ""
+        }
+        `}
       {...props}
     >
       <div className="bg-light dark:bg-[#42566b] w-full flex item-center justify-center">
