@@ -39,12 +39,15 @@ export default function CertificateLayout({
             />
           </div>
           <div className="grid gap-3 space-y-5 xl:space-y-10 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-3 lg:gap-5">
-            {certificates.filter(({status}) => status !== "plan").map((certificate, index) => (
-              <CertificateCardUI
-                className={`certificate-animate`}
-                {...certificate}
-              />
-            ))}
+            {certificates
+              .filter(({ status }) => status !== "plan")
+              .map((certificate, index) => (
+                <CertificateCardUI
+                  key={index}
+                  className={`certificate-animate`}
+                  {...certificate}
+                />
+              ))}
           </div>
         </div>
       </PaddingWrapperUI>

@@ -130,8 +130,8 @@ const SkillComponent = ({
 
   return (
     <div
-      onClick={toggleTooltip}
-      onMouseLeave={offTooltip}
+      onTouchStart={toggleTooltip}
+      onTouchEnd={offTooltip}
       className={`font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate border rounded-md border-border dark:border-dark hover:border-transparent duration-300 transition-colors ${
         mobileHover ? "border-transparent! dark:border-transparent!" : ""
       }`}
