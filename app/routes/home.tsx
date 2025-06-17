@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { access } from "~/api/access.api";
 import {
   getCertificates,
+  getDeveloperPlatform,
   getExperiences,
   getProjects,
   getServices,
@@ -20,7 +21,14 @@ import ContactLayout from "~/components/layout/contact.layout";
 import FooterLayout from "~/components/layout/footer.layout";
 import ChatBotLayout from "~/components/layout/chatbot.layout";
 import CertificateLayout from "~/components/layout/certificate.layout";
-import type { Certificate, Experience, Project, Service, Skill } from "~/types";
+import type {
+  Certificate,
+  DeveloperPlatform,
+  Experience,
+  Project,
+  Service,
+  Skill,
+} from "~/types";
 import { storeChat } from "~/api/chat-stream.api";
 
 export function meta({}: Route.MetaArgs) {
@@ -37,6 +45,7 @@ export default function Home() {
   const getStyle = getStyledType();
   const [show, setShow] = useState(false);
   const [experiences, setExperiences] = useState<Experience[]>();
+  const [platforms, setPlatforms] = useState<DeveloperPlatform[]>();
   const [services, setServices] = useState<Service[]>();
   const [certificates, setCertificates] = useState<Certificate[]>();
   const [skills, setSkills] = useState<Skill[]>();
@@ -45,20 +54,28 @@ export default function Home() {
 
   const loadData = async () => {
     try {
-      const [_experiences, _services, _certificates, _skills, _projects] =
-        await Promise.all([
-          getExperiences(),
-          getServices(),
-          getCertificates(),
-          getSkills(),
-          getProjects(),
-        ]);
+      const [
+        _experiences,
+        _services,
+        _certificates,
+        _skills,
+        _projects,
+        _platforms,
+      ] = await Promise.all([
+        getExperiences(),
+        getServices(),
+        getCertificates(),
+        getSkills(),
+        getProjects(),
+        getDeveloperPlatform(),
+      ]);
 
       setExperiences(_experiences);
       setServices(_services);
       setCertificates(_certificates);
       setSkills(_skills);
       setProjects(_projects);
+      setPlatforms(_platforms);
     } catch (err) {
       console.error(err);
     } finally {
@@ -89,7 +106,8 @@ export default function Home() {
                 skills &&
                 experiences &&
                 projects &&
-                certificates
+                certificates &&
+                platforms
               ) ? (
                 <div className="grid justify-center py-6 lg:py-10">
                   <div className="mt-2 flex items-center gap-2 lg:gap-3 lg:mt-4 justify-center">
@@ -106,7 +124,7 @@ export default function Home() {
                   <ProjectsLayout projects={projects || []} />
                   <CertificateLayout certificates={certificates || []} />
                   <ContactLayout />
-                  <FooterLayout />
+                  <FooterLayout platforms={platforms || []} />
                   <ChatBotLayout />
                 </>
               )}

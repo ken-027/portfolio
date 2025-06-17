@@ -75,3 +75,9 @@ export interface Certificate {
   skills: string[];
   status: "ongoing" | "plan" | "completed";
 }
+
+export interface DeveloperPlatform {
+  icon: string;
+  link: string;
+  name: string;
+}
