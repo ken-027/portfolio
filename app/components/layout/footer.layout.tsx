@@ -8,7 +8,12 @@ import LinkUI from "../ui/link.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
 import { PORTFOLIO_BASE_URL } from "~/config/env.config";
-export default function FooterLayout() {
+import type { DeveloperPlatform } from "~/types";
+export default function FooterLayout({
+  platforms,
+}: {
+  platforms: DeveloperPlatform[];
+}) {
   const [switching, setSwitching] = useState(false);
   const footerRef = useRef(null);
 
@@ -69,6 +74,18 @@ export default function FooterLayout() {
             Icon={<TerminalStyledIcon className="terminal-icon" />}
             className="footer-animate text-base"
           />
+        </div>
+        <div className="lg:mt-10 mt-6 lg:mb-8 mb-4 space-y-4">
+          <h4 className="text-lg lg:text-2xl">Developer's Platform</h4>
+          <ul className="flex lg:gap-6 gap-4 items-center justify-center">
+            {platforms.map(({ icon, link, name }, index) => (
+              <li key={index}>
+                <a href={link} target="_blank" title={name}>
+                  <img className="lg:h-9 lg:w-9 h-6 w-6 hover:scale-110 duration-500 transition-transform" src={icon} alt={name} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         <p className="footer-animate lg:text-lg">
           © 2025 Kenneth Andales. Software Developer
