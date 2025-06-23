@@ -82,9 +82,9 @@ export default function BannerLayout() {
         <p className="font-open-sauce dark:text-light/90 banner-animate md:text-lg lg:text-xl">
           Mid-Level Developer Ready to Elevate Your Team I bring{" "}
           <strong>3+</strong> years of hands-on experience building applications
-          that matter. Known for clear communication, reliable delivery, and
-          collaborative problem-solving, I help development teams ship better
-          products faster while maintaining code quality and user satisfaction.
+          that matter. Known for teamwork, reliable delivery, and collaborative
+          problem-solving, I help development teams ship better products faster
+          while maintaining code quality and user satisfaction.
         </p>
         <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI
