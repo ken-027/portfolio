@@ -1,10 +1,7 @@
 name: Test uploaded codes
 
 on:
-  push:
-    branches:
-      - dev
-
+  pull_request
 jobs:
   TEST_COMPONENTS:
     name: Test Components
