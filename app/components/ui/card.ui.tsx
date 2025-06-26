@@ -3,7 +3,7 @@ import useScreenSize from "~/hooks/useScreenSize";
 
 type CardUIProps = React.HtmlHTMLAttributes<HTMLDivElement> & {
   title: string;
-  description: string;
+  description: string | string[];
   image: string;
   ref?: RefObject<any>;
 };
@@ -58,10 +58,42 @@ export default function CardUI({
         <h3 className="text-lg font-anton dark:text-light/90 lg:text-2xl">
           {title}
         </h3>
-        <p className="text-base lg:text-lg font-open-sauce dark:text-light/90">
-          {description}
-        </p>
+        {Array.isArray(description) ? (
+          <ul className="text-left space-y-1 lg:space-y-2 px-2 lg:px-0">
+            {description.map((item, index) => (
+              <Description key={index} item={item} />
+            ))}
+          </ul>
+        ) : (
+          <p className="text-base lg:text-lg font-open-sauce dark:text-light/90">
+            {description}
+          </p>
+        )}
       </div>
     </div>
   );
 }
+
+const Description = ({ item }: { item: string }) => {
+  const { width } = useScreenSize();
+  const [isHover, setIsHover] = useState<boolean>(false);
+
+  const onHover = () => setIsHover(true);
+
+  const offHover = () => setIsHover(false);
+
+  useEffect(() => {
+    offHover();
+  }, [width]);
+
+  return (
+    <li
+      onMouseLeave={offHover}
+      onMouseEnter={onHover}
+      onTouchStart={onHover}
+      onTouchEnd={offHover}
+    >
+      <span className="font-anton text-xl">{!isHover ? "⚬" : "●"}</span> {item}
+    </li>
+  );
+};

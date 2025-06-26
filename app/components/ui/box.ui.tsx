@@ -16,6 +16,7 @@ interface BoxUIProps {
   repo?: string;
   website?: string;
   docker?: string;
+  aiPowered?: boolean;
 }
 
 export default function BoxUI({
@@ -27,6 +28,7 @@ export default function BoxUI({
   screenshot,
   repo,
   docker,
+  aiPowered,
 }: BoxUIProps) {
   const isUrl = website?.match(/(https?:\/\/)/);
 
@@ -61,6 +63,11 @@ export default function BoxUI({
             </div>
           ))}
         </div>
+        {aiPowered ? (
+          <div className="bg-[#D07252] border-[#8d2a09] text-light font-bold px-3 py-1.5 rounded-md capitalize w-fit">
+            <p className="text-xs md:text-sm">AI Powered</p>
+          </div>
+        ) : null}
         <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-xl lg:px-2">
           {website ? (
             <Link

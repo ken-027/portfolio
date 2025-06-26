@@ -14,7 +14,7 @@ export default function PaddingWrapperUI({
       }`}
     >
       <div
-        className={`max-w-screen-xl mx-auto min-h-[100vh] ${className || ""}`}
+        className={`max-w-screen-xl mx-auto min-h-[85vh] ${className || ""}`}
       >
         {children}
       </div>

@@ -167,6 +167,7 @@ const ExperienceItem = ({
                       githubRepo,
                       category,
                       aiPowered,
+                      projectRole,
                     },
                     _index
                   ) => (
@@ -175,7 +176,7 @@ const ExperienceItem = ({
                       className={`xl:pb-10 experience-${index}-animate`}
                     >
                       <div
-                        className={`border-1 border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 transition-shadow xl:w-[80%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                        className={`border-1 border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 transition-shadow xl:w-[85%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
                           _index % 2 === 0 ? "" : "ml-auto"
                         }`}
                       >
@@ -208,12 +209,17 @@ const ExperienceItem = ({
                               </div>
                             ))}
                           </div>
-                          <div className="flex gap-1.5 lg:gap-2 my-2 lg:my-3 font-open-sauce">
-                            <div className="bg-dark text-light dark:bg-light dark:text-dark lowercase font-bold px-3 py-0.5 rounded-md">
-                              {category}
+                          <div className="flex flex-col gap-1.5 my-2 font-open-sauce text-sm">
+                            <div>
+                              <p className="font-bold">Type</p>
+                              <p className="capitalize">{category}</p>
+                            </div>
+                            <div>
+                              <p className="font-bold">Role</p>
+                              <p className="capitalize">{projectRole}</p>
                             </div>
                             {aiPowered ? (
-                              <div className="bg-red-800 text-light lowercase font-bold px-3 py-0.5 rounded-md">
+                              <div className="bg-red-800 text-light font-bold px-3 py-1.5 rounded-md capitalize w-fit">
                                 AI Powered
                               </div>
                             ) : null}
@@ -302,6 +308,7 @@ function MobileCard({
             screenshot,
             aiPowered,
             category,
+            projectRole,
           },
           _index
         ) => {
@@ -360,12 +367,17 @@ function MobileCard({
                       </div>
                     ))}
                   </div>
-                  <div className="flex gap-1.5 my-2 font-open-sauce text-sm">
-                    <div className="bg-dark text-light dark:bg-light dark:text-dark lowercase font-bold px-3 py-0.5 rounded-md">
-                      {category}
+                  <div className="flex flex-col gap-1.5 my-2 font-open-sauce text-sm">
+                    <div>
+                      <p className="font-bold">Type</p>
+                      <p className="capitalize">{category}</p>
+                    </div>
+                    <div>
+                      <p className="font-bold">Role</p>
+                      <p className="capitalize">{projectRole}</p>
                     </div>
                     {aiPowered ? (
-                      <div className="bg-red-800 text-light lowercase font-bold px-3 py-0.5 rounded-md">
+                      <div className="bg-[#D07252] border-[#8d2a09] text-light font-bold px-3 py-0.5 rounded-md capitalize w-fit">
                         AI Powered
                       </div>
                     ) : null}
