@@ -13,7 +13,7 @@ export default function AboutMeLayout({ aboutMe }: { aboutMe: string[] }) {
     <SectionUI id="about-me" ref={aboutMeRef} className="lg:mt-30 mt-20">
       <HeaderUI
         headerTitle="About me"
-        headerSubtitle="From Code to Impact: My Journey as a Full-Stack Developer"
+        headerSubtitle="Software Developer Specializing in Modern Web Technologies"
         className=" about-me-animate"
       />
       <PaddingWrapperUI className="text-dark px-2 min-h-[70vh]!">
