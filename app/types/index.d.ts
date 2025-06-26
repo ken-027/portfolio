@@ -8,6 +8,10 @@ export interface Technology {
 export type Category = "fullstack" | "frontend" | "backend";
 
 export type ProjectType = "personal" | "freelance" | "company";
+export type ProjectRole =
+  | "individual contributor"
+  | "pair programmer"
+  | "team collaborator";
 
 export interface Project {
   thumbnailLink?: string;
@@ -21,6 +25,7 @@ export interface Project {
   type: ProjectType;
   aiPowered?: boolean;
   dockerLink?: string;
+  projectRole: ProjectRole;
 }
 
 export interface Service {
@@ -80,4 +85,9 @@ export interface DeveloperPlatform {
   icon: string;
   link: string;
   name: string;
+}
+export interface WhatIDo {
+    title: string;
+    description: string[];
+    image: string;
 }

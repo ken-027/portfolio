@@ -27,14 +27,7 @@ export default function ProjectsLayout({
   const projectRef = useRef(null);
   useAnimateElement("project", projectRef);
 
-  const { responseSize } = useScreenSize();
-
-  const CATEGORIES: CategoryWithAI[] = [
-    "frontend",
-    "backend",
-    "fullstack",
-    "AI-powered",
-  ];
+  const CATEGORIES: CategoryWithAI[] = ["frontend", "backend", "fullstack"];
 
   const categories = CATEGORIES;
 
@@ -81,10 +74,8 @@ export default function ProjectsLayout({
 
           const filterProjects = useMemo(
             () =>
-              projects.filter(({ category: itemCategory, aiPowered }) =>
-                category === "AI-powered"
-                  ? aiPowered
-                  : category === itemCategory
+              projects.filter(
+                ({ category: itemCategory }) => category === itemCategory
               ),
             []
           );
@@ -119,6 +110,7 @@ export default function ProjectsLayout({
                           screenshot,
                           liveDemo,
                           dockerLink,
+                          aiPowered,
                         },
                         _index
                       ) => (
@@ -132,6 +124,7 @@ export default function ProjectsLayout({
                             repo={githubRepo}
                             screenshot={screenshot}
                             docker={dockerLink}
+                            aiPowered={aiPowered}
                           />
                         </SwiperSlide>
                       )

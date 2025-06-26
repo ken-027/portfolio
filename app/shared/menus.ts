@@ -1,3 +1,4 @@
+import AboutMeIcon from "~/components/icons/about-me.icon";
 import CertificateIcon from "~/components/icons/certificate.icon";
 import ContactIcon from "~/components/icons/contact.icon";
 import ExperienceIcon from "~/components/icons/experience.icon";
@@ -15,11 +16,11 @@ type Nav = {
 };
 
 const MENUS: Nav[] = [
-  //   { name: "Home", href: "#home", Icon: ServicesIcon },
-  { name: "Services", href: "#services", Icon: ServicesIcon },
+  { name: "About me", href: "#about-me", Icon: AboutMeIcon },
   { name: "Skills", href: "#skills", Icon: SkillsIcon },
-  { name: "Experiences", href: "#experiences", Icon: ExperienceIcon },
+  { name: "What I do", href: "#what-i-do", Icon: ServicesIcon },
   { name: "Portfolio", href: "#portfolios", Icon: ProjectIcon },
+  { name: "Experiences", href: "#experiences", Icon: ExperienceIcon },
   { name: "Certificates", href: "#certificates", Icon: RibbonIcon },
   { name: "Contact", href: "#contact", Icon: ContactIcon },
   { name: "My resume", href: "#resume", Icon: ResumeMenuIcon },
