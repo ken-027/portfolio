@@ -9,8 +9,8 @@ import { Link } from "react-router";
 import useScreenSize from "~/hooks/useScreenSize";
 import useDarkMode from "~/hooks/useDarkMode";
 import LinkAnimatedUI from "../ui/link-animated.ui";
-import ResumeMenuIcon from "../icons/resume-menu.icon";
 import ContactModalUI from "../ui/contact-modal.ui";
+import ContactIcon from "../icons/contact.icon";
 
 const menus = MENUS;
 export default function NavLayout() {
@@ -20,7 +20,7 @@ export default function NavLayout() {
   const [scope, animate] = useAnimate();
   const [desktopMenuScope, animateList] = useAnimate();
   const { width } = useScreenSize();
-  const centerMenu = menus.slice(0, 5);
+  const centerMenu = menus.slice(0, 6);
   const bottomMenu = MENUS[MENUS.length - 2];
 
   const darkMode = useDarkMode();
@@ -129,7 +129,7 @@ export default function NavLayout() {
           }}
         >
           <LinkAnimatedUI
-            Icon={ResumeMenuIcon}
+            Icon={ContactIcon}
             name={bottomMenu.name}
             tooltipClassName="min-w-[140px]"
             onClick={onToggleContact}
