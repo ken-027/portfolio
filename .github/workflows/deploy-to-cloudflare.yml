@@ -29,6 +29,8 @@ jobs:
           VITE_PORTFOLIO_API: ${{ vars.VITE_PORTFOLIO_API }}
           VITE_ACCESS_API: ${{ vars.VITE_ACCESS_API }}
           VITE_ACCESS_API_DEV: ${{ vars.VITE_ACCESS_API_DEV }}
+          VITE_AGENTIC_API_DEV: ${{ vars.VITE_AGENTIC_API_DEV }}
+          VITE_AGENTIC_API: ${{ vars.VITE_AGENTIC_API }}
 
       - name: Install Wrangler CLI
         run: npm install -g wrangler
