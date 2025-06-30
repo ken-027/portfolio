@@ -1,7 +1,7 @@
 import { AGENTIC_API, PORTFOLIO_API } from "~/config/env.config";
 
 export const chatStream = async (message: string): Promise<any> => {
-  const response = await fetch(`${PORTFOLIO_API}/chat`, {
+  const response = await fetch(`${AGENTIC_API}/agents/portfolio`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
