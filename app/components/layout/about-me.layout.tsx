@@ -16,7 +16,7 @@ export default function AboutMeLayout({ aboutMe }: { aboutMe: string[] }) {
         headerSubtitle="Software Developer Specializing in Modern Web Technologies"
         className=" about-me-animate"
       />
-      <PaddingWrapperUI className="text-dark px-2 min-h-[70vh]!">
+      <PaddingWrapperUI className="text-dark px-2 min-h-[70vh]! dark:text-white/90">
         <div
           className="flex flex-col gap-5 xl:gap-y-10 xl:gap-x-10 max-w-[1000px] mx-auto"
           ref={aboutMeItemRef}

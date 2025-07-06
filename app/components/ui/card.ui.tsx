@@ -92,6 +92,7 @@ const Description = ({ item }: { item: string }) => {
       onMouseEnter={onHover}
       onTouchStart={onHover}
       onTouchEnd={offHover}
+      className="text-dark dark:text-white/90"
     >
       <span className="font-anton text-xl">{!isHover ? "⚬" : "●"}</span> {item}
     </li>
