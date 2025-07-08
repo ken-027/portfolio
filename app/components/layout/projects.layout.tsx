@@ -3,14 +3,13 @@
 import HeaderUI from "../ui/header.ui";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import BoxUI from "../ui/box.ui";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import SectionUI from "../ui/section.ui";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCards, EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination } from "swiper/modules";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import useScreenSize from "~/hooks/useScreenSize";
 import type { Category, Project } from "~/types";
 
 type CategoryWithAI = Category | "AI-powered";
@@ -46,15 +45,6 @@ export default function ProjectsLayout({
     },
     pagination: true,
     modules: [EffectCoverflow, Pagination],
-  };
-
-  const _mobileEffect = {
-    className: "w-full",
-    effect: "cards",
-    touchEventsTarget: "container",
-    grabCursor: true,
-    cardsEffect: { slideShadows: false },
-    modules: [EffectCards],
   };
 
   //   const effect = responseSize.lg ? desktopEffect : mobileEffect;

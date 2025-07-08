@@ -14,7 +14,7 @@ export default function LinkAnimatedUI({
   tooltipClassName,
   ...props
 }: LinkAnimatedUIProps) {
-  const [hover, setHover] = useState(false);
+  const [_hover, setHover] = useState(false);
 
   return (
     <a

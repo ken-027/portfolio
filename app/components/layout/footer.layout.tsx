@@ -14,7 +14,7 @@ export default function FooterLayout({
 }: {
   platforms: DeveloperPlatform[];
 }) {
-  const [switching, setSwitching] = useState(false);
+  const [_switching, setSwitching] = useState(false);
   const footerRef = useRef(null);
 
   const onSwitchStyle = () => {

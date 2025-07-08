@@ -1,9 +1,5 @@
 import moment from "moment";
-// @ts-expect-error @ts-ignore
-import { decode } from "he";
 import type { Certificate } from "~/types";
-import SkillsIcon from "../icons/skills.icon";
-import ViewIcon from "../icons/view.icon";
 import RibbonIcon from "../icons/ribbon.icon";
 import CourseIcon from "../icons/course.icon";
 import { useEffect, useState } from "react";

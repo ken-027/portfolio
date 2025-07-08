@@ -1,4 +1,4 @@
-import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 
 export default class EmailJS {
   #email: string;

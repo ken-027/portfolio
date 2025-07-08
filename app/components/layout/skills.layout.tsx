@@ -1,7 +1,6 @@
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
-import ImageUI from "../ui/image.ui";
 import { useEffect, useRef, useState } from "react";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import useScreenSize from "~/hooks/useScreenSize";
@@ -36,7 +35,6 @@ export default function SkillsLayout({ skills }: { skills: Skill[] }) {
             {skills.map((skill, index) => (
               <SkillWrapper
                 key={index}
-                lastItem={index === skills.length - 1}
                 {...skill}
               />
             ))}
@@ -50,8 +48,7 @@ export default function SkillsLayout({ skills }: { skills: Skill[] }) {
 const SkillWrapper = ({
   items,
   name,
-  lastItem,
-}: Skill & { lastItem: boolean }) => {
+}: Skill) => {
   return (
     <div
       className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center w-full`}

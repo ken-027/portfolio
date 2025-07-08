@@ -32,7 +32,7 @@ const Shell = () => {
 
 const ContactContext = createContext({
   isContact: false,
-  setIsContact: (state: boolean) => {},
+  setIsContact: (_state: boolean) => {},
 });
 
 const YearsExperiencesContext = createContext({
@@ -71,7 +71,7 @@ export default function TerminalLayout({
   loading,
 }: TerminalLayoutProps) {
   const [commandsHistory, setCommandsHistory] = useState<string[]>([]);
-  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [_historyIndex, setHistoryIndex] = useState<number>(-1);
   const [logs, setLogs] = useState<TerminalLog[]>([]);
   const [cleared, setCleared] = useState(false);
   const [isContact, setIsContact] = useState(false);
