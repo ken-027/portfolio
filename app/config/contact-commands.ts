@@ -1,4 +1,3 @@
-import GUIResponse from "~/components/response/gui.response";
 import type { Command } from "./commands";
 import ContactIntroResponse from "~/components/response/contact/contact-intro.response";
 import ContactHelpResponse from "~/components/response/contact/help.response";

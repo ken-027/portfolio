@@ -129,7 +129,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
     }
   };
 
-  const onDoubleClick = (e: any) => {
+  const onDoubleClick = (_e: any) => {
     const message = currentMessage.trim();
 
     if (responseSize.lg || message !== "") return;

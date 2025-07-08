@@ -1,3 +1,5 @@
+"use client";
+
 import type { Route } from "./+types/home";
 import { getStyledType } from "~/shared/local-storage";
 import { useEffect, useState } from "react";
@@ -15,7 +17,6 @@ import {
 
 import BannerLayout from "~/components/layout/banner.layout";
 import TerminalLayout from "~/components/layout/terminal.layout";
-import ServicesLayout from "~/components/layout/services.layout";
 import SkillsLayout from "~/components/layout/skills.layout";
 import ProjectsLayout from "~/components/layout/projects.layout";
 import ExperiencesLayout from "~/components/layout/experiences.layout";
@@ -108,7 +109,7 @@ export default function Home() {
 
   return (
     <>
-      {getStyle === "gui" ? (
+      {getStyle !== "terminal" ? (
         <>
           {show ? (
             <>

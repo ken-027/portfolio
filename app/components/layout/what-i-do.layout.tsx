@@ -4,7 +4,7 @@ import CardUI from "../ui/card.ui";
 import SectionUI from "../ui/section.ui";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useRef } from "react";
-import type { Service, WhatIDo } from "~/types";
+import type { WhatIDo } from "~/types";
 import useScreenSize from "~/hooks/useScreenSize";
 
 export default function WhatIDoLayout({ whatIDo }: { whatIDo: WhatIDo[] }) {

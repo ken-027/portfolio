@@ -3,7 +3,6 @@ import ButtonUI from "./button.ui";
 import TextFieldUI from "./text-field.ui";
 import ShareIcon from "../icons/share.icon";
 import { useEffect, useState, type FormEvent } from "react";
-import EmailJS from "~/utils/email-js";
 import { sendEmail } from "~/api/email.api";
 
 interface FormContactUIProps {
@@ -21,41 +20,6 @@ export default function FormContactUI({
   submitStatus,
 }: FormContactUIProps) {
   const [submitting, setSubmitting] = useState(false);
-
-  const rateLimitValue = (): number => {
-    const getRequest = document.cookie;
-    const cookies = getRequest.split(";").map((_cookie) => ({
-      key: _cookie.split("=")[0]?.trim(),
-      value: _cookie.split("=")[1]?.trim(),
-    }));
-
-    const _rateLimit =
-      cookies.find(({ key }) => key === "_emailRequest")?.value || 0;
-
-    return +_rateLimit;
-  };
-
-  const appendRequest = () => {
-    const limitValue = rateLimitValue();
-    document.cookie = `_emailRequest=${limitValue + 1}; path=/; max-age=${
-      3600 * 24 // 1 day expiration
-    }`;
-  };
-
-  const validateLimit = () => {
-    const limitValue = rateLimitValue();
-
-    if (limitValue >= 3) {
-      const message =
-        "⚠️ Email request limit reached for today. Please try again tomorrow";
-      submitStatus("error", message);
-      setTimeout(() => {
-        submitStatus("not-submitted");
-      }, 3000);
-
-      throw new Error(message);
-    }
-  };
 
   const validation = (form: HTMLFormElement) => {
     const name = form[0] as HTMLInputElement;

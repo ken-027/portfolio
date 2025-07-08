@@ -1,5 +1,4 @@
 import AboutMeIcon from "~/components/icons/about-me.icon";
-import CertificateIcon from "~/components/icons/certificate.icon";
 import ContactIcon from "~/components/icons/contact.icon";
 import ExperienceIcon from "~/components/icons/experience.icon";
 import ProjectIcon from "~/components/icons/project.icon";

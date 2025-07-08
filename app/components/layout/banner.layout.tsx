@@ -2,7 +2,7 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import ProjectIcon from "../icons/project.icon";
 import { TypeAnimation } from "react-type-animation";
 import { useEffect } from "react";
-import { motion, useAnimate, useInView } from "motion/react";
+import { motion, useAnimate } from "motion/react";
 import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";

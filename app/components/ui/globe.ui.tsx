@@ -3,46 +3,10 @@ import { motion, useAnimate } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { getSkills } from "~/api/portfolio.api";
 import type { ItemSkill } from "~/types";
-import { delay, stagger } from "motion";
-
-const icons = [
-  "aws",
-  "csharp",
-  "bash",
-  "bootstrap",
-  "codeigniter",
-  "css",
-  "docker",
-  "dotnet",
-  "expressjs",
-  "figma",
-  "html",
-  "javascript",
-  "jest",
-  "jquery",
-  "laravel",
-  "mariadb",
-  "mysql",
-  "nextjs",
-  "nodejs",
-  "npm",
-  "php",
-  "postman",
-  "python",
-  "reactjs",
-  "redux",
-  "sap",
-  "sass",
-  "socketio",
-  "sqlserver",
-  "tailwindcss",
-  "typescript",
-  "vscode",
-  "git",
-];
+import { stagger } from "motion";
 
 export default function GlobeUI({ className }: { className?: string }) {
-  const [data, setData] = useState(null);
+  const [data, _setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [icons, setIcons] = useState<ItemSkill[]>([]);
 

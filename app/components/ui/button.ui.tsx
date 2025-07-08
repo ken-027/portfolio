@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, HTMLInputTypeAttribute } from "react";
+import type { ButtonHTMLAttributes } from "react";
 
 interface ButtonUIProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;

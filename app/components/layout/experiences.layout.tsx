@@ -6,7 +6,7 @@ import SectionUI from "../ui/section.ui";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
 import { Parallax } from "react-scroll-parallax";
 import type { Experience, Project } from "~/types";
@@ -61,7 +61,7 @@ const ExperienceItem = ({
 }: Experience & { index: number }) => {
   const experienceItemRef = useRef(null);
   useAnimateElement(`experience-${index}`, experienceItemRef);
-  const { responseSize, width } = useScreenSize();
+  const { responseSize } = useScreenSize();
 
   return (
     <div

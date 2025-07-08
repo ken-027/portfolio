@@ -47,7 +47,6 @@ const ServiceCard = ({
   index,
   ref,
 }: Service & { index: number; ref: any }) => {
-  const serviceItemRef = useRef(null);
   const {
     responseSize: { md },
   } = useScreenSize();

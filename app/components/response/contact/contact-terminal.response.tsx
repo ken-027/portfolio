@@ -37,13 +37,13 @@ const EmailContext = createContext({
 
 const EmailResponseContext = createContext({
   emailSuccess: false,
-  setEmailSuccess: (emailSuccess: boolean) => {},
+  setEmailSuccess: (_emailSuccess: boolean) => {},
 });
 
 export default function ContactTerminalResponse() {
   const [commandsHistory, setCommandsHistory] = useState<string[]>([]);
   const [emailHistory, setEmailHistory] = useState<EmailStruct[]>([]);
-  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [_historyIndex, setHistoryIndex] = useState<number>(-1);
   const [logs, setLogs] = useState<TerminalLog[]>([]);
   const [cleared, setCleared] = useState(false);
   const [emailSuccess, setEmailSuccess] = useState(false);
