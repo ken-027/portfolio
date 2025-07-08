@@ -1,3 +1,5 @@
+"use client";
+
 import type { Route } from "./+types/home";
 import { getStyledType } from "~/shared/local-storage";
 import { useEffect, useState } from "react";
@@ -107,7 +109,7 @@ export default function Home() {
 
   return (
     <>
-      {getStyle === "gui" ? (
+      {getStyle !== "terminal" ? (
         <>
           {show ? (
             <>
