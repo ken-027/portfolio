@@ -1,17 +1,18 @@
-FROM node:22-alpine AS development-dependencies-env
-COPY . /app
+FROM node:22-alpine AS build
+
 WORKDIR /app
+
+COPY package.json package-lock.json ./
 RUN npm ci
 
-FROM node:22-alpine AS build-env
-COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
-WORKDIR /app
+COPY . /app
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:stable-alpine
 
-COPY --from=build-env /app/build/client /usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=build /app/build/client /usr/share/nginx/html
 
 EXPOSE 80
 
