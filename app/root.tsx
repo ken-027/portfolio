@@ -79,7 +79,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <meta
           property="og:image"
-          content="https://kenneth-andales.github.io/images/profile.png"
+          content="https://portfolio.ksoftdev.site/images/profile.png"
         />
         <meta property="og:url" content="https://portfolio.ksoftdev.site" />
         <meta property="og:type" content="website" />
@@ -92,7 +92,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <meta
           name="twitter:image"
-          content="https://kenneth-andales.github.io/images/profile.png"
+          content="https://portfolio.ksoftdev.site/images/profile.png"
         />
         <meta name="twitter:url" content="https://portfolio.ksoftdev.site" />
         <link rel="manifest" href="/manifest.json" />
