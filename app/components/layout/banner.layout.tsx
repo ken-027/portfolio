@@ -96,7 +96,7 @@ export default function BannerLayout() {
                 y: ["-30%", "0%"],
                 willChange: "transform",
               }}
-              transition={{ type: "spring", delay: 1, easel: "easeInOut" }}
+              transition={{ type: "spring", delay: 1, ease: "easeInOut" }}
               className="scale-75 lg:hidden"
             >
               <ScrollDownUI className="banner-animate" />

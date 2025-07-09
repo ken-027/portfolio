@@ -37,7 +37,7 @@ jobs:
 
       - name: Publish to Cloudflare Pages
         run: |
-          wrangler pages deploy ./build \
+          wrangler pages deploy ./build/client \
             --project-name ${{ secrets.CF_PROJECT_NAME }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
