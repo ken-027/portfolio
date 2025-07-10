@@ -1,7 +1,6 @@
 import GmailIcon from "~/components/icons/gmail.icon";
 import LinkedInIcon from "~/components/icons/linkedin.icon";
 import MicrosoftTeamsIcon from "~/components/icons/microsoft-teams.icon";
-import UpworkIcon from "~/components/icons/upwork.icon";
 import type { Contact } from "~/types";
 
 const CONTACTS: Contact[] = [
