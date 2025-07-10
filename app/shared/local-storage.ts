@@ -14,6 +14,7 @@ export const setDarkMode = (enabled: boolean) => {
 };
 
 type Styled = "gui" | "terminal";
+export type ChatbotStyle = "portfolio" | "github";
 
 export const getStyledType = (): Styled | undefined => {
   if (!isClient) return;
@@ -23,6 +24,18 @@ export const getStyledType = (): Styled | undefined => {
     : (localStorage.getItem("_styled") as Styled);
 };
 
-export const switchStyle = (styled: "gui" | "terminal") => {
+export const getChatbotStyle = (): ChatbotStyle | undefined => {
+  if (!isClient) return;
+
+  return localStorage.getItem("_chatbotStyled") === null
+    ? "portfolio"
+    : (localStorage.getItem("_chatbotStyled") as ChatbotStyle);
+};
+
+export const switchStyle = (styled: Styled) => {
   if (isClient) localStorage.setItem("_styled", styled);
+};
+
+export const switchChatbotStyle = (styled: ChatbotStyle) => {
+  if (isClient) localStorage.setItem("_chatbotStyled", styled);
 };
