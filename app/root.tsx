@@ -14,6 +14,7 @@ import NavLayout from "./components/layout/nav.layout";
 import { useEffect, useRef, useState } from "react";
 import { getDarkMode, getStyledType } from "./shared/local-storage";
 import { ParallaxProvider } from "react-scroll-parallax";
+import ScrollUpUI from "./components/ui/scroll-up.ui";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -108,6 +109,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {getStyle === "gui" ? <NavLayout /> : null}
         {/* @ts-ignore */}
         <ParallaxProvider scrollContainer={scrollEl}>
+          <ScrollUpUI body={ref} />
           {children}
         </ParallaxProvider>
         <ScrollRestoration />
