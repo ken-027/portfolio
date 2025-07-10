@@ -8,45 +8,79 @@ import botSound from "../../assets/sounds/chatbot-sound.mp3";
 import useSound from "use-sound";
 import generateRandomNumber from "~/utils/generate-random.util";
 import useScreenSize from "~/hooks/useScreenSize";
+import {
+  getChatbotStyle,
+  switchChatbotStyle,
+  type ChatbotStyle,
+} from "~/shared/local-storage";
 
 export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
-  const preMessages = [
-    "What services do you offer?",
-    "How many experiences do you have?",
-    "Can you show some of your past projects?",
-    "What technologies are you most proficient in?",
-    "Have you worked with clients or teams before?",
-    "Do you have experience with mobile or responsive design?",
-    "Can you build custom features based on client requirements?",
-    "Are you open to freelance or full-time opportunities?",
-    "",
-  ];
+  const preMessages: Record<ChatbotStyle, string[]> = {
+    portfolio: [
+      "What kind of projects have you worked on before?",
+      "Which technologies do you use the most?",
+      "What technologies are you most proficient in?",
+      "Do you have experience working with clients or teams?",
+      "Can I see examples of your design or UI work?",
+      "Are you open to new opportunities right now?",
+    ],
+    github: [
+      "What repository are you most proud of?",
+      "What tech stack did you use in this project?",
+      "Do you accept contributions or collaborate with others?",
+      "Are there any live demos available?",
+      "Which repo should I check out first?",
+    ],
+  };
+
+  const initMessage: Record<ChatbotStyle, string> = {
+    portfolio:
+      "Hey! Thanks for stopping by my portfolio. I'm your personal guide here - ask me about my projects, skills, or anything else you'd like to know. What interests you most?",
+    github:
+      "Hey! I’m Kenneth Andales. Need help understanding my GitHub projects or recent work?",
+  };
+
   const [show, setShow] = useState(false);
+
+  const [chatbotAgent, setChatbotAgent] = useState(getChatbotStyle());
   const [randomIndex, setRandomIndex] = useState<number>(
-    generateRandomNumber(0, preMessages.length)
+    generateRandomNumber(0, preMessages[chatbotAgent || "portfolio"].length)
   );
+  const [agentMenu, setAgentMenu] = useState(false);
   const [streaming, setStreaming] = useState(false);
   const [showChatBot, setShowChatBot] = useState(false);
   const [reply, setReply] = useState("");
   const [currentMessage, setCurrentMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([
-    "Hey! Thanks for stopping by my portfolio. I'm your personal guide here - ask me about my projects, skills, or anything else you'd like to know. What interests you most?",
+    initMessage[chatbotAgent || "portfolio"],
   ]);
   const historyRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [play] = useSound(botSound);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const image: Record<ChatbotStyle, string> = {
+    portfolio: "/images/chatbot.png",
+    github: "/images/github-copilot.svg",
+  };
+
   const { responseSize } = useScreenSize();
 
-  const toggleChat = () =>
+  const toggleChat = () => {
+    closeAgentMenu();
     setShow((prevState) => {
       if (prevState) {
-        setRandomIndex(generateRandomNumber(0, preMessages.length));
+        setRandomIndex(
+          generateRandomNumber(
+            0,
+            preMessages[chatbotAgent || "portfolio"].length
+          )
+        );
       }
 
       return !prevState;
     });
+  };
 
   const renderer = new marked.Renderer();
   renderer.link = function ({ href, text }) {
@@ -60,6 +94,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
   const onChange = (e: any) => setCurrentMessage(e.target.value);
 
   const onChat = async () => {
+    closeAgentMenu();
     let _reply = "";
     try {
       if (currentMessage.trim() === "") return;
@@ -72,7 +107,10 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       setStreaming(true);
       setMessages((prevState) => [...prevState, message]);
 
-      const stream_replies = await chatStream(message);
+      const stream_replies = await chatStream(
+        message,
+        chatbotAgent || "portfolio"
+      );
 
       play();
 
@@ -94,7 +132,9 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
       setMessages((prevState) => [...prevState, _reply]);
       setReply("");
       setStreaming(false);
-      setRandomIndex(generateRandomNumber(0, preMessages.length));
+      setRandomIndex(
+        generateRandomNumber(0, preMessages[chatbotAgent || "portfolio"].length)
+      );
     }
   };
 
@@ -125,8 +165,24 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
     const message = currentMessage.trim();
 
     if (e.key === "Tab" && message === "") {
-      setCurrentMessage(preMessages[randomIndex] || "");
+      setCurrentMessage(
+        preMessages[chatbotAgent || "portfolio"][randomIndex] || ""
+      );
     }
+  };
+
+  const onOpenAgent = () => setAgentMenu((prev) => !prev);
+  const closeAgentMenu = () => setAgentMenu(false);
+
+  const selectPortfolioAgent = () => {
+    setChatbotAgent("portfolio");
+    switchChatbotStyle("portfolio");
+    closeAgentMenu();
+  };
+  const selectGithubAgent = () => {
+    setChatbotAgent("github");
+    switchChatbotStyle("github");
+    closeAgentMenu();
   };
 
   const onDoubleClick = (_e: any) => {
@@ -134,13 +190,20 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
 
     if (responseSize.lg || message !== "") return;
 
-    setCurrentMessage(preMessages[randomIndex] || "");
+    setCurrentMessage(
+      preMessages[chatbotAgent || "portfolio"][randomIndex] || ""
+    );
   };
 
   const focusTextInput = () => {
     show && inputRef.current?.focus();
   };
 
+  const changeInitMessage = () => {
+    setMessages([initMessage[chatbotAgent || "portfolio"]]);
+  };
+
+  useEffect(changeInitMessage, [chatbotAgent]);
   useEffect(scrollDown, [reply]);
   useEffect(handleOutsideClick, [onClose]);
   useEffect(focusTextInput, [show]);
@@ -186,10 +249,13 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                   <div className="flex gap-2 items-center">
                     <img
                       alt="chatbot"
-                      src="/images/chatbot.png"
+                      src={image[chatbotAgent || "portfolio"]}
                       className="h-8 w-8"
                     />
-                    <h3>Welcome to my Personal Chatbot</h3>
+                    <h3>
+                      Welcome to my{" "}
+                      <span className="capitalize">{chatbotAgent}</span> Chatbot
+                    </h3>
                   </div>
                   <button
                     className="hover:text-yellow-300 lg:hidden cursor-pointer"
@@ -221,12 +287,92 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                   ) : null}
                 </div>
                 <div className="flex border-t-[1px] border-border dark:border-border-dark px-4 dark:bg-dark py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
-                  <div className="relative w-full">
+                  <AnimatePresence>
+                    {agentMenu ? (
+                      <motion.ul
+                        initial={{
+                          opacity: 0,
+                          scale: 0,
+                          x: "-30%",
+                          y: "50%",
+                        }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                          y: "0%",
+                          x: "0%",
+                        }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0,
+                          y: "50%",
+                          x: "-30%",
+                        }}
+                        className="absolute bottom-[100%] mb-2 bg-light dark:bg-dark py-2 rounded-md border left-2 border-border shadow-2xl px-3"
+                      >
+                        <li>
+                          <button
+                            className="cursor-pointer outline-none flex gap-3 items-center group"
+                            onClick={selectPortfolioAgent}
+                          >
+                            <img
+                              src={image.portfolio}
+                              className="w-9 h-9 group-hover:scale-[1.05] duration-300 transition-transform"
+                            />
+                            <span
+                              className={
+                                chatbotAgent === "portfolio"
+                                  ? "text-secondary font-bold"
+                                  : ""
+                              }
+                            >
+                              Portfolio
+                            </span>
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className="cursor-pointer outline-none flex gap-3 items-center group"
+                            onClick={selectGithubAgent}
+                          >
+                            <img
+                              src={image.github}
+                              className="w-9 h-9 group-hover:scale-[1.05] duration-300 transition-transform"
+                            />
+                            <span
+                              className={
+                                chatbotAgent === "github"
+                                  ? "text-secondary font-bold"
+                                  : ""
+                              }
+                            >
+                              Github
+                            </span>
+                          </button>
+                        </li>
+                      </motion.ul>
+                    ) : (
+                      ""
+                    )}
+                  </AnimatePresence>
+                  <div className="relative w-full flex items-center gap-2 lg:gap-3">
+                    <button
+                      className="cursor-pointer outline-none"
+                      type="button"
+                      onClick={onOpenAgent}
+                    >
+                      <img
+                        alt="chatbot"
+                        src={image[chatbotAgent || "portfolio"]}
+                        className="h-10 w-10"
+                      />
+                    </button>
                     <input
                       ref={inputRef}
                       type="text"
                       placeholder={
-                        preMessages[randomIndex] || "Your question here..."
+                        preMessages[chatbotAgent || "portfolio"][randomIndex] ||
+                        "Your question here..."
                       }
                       onKeyDown={onKeyDown}
                       onChange={onChange}
@@ -272,7 +418,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
               ) : (
                 <img
                   alt="chatbot"
-                  src="/images/chatbot.png"
+                  src={image[chatbotAgent || "portfolio"]}
                   className="h-12 w-12 lg:h-16 lg:w-16"
                 />
               )}

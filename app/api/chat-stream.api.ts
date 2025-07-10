@@ -1,7 +1,11 @@
 import { AGENTIC_API, PORTFOLIO_API } from "~/config/env.config";
+import type { ChatbotStyle } from "~/shared/local-storage";
 
-export const chatStream = async (message: string): Promise<any> => {
-  const response = await fetch(`${AGENTIC_API}/agents/portfolio`, {
+export const chatStream = async (
+  message: string,
+  agent: ChatbotStyle
+): Promise<any> => {
+  const response = await fetch(`${AGENTIC_API}/agents/${agent}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
