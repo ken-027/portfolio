@@ -17,12 +17,6 @@ jobs:
 
       - name: Login to docker
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          VITE_PORTFOLIO_API: ${{ vars.VITE_PORTFOLIO_API }}
-          VITE_ACCESS_API: ${{ vars.VITE_ACCESS_API }}
-          VITE_AGENTIC_API: ${{ vars.VITE_AGENTIC_API }}
 
       - name: 🛠️ Build and Push Docker Image
         uses: docker/build-push-action@v5
@@ -32,3 +26,9 @@ jobs:
             tags: |
               ken027/portfolio-site:latest
               ken027/portfolio-site:${{ steps.pkg.outputs.version }}
+            build-args: |
+                DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+                DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+                VITE_PORTFOLIO_API: ${{ vars.VITE_PORTFOLIO_API }}
+                VITE_ACCESS_API: ${{ vars.VITE_ACCESS_API }}
+                VITE_AGENTIC_API: ${{ vars.VITE_AGENTIC_API }}

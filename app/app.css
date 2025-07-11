@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "../app/assets/styles/animate.style.css";
+
 @font-face {
   font-family: "Open Sauce One";
   src: url("/fonts/open-sauce/OpenSauceOne-Regular.ttf") format("truetype");
@@ -234,45 +236,6 @@ input::after {
   animation: fly 3s ease-out infinite;
 }
 
-@keyframes fly {
-  0% {
-    transform: translate(0%, 0);
-  }
-  50% {
-    transform: translate(-200%, 0) rotate(50deg);
-  }
-  100% {
-    transform: translate(1000%, 0%) rotate(15deg);
-  }
-}
-
-@keyframes wave-animation {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(14deg);
-  }
-  20% {
-    transform: rotate(-8deg);
-  }
-  30% {
-    transform: rotate(14deg);
-  }
-  40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  60% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
 .mouse_scroll {
   display: block;
   margin: 0 auto;
@@ -375,29 +338,6 @@ input::after {
   animation: bouncing 1s infinite;
 }
 
-@keyframes bouncing {
-  0%,
-  100% {
-    transform: translateY(0);
-    animation-timing-function: ease-in-out;
-  }
-  50% {
-    transform: translateY(-10px);
-    animation-timing-function: ease-in-out;
-  }
-}
-
-.terminal-icon {
-  animation: terminal 1.5s infinite;
-  animation-timing-function: ease-in;
-}
-
-.wheel {
-  -webkit-animation: mouse-wheel 0.6s linear infinite;
-  -moz-animation: mouse-wheel 0.6s linear infinite;
-  animation: mouse-wheel 0.6s linear infinite;
-}
-
 [data-theme="dark"] {
   .m_scroll_arrows {
     border-right: 2px solid var(--color-light);
@@ -413,187 +353,7 @@ input::after {
   }
 }
 
-@-webkit-keyframes mouse-wheel {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
-    transform: translateY(0);
-  }
-
-  100% {
-    opacity: 0;
-    -webkit-transform: translateY(6px);
-    -ms-transform: translateY(6px);
-    transform: translateY(6px);
-  }
-}
-@-moz-keyframes mouse-wheel {
-  0% {
-    top: 1px;
-  }
-  25% {
-    top: 2px;
-  }
-  50% {
-    top: 3px;
-  }
-  75% {
-    top: 2px;
-  }
-  100% {
-    top: 1px;
-  }
-}
-@-o-keyframes mouse-wheel {
-  0% {
-    top: 1px;
-  }
-  25% {
-    top: 2px;
-  }
-  50% {
-    top: 3px;
-  }
-  75% {
-    top: 2px;
-  }
-  100% {
-    top: 1px;
-  }
-}
-@keyframes mouse-wheel {
-  0% {
-    top: 1px;
-  }
-  25% {
-    top: 2px;
-  }
-  50% {
-    top: 3px;
-  }
-  75% {
-    top: 2px;
-  }
-  100% {
-    top: 1px;
-  }
-}
-
-@-webkit-keyframes mouse-scroll {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-moz-keyframes mouse-scroll {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@-o-keyframes mouse-scroll {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes mouse-scroll {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* The wave element */
-.sea-wave {
-  position: absolute;
-  width: 275%;
-  background-color: #0077be; /* Ocean blue */
-  bottom: 0;
-  left: 0;
-  border-radius: 100% 100% 0 0;
-  opacity: 0.8;
-  animation: wave 8s linear infinite;
-}
-
-.sea-wave-odd {
-  position: absolute;
-  width: 275%;
-  background-color: #0077be; /* Ocean blue */
-  bottom: 0;
-  left: 0;
-  border-radius: 100% 100% 0 0;
-  opacity: 0.8;
-  animation: wave2 6s linear infinite;
-}
-
-@keyframes terminal {
-  0% {
-    rotate: 0deg;
-  }
-  25% {
-    rotate: -10deg;
-  }
-  50% {
-    rotate: 0deg;
-  }
-}
-
-/* Main wave animation */
-@keyframes wave {
-  0% {
-    transform: translateX(0) translateY(0) scaleY(1);
-  }
-  25% {
-    transform: translateX(-25%) translateY(3px) scaleY(0.9);
-  }
-  50% {
-    transform: translateX(-50%) translateY(0) scaleY(1);
-  }
-  75% {
-    transform: translateX(-25%) translateY(5px) scaleY(1.1);
-  }
-  100% {
-    transform: translateX(0) translateY(0) scaleY(1);
-  }
-}
-
-/* Second wave animation - slightly different timing */
-@keyframes wave2 {
-  0% {
-    transform: translateX(0) translateY(0) scaleY(1);
-  }
-  25% {
-    transform: translateX(-20%) translateY(3px) scaleY(1.1);
-  }
-  50% {
-    transform: translateX(-40%) translateY(0) scaleY(0.9);
-  }
-  75% {
-    transform: translateX(-20%) translateY(5px) scaleY(1);
-  }
-  100% {
-    transform: translateX(0) translateY(0) scaleY(1);
-  }
+.heartbeat {
+  animation: heartbeat 3.8s infinite;
+  transform-origin: center;
 }
