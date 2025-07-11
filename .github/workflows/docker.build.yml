@@ -22,14 +22,15 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 🛠️ Build an Image
-        run: |
-            docker build -t ken027/portfolio-site:latest \
-            -t ken027/portfolio-site:${{ steps.pkg.outputs.version }} \
-            .
-        env:
-          VITE_PORTFOLIO_API: ${{ vars.VITE_PORTFOLIO_API }}
-          VITE_ACCESS_API: ${{ vars.VITE_ACCESS_API }}
-          VITE_AGENTIC_API: ${{ vars.VITE_AGENTIC_API }}
+        run: echo ${{ vars.VITE_PORTFOLIO_API }}
+      #   run: |
+      #       docker build -t ken027/portfolio-site:latest \
+      #       -t ken027/portfolio-site:${{ steps.pkg.outputs.version }} \
+      #       .
+      #   env:
+      #     VITE_PORTFOLIO_API: ${{ vars.VITE_PORTFOLIO_API }}
+      #     VITE_ACCESS_API: ${{ vars.VITE_ACCESS_API }}
+      #     VITE_AGENTIC_API: ${{ vars.VITE_AGENTIC_API }}
 
-      - name: Push Image to Docker Hub
-        run: docker push ken027/portfolio-site:latest && docker push ken027/portfolio-site:${{ steps.pkg.outputs.version }}
+      # - name: Push Image to Docker Hub
+      #   run: docker push ken027/portfolio-site:latest && docker push ken027/portfolio-site:${{ steps.pkg.outputs.version }}
