@@ -308,12 +308,13 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                           y: "50%",
                           x: "-30%",
                         }}
-                        className="absolute bottom-[100%] mb-2 bg-light dark:bg-dark py-2 rounded-md border left-2 border-border shadow-2xl px-3"
+                        className="absolute bottom-[100%] mb-2 bg-light py-2 rounded-md border left-2 border-border shadow-2xl px-3"
                       >
                         <li>
                           <button
                             className="cursor-pointer outline-none flex gap-3 items-center group"
                             onClick={selectPortfolioAgent}
+                            disabled={streaming}
                           >
                             <img
                               src={image.portfolio}
@@ -333,6 +334,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                         <li>
                           <button
                             className="cursor-pointer outline-none flex gap-3 items-center group"
+                            disabled={streaming}
                             onClick={selectGithubAgent}
                           >
                             <img
@@ -357,8 +359,9 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                   </AnimatePresence>
                   <div className="relative w-full flex items-center gap-2 lg:gap-3">
                     <button
-                      className="cursor-pointer outline-none"
+                      className="cursor-pointer outline-none heartbeat"
                       type="button"
+                      disabled={streaming}
                       onClick={onOpenAgent}
                     >
                       <img
@@ -399,7 +402,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
         {showChatBot ? (
           <motion.div
             animate={{
-              x: ["100%", "0%"],
+              y: ["100%", "0%"],
               opacity: [0, 1],
               willChange: "transform",
             }}
@@ -409,7 +412,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
             <GreetingsMessage />
             <motion.button
               className={`cursor-pointer text-4xl! lg:text-5xl! translate-x-2 outline-none group ${
-                !show ? "wave" : null
+                !show ? "heartbeat" : null
               }`}
               onClick={toggleChat}
             >
