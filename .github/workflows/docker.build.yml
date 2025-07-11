@@ -30,6 +30,6 @@ jobs:
               ken027/portfolio-site:latest
               ken027/portfolio-site:${{ steps.pkg.outputs.version }}
             build-args: |
-                VITE_PORTFOLIO_API=${{ vars.VITE_PORTFOLIO_API }}
-                VITE_ACCESS_API=${{ vars.VITE_ACCESS_API }}
-                VITE_AGENTIC_API=${{ vars.VITE_AGENTIC_API }}
+              VITE_PORTFOLIO_API=${{ vars.VITE_PORTFOLIO_API }}
+              VITE_ACCESS_API=${{ vars.VITE_ACCESS_API }}
+              VITE_AGENTIC_API=${{ vars.VITE_AGENTIC_API }}
