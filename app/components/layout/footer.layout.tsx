@@ -51,7 +51,8 @@ export default function FooterLayout({
           <LinkUI
             title="Get my resume"
             download
-            href={`${PORTFOLIO_BASE_URL}/resume/software-developer.pdf`}
+            target="_blank"
+            href={`${PORTFOLIO_BASE_URL}/resume/kenneth-andales.resume.2025.pdf`}
             Icon={<ResumeMenuIcon />}
             className="mt-2"
           />
@@ -81,7 +82,11 @@ export default function FooterLayout({
             {platforms.map(({ icon, link, name }, index) => (
               <li key={index}>
                 <a href={link} target="_blank" title={name}>
-                  <img className="lg:h-9 lg:w-9 h-6 w-6 hover:scale-110 duration-500 transition-transform" src={icon} alt={name} />
+                  <img
+                    className="lg:h-9 lg:w-9 h-6 w-6 hover:scale-110 duration-500 transition-transform"
+                    src={icon}
+                    alt={name}
+                  />
                 </a>
               </li>
             ))}

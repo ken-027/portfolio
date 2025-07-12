@@ -76,11 +76,11 @@ export default function BannerLayout() {
           </span>
         </p>
         <p className="font-open-sauce dark:text-light/90 banner-animate md:text-lg lg:text-xl">
-          Software Developer Ready to Elevate Your Team I bring hands-on
-          experience building applications that matter. Known for teamwork,
-          reliable delivery, and collaborative problem-solving, I help
-          development teams ship better products faster while maintaining code
-          quality and user satisfaction.
+          Over 3 years of experience delivering full-stack web systems in
+          cooperative banking, e-commerce, and government projects. Known for
+          reliable delivery, clean code, and collaborative teamwork. I help
+          teams ship faster while ensuring performance, scalability, and user
+          satisfaction.
         </p>
         <div className="flex flex-col items-center lg:items-start gap-3">
           <LinkUI

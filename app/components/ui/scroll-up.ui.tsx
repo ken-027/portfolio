@@ -56,13 +56,13 @@ export default function ScrollUpUI({ body }: ScrollUpUIProps) {
             onClick={() => {
               document.body.scrollTop = 0;
             }}
-            className="cursor-pointer group-hover:animate-none outline-none dark:bg-light rounded-md dark:text-dark bg-dark text-light shadow border-[1px] border-border w-9 h-9 lg:w-11 lg:h-11 grid place-items-center"
+            className="cursor-pointer group-hover:animate-none outline-none dark:bg-light rounded-md animate-bounce dark:text-dark bg-dark text-light w-9 h-9 lg:w-11 lg:h-11 grid place-items-center"
           >
             <ArrowUpIcon />
           </button>
-          <strong className="text-dark dark:text-light/90 text-shadow-2xs text-shadow-gray-500 dark:text-shadow-gray-500">
+          {/* <strong className="text-dark dark:text-light/90 text-shadow-2xs text-shadow-gray-500 dark:text-shadow-gray-500">
             Back to top
-          </strong>
+          </strong> */}
         </motion.div>
       )}
     </AnimatePresence>
