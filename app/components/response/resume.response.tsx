@@ -5,7 +5,7 @@ import { PORTFOLIO_BASE_URL } from "~/config/env.config";
 export default function ResumeResponse() {
   const downloadPDF = () => {
     const link = document.createElement("a");
-    const fileName = "software-developer.pdf";
+    const fileName = "kenneth-andales.resume.2025.pdf";
 
     link.href = `/resume/${fileName}`;
     link.download = fileName;
@@ -23,7 +23,7 @@ export default function ResumeResponse() {
       <a
         title="Get my resume"
         download
-        href={`${PORTFOLIO_BASE_URL}/resume/software-developer.pdf`}
+        href={`${PORTFOLIO_BASE_URL}/resume/kenneth-andales.resume.2025.pdf`}
         className="mt-2 hidden"
       />
       <p>Thanks for downloading my resume</p>

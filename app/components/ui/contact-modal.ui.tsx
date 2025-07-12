@@ -129,8 +129,9 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
 
                   <LinkUI
                     title="Get my resume"
+                    target="_blank"
                     download
-                    href={`${PORTFOLIO_BASE_URL}/resume/software-developer.pdf`}
+                    href={`${PORTFOLIO_BASE_URL}/resume/kenneth-andales.resume.2025.pdf`}
                     Icon={<ResumeMenuIcon />}
                     className="mt-2 text-light border-light dark:text-dark dark:border-dark text-shadow-lg/30"
                     borderClassName="bg-light dark:bg-dark"
