@@ -92,6 +92,32 @@ export default function FooterLayout({
             ))}
           </ul>
         </div>
+        <div className="space-y-4 mt-10 mb-6">
+          <h4 className="text-base lg:text-xl">Tracking My Coding Progress</h4>
+          <div className="grid flex-wrap gap-4 md:grid-cols-2 justify-center w-fit mx-auto">
+            <a
+              href="https://github.com/ken-027"
+              className="hover:shadow-green-600/20! hover:shadow-2xl transition-shadow-b-colors rounded-md duration-500 w-fit"
+              target="_blank"
+            >
+              <img
+                src="https://github-readme-streak-stats.herokuapp.com/?user=ken-027&"
+                alt="ken-27 github stats"
+              />
+            </a>
+            <a
+              href="https://github.com/ken-027"
+              target="_blank"
+              className="hover:shadow-green-600/20! hover:shadow-2xl transition-shadow-b-colors rounded-md duration-500 w-fit"
+            >
+              <img
+                src="https://github-readme-stats.vercel.app/api?username=ken-027&show_icons=true&locale=en"
+                alt="ken-027"
+              />
+            </a>
+          </div>
+        </div>
+
         <p className="footer-animate lg:text-lg">
           © 2025 Kenneth Andales. Software Developer
         </p>
