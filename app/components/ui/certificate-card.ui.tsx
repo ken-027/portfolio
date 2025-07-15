@@ -30,6 +30,14 @@ export default function CertificateCardUI({
       "hover:shadow-green-600/30! hover:shadow-2xl hover:border-green-600!",
   };
 
+    const bgColor = {
+      ongoing:
+        "hover:bg-blue-300/30! hover:bg-2xl hover:border-blue-600! hover:text-blue-800",
+      plan: "hover:bg-yellow-300/30! hover:bg-2xl hover:border-yellow-600! hover:text-yellow-800",
+      completed:
+        "hover:bg-green-300/30! hover:bg-2xl hover:border-green-600! hover:text-green-800",
+    };
+
   const onMobileColor = {
     ongoing: "shadow-blue-600/30! shadow-2xl border-blue-600!",
     plan: "shadow-yellow-600/30! shadow-2xl border-yellow-600!",
@@ -61,8 +69,8 @@ export default function CertificateCardUI({
         className || ""
       }
         ${shadowColor[status]}
-         ${mobileHover ? onMobileColor[status].replaceAll("hover:", "") : ""}
-              `}
+        ${mobileHover ? onMobileColor[status].replaceAll("hover:", "") : ""}
+      `}
     >
       <div className="flex justify-between">
         <div className="mb-4 px-4 flex-3/4">
@@ -80,7 +88,9 @@ export default function CertificateCardUI({
         <ul className="flex items-center gap-2 flex-wrap text-sm">
           {skills.map((skill, index) => (
             <li
-              className="border border-border dark:border-border-dark px-2 py-1 rounded-md"
+              onTouchStart={toggleTooltip}
+              onTouchEnd={offTooltip}
+              className={`border border-border dark:border-border-dark px-2 py-1 rounded-md duration-500 transition-colors ${bgColor[status]}`}
               key={index}
             >
               {skill}
