@@ -78,8 +78,10 @@ export interface Certificate {
   certificateImage?: string;
   courseLink?: string;
   skills: string[];
-  status: "ongoing" | "plan" | "completed";
+  status: CertificateStatus;
 }
+
+export type CertificateStatus = "ongoing" | "plan" | "completed";
 
 export interface DeveloperPlatform {
   icon: string;
@@ -87,7 +89,7 @@ export interface DeveloperPlatform {
   name: string;
 }
 export interface WhatIDo {
-    title: string;
-    description: string[];
-    image: string;
+  title: string;
+  description: string[];
+  image: string;
 }

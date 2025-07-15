@@ -1,5 +1,5 @@
 import moment from "moment";
-import type { Certificate } from "~/types";
+import type { Certificate, CertificateStatus } from "~/types";
 import RibbonIcon from "../icons/ribbon.icon";
 import CourseIcon from "../icons/course.icon";
 import { useEffect, useState } from "react";
@@ -29,14 +29,6 @@ export default function CertificateCardUI({
     completed:
       "hover:shadow-green-600/30! hover:shadow-2xl hover:border-green-600!",
   };
-
-    const bgColor = {
-      ongoing:
-        "hover:bg-blue-300/30! hover:bg-2xl hover:border-blue-600! hover:text-blue-800",
-      plan: "hover:bg-yellow-300/30! hover:bg-2xl hover:border-yellow-600! hover:text-yellow-800",
-      completed:
-        "hover:bg-green-300/30! hover:bg-2xl hover:border-green-600! hover:text-green-800",
-    };
 
   const onMobileColor = {
     ongoing: "shadow-blue-600/30! shadow-2xl border-blue-600!",
@@ -87,14 +79,7 @@ export default function CertificateCardUI({
         <p className="flex gap-2 font-anton text-lg">Skills</p>
         <ul className="flex items-center gap-2 flex-wrap text-sm">
           {skills.map((skill, index) => (
-            <li
-              onTouchStart={toggleTooltip}
-              onTouchEnd={offTooltip}
-              className={`border border-border dark:border-border-dark px-2 py-1 rounded-md duration-500 transition-colors ${bgColor[status]}`}
-              key={index}
-            >
-              {skill}
-            </li>
+            <SkillItem key={index} skill={skill} status={status} />
           ))}
         </ul>
       </div>
@@ -135,3 +120,53 @@ export default function CertificateCardUI({
     </div>
   );
 }
+
+const SkillItem = ({
+  skill,
+  status,
+}: {
+  skill: string;
+  status: CertificateStatus;
+}) => {
+  const [listMobileHover, setListMobileHover] = useState(false);
+  const { responseSize, width } = useScreenSize();
+
+  const bgColor: Record<CertificateStatus, string> = {
+    ongoing: "hover:bg-blue-300/30! hover:border-blue-600! hover:text-blue-800",
+    plan: "hover:bg-yellow-300/30! hover:border-yellow-600! hover:text-yellow-800",
+    completed:
+      "hover:bg-green-300/30! hover:border-green-600! hover:text-green-800",
+  };
+
+  const onMobileColor = {
+    ongoing: "bg-blue-300/30! border-blue-600! text-blue-800",
+    plan: "bg-yellow-300/30! border-yellow-600! text-yellow-800",
+    completed: "bg-green-300/30! border-green-600! text-green-800",
+  };
+
+  const listToggleTooltip = () => {
+    if (responseSize.lg) return;
+
+    setListMobileHover((prevState) => !prevState);
+  };
+
+  const listOffTooltip = () => {
+    setListMobileHover(false);
+  };
+
+  useEffect(() => {
+    setListMobileHover(false);
+  }, [width]);
+
+  return (
+    <li
+      onTouchStart={listToggleTooltip}
+      onTouchEnd={listOffTooltip}
+      className={`border border-border dark:border-border-dark px-2 py-1 rounded-md duration-500 transition-colors ${
+        bgColor[status]
+      }         ${listMobileHover ? onMobileColor[status] : ""}`}
+    >
+      {skill}
+    </li>
+  );
+};
