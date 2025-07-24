@@ -150,6 +150,12 @@ html {
   background-attachment: fixed;
 }
 
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: var(--dark-bg) !important;
+  transition: transform linear 0.5s;
+  transform: scale(1.8);
+}
+
 input:checked + .slider {
   background-color: var(--light);
 }
@@ -350,6 +356,10 @@ input::after {
 
   .wheel {
     border: 2px solid var(--color-light);
+  }
+
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: var(--color-light) !important;
   }
 }
 
