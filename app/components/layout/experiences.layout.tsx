@@ -4,7 +4,7 @@ import { getDateFormat, getTotalByFormat } from "~/utils/date.utils";
 import CheckIcon from "../icons/check.icon";
 import SectionUI from "../ui/section.ui";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination } from "swiper/modules";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useEffect, useRef, useState } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
@@ -286,16 +286,25 @@ function MobileCard({
   projects: Project[];
   cardIndex: number;
 }) {
+  const desktopEffect = {
+    className: "pb-10!",
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: false,
+    },
+    pagination: true,
+    modules: [EffectCoverflow, Pagination],
+  };
+
   return (
-    <Swiper
-      modules={[Navigation, Pagination]}
-      className="w-full"
-      spaceBetween={50}
-      centeredSlides={true}
-      slidesPerView={"auto"}
-      navigation
-      pagination={{ clickable: true }}
-    >
+    <Swiper {...desktopEffect}>
       {projects?.map(
         (
           {

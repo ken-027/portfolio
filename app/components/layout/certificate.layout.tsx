@@ -10,6 +10,26 @@ import "swiper/css/effect-cards";
 import useAnimateElement from "~/hooks/useAnimateElement";
 import { useRef } from "react";
 import type { Certificate } from "~/types";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination } from "swiper/modules";
+
+const organizeByPlatforms = (
+  certificates: Certificate[]
+): Map<string, Certificate[]> => {
+  const platforms = new Map<string, Certificate[]>();
+
+  for (const certificate of certificates) {
+    const platform = certificate.platform;
+    const existingData = platforms.get(platform) || [];
+    if (platforms.has(platform)) {
+      platforms.set(platform, [...existingData, certificate]);
+      continue;
+    }
+    platforms.set(platform, [...existingData, certificate]);
+  }
+
+  return platforms;
+};
 
 export default function CertificateLayout({
   certificates,
@@ -19,6 +39,30 @@ export default function CertificateLayout({
   const certificateRef = useRef(null);
 
   useAnimateElement("certificate", certificateRef);
+
+  const desktopEffect = {
+    className: "pb-10!",
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 1,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: false,
+    },
+    pagination: true,
+    modules: [EffectCoverflow, Pagination],
+  };
+
+  //   const effect = responseSize.lg ? desktopEffect : mobileEffect;
+  const effect = desktopEffect;
+
+  const platforms = organizeByPlatforms(certificates);
+
+  console.log(platforms.keys());
 
   return (
     <SectionUI ref={certificateRef} id="certificates">
@@ -38,16 +82,30 @@ export default function CertificateLayout({
               wrapperClassName="certificate-animate"
             />
           </div>
-          <div className="grid gap-3 space-y-5 xl:space-y-10 md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-3 lg:gap-5">
-            {certificates
-              .filter(({ status }) => status !== "plan")
-              .map((certificate, index) => (
-                <CertificateCardUI
-                  key={index}
-                  className={`certificate-animate`}
-                  {...certificate}
-                />
-              ))}
+          <div className="flex flex-col gap-4 md:gap-7 lg:gap-16 w-full">
+            {[...platforms.keys()].map((key) => (
+              <div className="lg:w-[40%] md:mx-auto md:w-[70%] space-y-10 w-full">
+                <h3
+                  className={`text-center text-2xl md:text-3xl font-anton dark:text-light/90 lg:text-3xl capitalize certificate-animate`}
+                >
+                  {key}
+                </h3>
+                <Swiper {...effect}>
+                  {/* @ts-ignore */}
+                  {platforms
+                    .get(key)
+                    .filter(({ status }) => status !== "plan")
+                    .map((certificate, index) => (
+                      <SwiperSlide key={index}>
+                        <CertificateCardUI
+                          className={`certificate-animate`}
+                          {...certificate}
+                        />
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
+              </div>
+            ))}
           </div>
         </div>
       </PaddingWrapperUI>

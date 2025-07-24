@@ -48,7 +48,7 @@ export default function ProjectsLayout({
   };
 
   //   const effect = responseSize.lg ? desktopEffect : mobileEffect;
-  const effect = desktopEffect;
+//   const effect = desktopEffect;
 
   return (
     <SectionUI id="portfolios" ref={projectRef}>
@@ -73,7 +73,7 @@ export default function ProjectsLayout({
           return (
             <div
               key={index}
-              className={`flex flex-col gap-4 p-7 md:gap-7 lg:gap-16 project-${index}-animate`}
+              className={`flex flex-col gap-4 md:gap-7 lg:gap-16 project-${index}-animate`}
               ref={projectItemRef}
             >
               <h3
@@ -81,9 +81,9 @@ export default function ProjectsLayout({
               >
                 {category} applications
               </h3>
-              <div className="lg:w-1/2 md:mx-auto md:w-[80%]">
+              <div className="lg:w-1/2 md:mx-auto md:w-[90%]">
                 {/* @ts-ignore */}
-                <Swiper {...effect}>
+                <Swiper {...desktopEffect}>
                   {filterProjects
                     .filter(
                       ({ type: projectType }: Project) =>
