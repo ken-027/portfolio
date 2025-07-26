@@ -21,10 +21,6 @@ const organizeByPlatforms = (
   for (const certificate of certificates) {
     const platform = certificate.platform;
     const existingData = platforms.get(platform) || [];
-    if (platforms.has(platform)) {
-      platforms.set(platform, [...existingData, certificate]);
-      continue;
-    }
     platforms.set(platform, [...existingData, certificate]);
   }
 
