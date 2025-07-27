@@ -34,7 +34,7 @@ export default function BoxUI({
 
   return (
     <div
-      className={`border-[1px] mb-2 bg-light dark:bg-dark border-border transition-shadow-b-colors dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 transition-shadow`}
+      className={`border-[1px] mb-2 bg-light dark:bg-dark-bg border-border transition-shadow-b-colors dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl overflow-hidden dark:border-border-dark rounded-sm min-h-[300px] lg:min-h-[400px] pb-5 transition-shadow`}
     >
       <img
         src={thumbnail || "/section-illustration/project.svg"}
@@ -45,10 +45,10 @@ export default function BoxUI({
       />
       <div className="px-3 space-y-3 md:space-y-6">
         <div className="space-y-2 mt-5">
-          <h3 className="text-xl md:text-2xl xl:text-3xl font-anton dark:text-light/90">
+          <h3 className="text-xl md:text-2xl xl:text-3xl font-anton dark:text-dark-text">
             {title}
           </h3>
-          <p className="text-sm md:text-base font-open-sauce dark:text-light/90 xl:text-lg">
+          <p className="text-sm md:text-base font-open-sauce dark:text-dark-text xl:text-lg">
             {description}
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function BoxUI({
             <p className="text-xs md:text-sm">AI Powered</p>
           </div>
         ) : null}
-        <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-xl lg:px-2">
+        <div className="flex flex-wrap gap-5 font-anton dark:text-dark-text md:text-xl lg:px-2">
           {website ? (
             <Link
               target={isUrl ? "_blank" : "_self"}

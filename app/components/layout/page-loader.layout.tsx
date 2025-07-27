@@ -38,7 +38,7 @@ export default function PageLoaderLayout() {
               height={81}
             />
           ) : null}
-          <p className="text-dark dark:text-light/90">Switching style</p>
+          <p className="text-dark dark:text-dark-text">Switching style</p>
           <div className="mt-2 flex items-center gap-2 lg:gap-3 lg:mt-4">
             <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-yellow-300 border-[1px] border-border rounded-full ball-loading" />
             <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-green-300 animate-100 border-[1px] border-border rounded-full ball-loading" />

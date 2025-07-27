@@ -142,7 +142,7 @@ export default function NavLayout() {
         initial={{ y: "-100%", willChange: "transform" }}
         animate={{ y: "0%", willChange: "transform" }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="fixed top-0 inset-x-0 bg-light dark:bg-dark z-20 text-dark dark:text-light/90 border-b-1  lg:border-0 border-border dark:border-border-dark lg:hidden"
+        className="fixed top-0 inset-x-0 bg-light dark:bg-dark z-20 text-dark dark:text-dark-text border-b-1  lg:border-0 border-border dark:border-border-dark lg:hidden"
       >
         <div className="flex justify-between bg-light dark:bg-dark items-center px-2 z-30">
           <a href="/" onClick={closeNav}>

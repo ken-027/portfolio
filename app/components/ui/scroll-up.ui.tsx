@@ -60,7 +60,7 @@ export default function ScrollUpUI({ body }: ScrollUpUIProps) {
           >
             <ArrowUpIcon />
           </button>
-          {/* <strong className="text-dark dark:text-light/90 text-shadow-2xs text-shadow-gray-500 dark:text-shadow-gray-500">
+          {/* <strong className="text-dark dark:text-dark-text text-shadow-2xs text-shadow-gray-500 dark:text-shadow-gray-500">
             Back to top
           </strong> */}
         </motion.div>

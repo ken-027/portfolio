@@ -58,7 +58,7 @@ export default function ContactModalUI({ show, onClose }: ContactModalUIProps) {
                     <HeaderUI
                       headerTitle="Contact"
                       headerSubtitle="Get in Touch"
-                      className="mb-10! contact-animate"
+                      className="mb-10! contact-animate dark:bg-dark-bg"
                     />
                   }
                   submitStatus={(status, error) => {

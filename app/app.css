@@ -52,15 +52,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --dark: #213448;
+  /* --dark: #363636; */
+  --dark: #121418;
+  --dark-bg: #1f202a;
   --light: #ffffff;
   --secondary: #5271ff;
   --border: #e0e0e0;
   --border-dark: #787878;
   --font-open-sauce: "Open Sauce One", sans-serif;
   --font-anton: "Anton", sans-serif;
-  --dark-bg: #213448;
-  --dark-text: #547792;
+  /* --dark-bg: #213448; */
+  --dark-text: #d6d7e4;
 }
 
 @theme inline {
@@ -76,7 +78,8 @@
   --font-open-sauce: var(--font-open-sauce);
   --font-anton: var(--font-anton);
   --dark-bg: var(--dark-bg);
-  --dark-text: var(--dark-text);
+  --color-dark-text: var(--dark-text);
+  --color-dark-bg: var(--dark-bg);
 }
 
 body {
@@ -360,6 +363,10 @@ input::after {
 
   .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background-color: var(--color-light) !important;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: #ffffff !important;
   }
 }
 

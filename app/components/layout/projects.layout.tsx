@@ -77,7 +77,7 @@ export default function ProjectsLayout({
               ref={projectItemRef}
             >
               <h3
-                className={`text-center text-xl md:text-2xl font-anton dark:text-light/90 lg:text-3xl capitalize project-${index}-animate`}
+                className={`text-center text-xl md:text-2xl font-anton dark:text-dark-text lg:text-3xl capitalize project-${index}-animate`}
               >
                 {category} applications
               </h3>

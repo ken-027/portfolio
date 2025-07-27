@@ -88,7 +88,7 @@ const ExperienceItem = ({
             </div>
             <div className="lg:space-y-1 text-center lg:text-left">
               <h3
-                className={`text-xl md:text-2xl lg:text-3xl font-anton dark:text-light/90 experience-${index}-animate`}
+                className={`text-xl md:text-2xl lg:text-3xl font-anton dark:text-dark-text experience-${index}-animate`}
               >
                 {company}
               </h3>
@@ -104,7 +104,7 @@ const ExperienceItem = ({
             </div>
           </div>
           <div className="dark:border-border-dark mx-4 border-border pt-5 lg:mx-0">
-            <div className="flex flex-col font-open-sauce dark:text-light/90 md:text-lg md:text-center lg:text-left">
+            <div className="flex flex-col font-open-sauce dark:text-dark-text md:text-lg md:text-center lg:text-left">
               <p className={`text-secondary experience-${index}-animate`}>
                 <b>{title}</b>
               </p>
@@ -133,7 +133,7 @@ const ExperienceItem = ({
                     <span className="mt-1">
                       <CheckIcon className="text-secondary" />
                     </span>
-                    <small className="text-sm md:text-base lg:text-lg dark:text-light/90">
+                    <small className="text-sm md:text-base lg:text-lg dark:text-dark-text">
                       {description}
                     </small>
                   </li>
@@ -150,7 +150,7 @@ const ExperienceItem = ({
             speed={responseSize.xl ? 100 : 0}
             className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block"
           >
-            <p className="font-open-sauce md:text-lg dark:text-light/90 lg:text-xl font-bold">
+            <p className="font-open-sauce md:text-lg dark:text-dark-text lg:text-xl font-bold">
               Projects I Worked On
             </p>
             <div className={`mt-4 lg:mt-10 space-y-5`}>
@@ -176,7 +176,7 @@ const ExperienceItem = ({
                       className={`xl:pb-10 experience-${index}-animate`}
                     >
                       <div
-                        className={`border-1 border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 transition-shadow xl:w-[85%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                        className={`border-1 dark:bg-dark-bg border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 transition-shadow xl:w-[85%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
                           _index % 2 === 0 ? "" : "ml-auto"
                         }`}
                       >
@@ -189,7 +189,7 @@ const ExperienceItem = ({
                           width={182}
                           height={99}
                         />
-                        <div className="p-3 dark:text-light/90 font-anton lg:px-4 lg:py-5 lg:space-y-4">
+                        <div className="p-3 dark:text-dark-text font-anton lg:px-4 lg:py-5 lg:space-y-4">
                           <div className="">
                             <p className="lg:text-2xl">{title}</p>
                             <p className="font-open-sauce">{description}</p>
@@ -225,7 +225,7 @@ const ExperienceItem = ({
                             ) : null}
                           </div>
                           {liveDemo || githubRepo || screenshot ? (
-                            <div className="flex flex-wrap gap-5 font-anton dark:text-light/90 md:text-xl lg:px-2">
+                            <div className="flex flex-wrap gap-5 font-anton dark:text-dark-text md:text-xl lg:px-2">
                               {liveDemo ? (
                                 <Link
                                   target={"_blank"}
@@ -343,7 +343,7 @@ function MobileCard({
               <div
                 onTouchStart={toggleTooltip}
                 onTouchEnd={offTooltip}
-                className={`border-1 border-border dark:border-border-dark rounded-sm overflow-hidden transition-shadow-b-colors duration-500 ${
+                className={`border-1 border-border dark:bg-dark-bg dark:border-border-dark rounded-sm overflow-hidden transition-shadow-b-colors duration-500 ${
                   mobileHover
                     ? " shadow-2xl border-dark dark:shadow-light/30 dark:border-border shadow-dark/50"
                     : ""
@@ -356,7 +356,7 @@ function MobileCard({
                   width={182}
                   height={99}
                 />
-                <div className="p-3 dark:text-light/90 font-anton">
+                <div className="p-3 dark:text-dark-text font-anton">
                   <div className="">
                     <p className="lg:text-xl">{title}</p>
                     <p className="font-open-sauce">{description}</p>
@@ -392,7 +392,7 @@ function MobileCard({
                     ) : null}
                   </div>
                   {liveDemo || githubRepo || screenshot ? (
-                    <div className="flex flex-wrap gap-5 mt-2 font-anton dark:text-light/90 md:text-xl lg:px-2">
+                    <div className="flex flex-wrap gap-5 mt-2 font-anton dark:text-dark-text md:text-xl lg:px-2">
                       {liveDemo ? (
                         <Link
                           target={"_blank"}

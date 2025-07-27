@@ -122,7 +122,7 @@ export default function FormContactUI({
   return (
     <>
       <div
-        className={`border-1 bg-light dark:bg-dark border-border dark:border-border-dark rounded-lg p-4 font-open-sauce pb-5 contact-animate ${
+        className={`border-1 bg-light dark:bg-dark-bg border-border dark:border-border-dark rounded-lg p-4 font-open-sauce pb-5 contact-animate ${
           className || ""
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -133,12 +133,12 @@ export default function FormContactUI({
           <TextFieldUI id="subject" label="Subject" />
           <TextFieldUI id="email" label="Email" type="email" />
           <div className="flex flex-col gap-2">
-            <label htmlFor="message" className="dark:text-light/90 lg:text-lg">
+            <label htmlFor="message" className="dark:text-dark-text lg:text-lg">
               Message
             </label>
             <textarea
               placeholder="Type your message here..."
-              className="border-1 border-border lg:placeholder:text-base dark:text-light/90 rounded-sm p-1 px-2 w-full outline-none focus:border-secondary placeholder:italic placeholder:text-sm dark:border-border-dark"
+              className="border-1 border-border lg:placeholder:text-base dark:text-dark-text rounded-sm p-1 px-2 w-full outline-none focus:border-secondary placeholder:italic placeholder:text-sm dark:border-border-dark"
               rows={5}
             ></textarea>
           </div>
@@ -160,7 +160,7 @@ export default function FormContactUI({
         </form>
         <div className="flex justify-center items-center">
           <hr className="text-border w-full dark:text-border-dark block" />
-          <p className="px-5 dark:text-light/90">or</p>
+          <p className="px-5 dark:text-dark-text">or</p>
           <hr className="text-border w-full dark:text-border-dark" />
         </div>
         <div className="flex justify-center items-center gap-6 lg:gap-8 mt-4">
