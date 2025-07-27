@@ -138,7 +138,7 @@ const SkillComponent = ({
           hoverCardColor[proficiency]
         } ${mobileHover ? mobileCardColor[proficiency] : ""}`}
       >
-        <div className="border-1  border-border relative z-0 h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center text-center">
+        <div className="border-1  border-border relative bg-light z-0 h-9 w-9 min-w-9 min-h-9 lg:h-11 lg:w-11 rounded-md grid place-items-center text-center">
           <div className="absolute overflow-hidden inset-0">
             <span
               className={`bg-cyan-400/30! inset-x-0 border-t-[1px] border-cyan-500 ${
