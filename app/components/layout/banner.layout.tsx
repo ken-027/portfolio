@@ -35,10 +35,10 @@ export default function BannerLayout() {
       id="home"
     >
       {/* <ScrollUpUI show={!isInView} /> */}
-      <div className="w-fit rounded-2xl overflow-hidden bg-light dark:bg-transparent lg:ml-auto banner-animate dark:overflow-visible dark:mb-10">
+      <div className="w-fit overflow-hidden bg-light dark:bg-transparent lg:ml-auto banner-animate dark:mb-10 md:rounded-2xl">
         <img
-          className="lg:h-[450px] md:h-[350px] h-[250px] translate-y-5"
-          src={darkMode ? "/section-illustration/banner.svg" : "/images/banner.gif"}
+          className="lg:h-[450px] md:h-[350px] h-[250px] translate-y-5 dark:translate-y-0"
+          src={darkMode ? "/images/banner-dark.gif" : "/images/banner.gif"}
         />
       </div>
 
