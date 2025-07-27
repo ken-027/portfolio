@@ -7,9 +7,11 @@ import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
 import { stagger } from "motion";
+import useDarkMode from "~/hooks/useDarkMode";
 
 export default function BannerLayout() {
   const [scope, animate] = useAnimate();
+  const darkMode = useDarkMode();
 
   //   const isInView = useInView(scope);
 
@@ -33,10 +35,10 @@ export default function BannerLayout() {
       id="home"
     >
       {/* <ScrollUpUI show={!isInView} /> */}
-      <div className="w-fit rounded-2xl overflow-hidden bg-light lg:ml-auto banner-animate">
+      <div className="w-fit rounded-2xl overflow-hidden bg-light dark:bg-transparent lg:ml-auto banner-animate dark:overflow-visible dark:mb-10">
         <img
           className="lg:h-[450px] md:h-[350px] h-[250px] translate-y-5"
-          src="/images/banner.gif"
+          src={darkMode ? "/section-illustration/banner.svg" : "/images/banner.gif"}
         />
       </div>
 
@@ -55,7 +57,7 @@ export default function BannerLayout() {
             I'm Kenneth Andales
           </span>
 
-          <span className="text-xl md:mt-1 md:text-2xl lg:text-3xl font-bold dark:text-light/90 xl:mt-2">
+          <span className="text-xl md:mt-1 md:text-2xl lg:text-3xl font-bold dark:text-dark-text xl:mt-2">
             <TypeAnimation
               sequence={[
                 "Software Developer",
@@ -75,7 +77,7 @@ export default function BannerLayout() {
             />
           </span>
         </p>
-        <p className="font-open-sauce dark:text-light/90 banner-animate md:text-lg lg:text-xl">
+        <p className="font-open-sauce dark:text-dark-text banner-animate md:text-lg lg:text-xl">
           Over 3 years of experience delivering full-stack web systems in
           cooperative banking, e-commerce, and government projects. Known for
           reliable delivery, clean code, and collaborative teamwork. I help

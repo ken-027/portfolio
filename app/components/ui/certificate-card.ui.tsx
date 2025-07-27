@@ -57,7 +57,7 @@ export default function CertificateCardUI({
     <div
       onTouchStart={toggleTooltip}
       onTouchEnd={offTooltip}
-      className={`border-[1px] dark:text-light/90 h-fit  py-4 lg:pt-6 min-h-[450px] duration-500 transition-shadow-b-colors bg-light dark:bg-dark border-border dark:border-border-dark rounded-md ${
+      className={`border-[1px] dark:text-dark-text h-fit dark:bg-dark-bg py-4 lg:pt-6 min-h-[450px] duration-500 transition-shadow-b-colors bg-light border-border dark:border-border-dark rounded-md ${
         className || ""
       }
         ${shadowColor[status]}

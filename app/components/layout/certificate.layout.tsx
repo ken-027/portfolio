@@ -82,7 +82,7 @@ export default function CertificateLayout({
             {[...platforms.keys()].map((key) => (
               <div className="lg:w-[40%] md:mx-auto md:w-[70%] space-y-10 w-full">
                 <h3
-                  className={`text-center text-2xl md:text-3xl font-anton dark:text-light/90 lg:text-3xl capitalize certificate-animate`}
+                  className={`text-center text-2xl md:text-3xl font-anton dark:text-dark-text lg:text-3xl capitalize certificate-animate`}
                 >
                   {key}
                 </h3>

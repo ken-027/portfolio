@@ -54,7 +54,7 @@ const SkillWrapper = ({
       className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center w-full`}
     >
       <h3
-        className={`font-anton text-lg md:text-xl dark:text-light/90 skill-animate lg:text-2xl`}
+        className={`font-anton text-lg md:text-xl dark:text-dark-text skill-animate lg:text-2xl`}
       >
         {name}
       </h3>
@@ -129,12 +129,12 @@ const SkillComponent = ({
     <div
       onTouchStart={toggleTooltip}
       onTouchEnd={offTooltip}
-      className={`font-open-sauce group text-sm md:text-base xl:text-lg dark:text-light/90 flex  items-center gap-2 skill-animate border rounded-md border-border dark:border-dark hover:border-transparent duration-300 transition-colors ${
+      className={`font-open-sauce group text-sm md:text-base xl:text-lg dark:text-dark-text flex  items-center gap-2 skill-animate border rounded-md border-border dark:border-border-dark hover:border-transparent duration-300 transition-colors ${
         mobileHover ? "border-transparent! dark:border-transparent!" : ""
       }`}
     >
       <div
-        className={`border-2 border-transparent w-full grid place-items-center transition-shadow-b-colors p-3 pt-2 rounded-md space-y-2 bg-light ${
+        className={`border-2 border-transparent w-full grid place-items-center transition-shadow-b-colors p-3 pt-2 rounded-md space-y-2 bg-light dark:bg-dark-bg ${
           hoverCardColor[proficiency]
         } ${mobileHover ? mobileCardColor[proficiency] : ""}`}
       >
@@ -160,7 +160,7 @@ const SkillComponent = ({
             }}
           />
         </div>
-        <p className="font-anton text-dark">{name}</p>
+        <p className="font-anton text-dark dark:text-light">{name}</p>
         <small className={`${proficiencyColor[proficiency]}`}>
           {proficiency}
         </small>

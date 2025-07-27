@@ -239,7 +239,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                 x: "50%",
               }}
               transition={{ type: "tween" }}
-              className="border-1 rounded-md fixed inset-0 dark:bg-dark dark:border-border-dark lg:inset-[unset] lg:right-10 lg:bottom-24 z-40 border-border mx-auto min-h-[500px] lg:min-h-[600px] w-full lg:w-[550px] flex flex-col justify-center overflow-hidden shadow-lg bg-light"
+              className="border-1 rounded-md fixed inset-0 dark:bg-dark-bg dark:border-border-dark lg:inset-[unset] lg:right-10 lg:bottom-24 z-40 border-border mx-auto min-h-[500px] lg:min-h-[600px] w-full lg:w-[550px] flex flex-col justify-center overflow-hidden shadow-lg bg-light"
             >
               <form
                 className="flex-1 relative"
@@ -267,7 +267,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                 </div>
                 <div
                   ref={historyRef}
-                  className="max-h-[85vh] dark:bg-dark lg:max-h-[500px] px-2 overflow-y-auto space-y-3 message-history pt-4 pb-10"
+                  className="max-h-[85vh] dark:bg-dark-bg lg:max-h-[500px] px-2 overflow-y-auto space-y-3 message-history pt-4 pb-10"
                 >
                   {messages.map((message, index) => (
                     <Fragment key={index}>
@@ -286,7 +286,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                     <ReplyCard replyHistory={reply.replaceAll("*", "")} />
                   ) : null}
                 </div>
-                <div className="flex border-t-[1px] border-border dark:border-border-dark px-4 dark:bg-dark py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
+                <div className="flex border-t-[1px] border-border dark:border-border-dark px-4 dark:bg-dark-bg py-4 absolute bottom-0 inset-x-0 bg-light rounded-r-xl rounded-l-xl">
                   <AnimatePresence>
                     {agentMenu ? (
                       <motion.ul
@@ -381,7 +381,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
                       onChange={onChange}
                       value={currentMessage}
                       onDoubleClick={onDoubleClick}
-                      className="w-full outline-none placeholder:italic group border-[1px] border-border dark:border-border-dark pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark dark:focus:border-light/90 dark:bg-dark dark:text-light/90"
+                      className="w-full outline-none placeholder:italic group border-[1px] border-border dark:border-border-dark pr-10 py-2 px-2 rounded-md transition-colors duration-500 focus:border-dark dark:focus:border-light/90 dark:bg-dark-bg dark:text-dark-text"
                     />
                     <button
                       className="cursor-pointer w-fit bottom-3 group outline-none absolute right-3"
@@ -417,7 +417,7 @@ export default function ChatBotLayout({ onClose }: { onClose?: () => void }) {
               onClick={toggleChat}
             >
               {show ? (
-                <CloseIcon className="transition-colors h-12 w-12 lg:h-16 lg:w-16 scale-50 group-hover:text-yellow-300 text-dark dark:text-light/90" />
+                <CloseIcon className="transition-colors h-12 w-12 lg:h-16 lg:w-16 scale-50 group-hover:text-yellow-300 text-dark dark:text-dark-text" />
               ) : (
                 <img
                   alt="chatbot"

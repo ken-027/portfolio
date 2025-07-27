@@ -1,7 +1,7 @@
 {
     "name": "personal-site",
     "private": true,
-    "version": "1.0.1",
+    "version": "1.0.5",
     "type": "module",
     "scripts": {
         "build": "react-router build",
@@ -40,5 +40,8 @@
         "typescript": "^5.8.3",
         "vite": "^7.0.3",
         "vite-tsconfig-paths": "^5.1.4"
+    },
+    "volta": {
+        "node": "22.17.1"
     }
 }
