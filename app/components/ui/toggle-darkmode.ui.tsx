@@ -25,7 +25,7 @@ export default function ToggleDarkModeUI() {
       <div className="flex items-center overflow-hidden rounded-md">
         <button
           title={"toggle light mode"}
-          className={`cursor-pointer bg-dark text-light border-1 dark:border-light/90 rounded-l-md border-r-0 border-dark duration-500 flex gap-2 text-sm items-center outline-none font-open-sauce py-1 pl-2 pr-1 `}
+          className={`cursor-pointer bg-dark-bg text-light border-1 dark:border-light/90 rounded-l-md border-r-0 border-dark duration-500 flex gap-2 text-sm items-center outline-none font-open-sauce py-1 pl-2 pr-1 `}
           onClick={() => onToggle("light")}
         >
           <LightIcon
