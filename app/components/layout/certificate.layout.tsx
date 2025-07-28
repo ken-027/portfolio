@@ -58,8 +58,6 @@ export default function CertificateLayout({
 
   const platforms = organizeByPlatforms(certificates);
 
-  console.log(platforms.keys());
-
   return (
     <SectionUI ref={certificateRef} id="certificates">
       <HeaderUI
@@ -80,7 +78,7 @@ export default function CertificateLayout({
           </div>
           <div className="flex flex-col gap-4 md:gap-7 lg:gap-16 w-full">
             {[...platforms.keys()].map((key) => (
-              <div className="lg:w-[40%] md:mx-auto md:w-[70%] space-y-10 w-full">
+              <div className="lg:w-[40%] md:mx-auto md:w-[70%] space-y-10 w-full" key={key}>
                 <h3
                   className={`text-center text-2xl md:text-3xl font-anton dark:text-dark-text lg:text-3xl capitalize certificate-animate`}
                 >

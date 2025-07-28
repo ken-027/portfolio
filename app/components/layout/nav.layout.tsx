@@ -97,7 +97,7 @@ export default function NavLayout() {
       <div className="hidden absolute top-2 right-2 lg:block scale-[80%]">
         <ToggleDarkModeUI />
       </div>
-      <motion.nav className="hidden lg:flex bg-light dark:bg-dark flex-col fixed justify-between inset-y-0 left-0 items-center z-20 pb-10">
+      <motion.nav className="hidden lg:flex bg-light lg:dark:bg-dark dark:bg-dark-bg flex-col fixed justify-between inset-y-0 left-0 items-center z-20 pb-10">
         <a href="/">
           <motion.img
             animate={{
@@ -142,9 +142,9 @@ export default function NavLayout() {
         initial={{ y: "-100%", willChange: "transform" }}
         animate={{ y: "0%", willChange: "transform" }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="fixed top-0 inset-x-0 bg-light dark:bg-dark z-20 text-dark dark:text-dark-text border-b-1  lg:border-0 border-border dark:border-border-dark lg:hidden"
+        className="fixed top-0 inset-x-0 bg-light dark:bg-dark-bg z-20 text-dark dark:text-dark-text border-b-1  lg:border-0 border-border dark:border-border-dark lg:hidden"
       >
-        <div className="flex justify-between bg-light dark:bg-dark items-center px-2 z-30">
+        <div className="flex justify-between bg-light dark:bg-dark-bg items-center px-2 z-30">
           <a href="/" onClick={closeNav}>
             <img
               src={
@@ -172,7 +172,7 @@ export default function NavLayout() {
               initial={{ transform: "translateY(-100%)" }}
               exit={{ transform: "translateY(-100%)" }}
               transition={{ type: "keyframes", ease: "easeInOut" }}
-              className="bg-light dark:bg-dark dark:border-border-dark border-b-1 border-border class p-5 absolute inset-x-0 top-0 pt-20 -z-10 lg:hidden"
+              className="bg-light dark:bg-dark-bg dark:border-border-dark border-b-1 border-border class p-5 absolute inset-x-0 top-0 pt-20 -z-10 lg:hidden"
             >
               <ul
                 className="flex flex-col gap-2 font-anton pb-2 md:text-lg"

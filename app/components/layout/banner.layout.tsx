@@ -7,12 +7,10 @@ import HandIcon from "../icons/hand.icon";
 import ScrollDownUI from "../ui/scroll-down.ui";
 import LinkUI from "../ui/link.ui";
 import { stagger } from "motion";
-import useDarkMode from "~/hooks/useDarkMode";
+import FrameSVG from "../svg/frame.svg";
 
 export default function BannerLayout() {
   const [scope, animate] = useAnimate();
-  const darkMode = useDarkMode();
-
   //   const isInView = useInView(scope);
 
   const initialEffect = () => {
@@ -31,14 +29,17 @@ export default function BannerLayout() {
   return (
     <header
       ref={scope}
-      className="text-center text-dark dark:bg-dark pt-10 flex flex-col justify-center gap-2 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
+      className="text-center text-dark dark:bg-dark flex flex-col gap-2 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
       id="home"
     >
-      {/* <ScrollUpUI show={!isInView} /> */}
-      <div className="w-fit overflow-hidden bg-light dark:bg-transparent lg:ml-auto banner-animate dark:mb-10 md:rounded-2xl">
+      <div className="w-fit overflow-hidden relative bg-light dark:bg-transparent lg:ml-auto banner-animate mt-[60px] mb-4">
+        <FrameSVG
+          className="w-full absolute inset-0 text-light dark:text-dark h-full scale-105"
+          borderClassName="fill-border-dark"
+        />
         <img
-          className="lg:h-[450px] md:h-[350px] h-[250px] translate-y-5 dark:translate-y-0"
-          src={darkMode ? "/images/banner-dark.gif" : "/images/banner.gif"}
+          className="lg:h-[450px] w-full"
+          src="/images/banner-dark.gif"
         />
       </div>
 
