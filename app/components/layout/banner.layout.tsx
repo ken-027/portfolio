@@ -38,7 +38,7 @@ export default function BannerLayout() {
           borderClassName="fill-border-dark"
         />
         <img
-          className="lg:h-[450px] w-full"
+          className="w-full h-full"
           src="/images/banner-dark.gif"
         />
       </div>
