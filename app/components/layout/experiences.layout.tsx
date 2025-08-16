@@ -155,113 +155,121 @@ const ExperienceItem = ({
             </p>
             <div className={`mt-4 lg:mt-10 space-y-5`}>
               <div className="w-full md:grid md:grid-cols-2 md:gap-5 justify-center lg:gap-10 xl:block">
-                {projects?.map(
-                  (
-                    {
-                      thumbnailLink,
-                      title,
-                      technologies,
-                      description,
-                      liveDemo,
-                      screenshot,
-                      githubRepo,
-                      category,
-                      aiPowered,
-                      projectRole,
-                    },
-                    _index
-                  ) => (
-                    <div
-                      key={_index}
-                      className={`xl:pb-10 experience-${index}-animate`}
-                    >
+                {projects.length ? (
+                  projects?.map(
+                    (
+                      {
+                        thumbnailLink,
+                        title,
+                        technologies,
+                        description,
+                        liveDemo,
+                        screenshot,
+                        githubRepo,
+                        category,
+                        aiPowered,
+                        projectRole,
+                      },
+                      _index
+                    ) => (
                       <div
-                        className={`border-1 dark:bg-dark-bg border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 transition-shadow xl:w-[85%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
-                          _index % 2 === 0 ? "" : "ml-auto"
-                        }`}
+                        key={_index}
+                        className={`xl:pb-10 experience-${index}-animate`}
                       >
-                        <img
-                          className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] lg:h-[250px] md:h-[180px] bg-cover object-center aspect-ratio[16/9]"
-                          src={
-                            thumbnailLink || "/section-illustration/project.svg"
-                          }
-                          alt={title.toLowerCase()}
-                          width={182}
-                          height={99}
-                        />
-                        <div className="p-3 dark:text-dark-text font-anton lg:px-4 lg:py-5 lg:space-y-4">
-                          <div className="">
-                            <p className="lg:text-2xl">{title}</p>
-                            <p className="font-open-sauce">{description}</p>
-                          </div>
-                          <div className="flex flex-wrap gap-1 md:gap-2 mt-2 lg:gap-3">
-                            {technologies.map(({ icon, name }, __index) => (
-                              <div
-                                key={__index}
-                                title={name}
-                                className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
-                              >
-                                <img
-                                  alt={name}
-                                  src={icon}
-                                  className="scale-75 md:scale-100"
-                                />
+                        <div
+                          className={`border-1 dark:bg-dark-bg border-border transition-shadow-b-colors hover:shadow-2xl hover:border-dark dark:hover:shadow-light/30 dark:hover:border-border hover:shadow-dark/50 transition-shadow xl:w-[85%] md:w-[100%] dark:border-border-dark rounded-sm overflow-hidden ${
+                            _index % 2 === 0 ? "" : "ml-auto"
+                          }`}
+                        >
+                          <img
+                            className="w-full border-b border-border overflow-hidden bg-light dark:border-border-dark h-[200px] lg:h-[250px] md:h-[180px] bg-cover object-center aspect-ratio[16/9]"
+                            src={
+                              thumbnailLink ||
+                              "/section-illustration/project.svg"
+                            }
+                            alt={title.toLowerCase()}
+                            width={182}
+                            height={99}
+                          />
+                          <div className="p-3 dark:text-dark-text font-anton lg:px-4 lg:py-5 lg:space-y-4">
+                            <div className="">
+                              <p className="lg:text-2xl">{title}</p>
+                              <p className="font-open-sauce">{description}</p>
+                            </div>
+                            <div className="flex flex-wrap gap-1 md:gap-2 mt-2 lg:gap-3">
+                              {technologies.map(({ icon, name }, __index) => (
+                                <div
+                                  key={__index}
+                                  title={name}
+                                  className={`border-1 dark:bg-light dark:border-0 border-border dark:border-border-dark h-7 w-7 md:h-10 md:w-10 rounded-md flex justify-center items-center experience-${index}-animate`}
+                                >
+                                  <img
+                                    alt={name}
+                                    src={icon}
+                                    className="scale-75 md:scale-100"
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            <div className="flex flex-col gap-1.5 my-2 font-open-sauce text-sm">
+                              <div>
+                                <p className="font-bold">Type</p>
+                                <p className="capitalize">{category}</p>
                               </div>
-                            ))}
-                          </div>
-                          <div className="flex flex-col gap-1.5 my-2 font-open-sauce text-sm">
-                            <div>
-                              <p className="font-bold">Type</p>
-                              <p className="capitalize">{category}</p>
+                              <div>
+                                <p className="font-bold">Role</p>
+                                <p className="capitalize">{projectRole}</p>
+                              </div>
+                              {aiPowered ? (
+                                <div className="bg-red-800 text-light font-bold px-3 py-1.5 rounded-md capitalize w-fit">
+                                  AI Powered
+                                </div>
+                              ) : null}
                             </div>
-                            <div>
-                              <p className="font-bold">Role</p>
-                              <p className="capitalize">{projectRole}</p>
-                            </div>
-                            {aiPowered ? (
-                              <div className="bg-red-800 text-light font-bold px-3 py-1.5 rounded-md capitalize w-fit">
-                                AI Powered
+                            {liveDemo || githubRepo || screenshot ? (
+                              <div className="flex flex-wrap gap-5 font-anton dark:text-dark-text md:text-xl lg:px-2">
+                                {liveDemo ? (
+                                  <Link
+                                    target={"_blank"}
+                                    to={liveDemo}
+                                    className="flex items-center gap-2 lg:gap-4"
+                                  >
+                                    <ViewIcon className="scale-125 lg:scale-200" />
+                                    Demo
+                                  </Link>
+                                ) : null}
+                                {githubRepo ? (
+                                  <Link
+                                    target="_blank"
+                                    to={githubRepo}
+                                    className="flex items-center gap-2 lg:gap-4"
+                                  >
+                                    <RepoIcon className="scale-125 lg:scale-200" />{" "}
+                                    Code
+                                  </Link>
+                                ) : null}
+                                {screenshot ? (
+                                  <Link
+                                    target="_blank"
+                                    to={screenshot}
+                                    className="flex items-center gap-2 lg:gap-4"
+                                  >
+                                    <DownloadImageIcon className="scale-125 lg:scale-200" />
+                                    Screenshots
+                                  </Link>
+                                ) : null}
                               </div>
                             ) : null}
                           </div>
-                          {liveDemo || githubRepo || screenshot ? (
-                            <div className="flex flex-wrap gap-5 font-anton dark:text-dark-text md:text-xl lg:px-2">
-                              {liveDemo ? (
-                                <Link
-                                  target={"_blank"}
-                                  to={liveDemo}
-                                  className="flex items-center gap-2 lg:gap-4"
-                                >
-                                  <ViewIcon className="scale-125 lg:scale-200" />
-                                  Demo
-                                </Link>
-                              ) : null}
-                              {githubRepo ? (
-                                <Link
-                                  target="_blank"
-                                  to={githubRepo}
-                                  className="flex items-center gap-2 lg:gap-4"
-                                >
-                                  <RepoIcon className="scale-125 lg:scale-200" />{" "}
-                                  Code
-                                </Link>
-                              ) : null}
-                              {screenshot ? (
-                                <Link
-                                  target="_blank"
-                                  to={screenshot}
-                                  className="flex items-center gap-2 lg:gap-4"
-                                >
-                                  <DownloadImageIcon className="scale-125 lg:scale-200" />
-                                  Screenshots
-                                </Link>
-                              ) : null}
-                            </div>
-                          ) : null}
                         </div>
                       </div>
-                    </div>
+                    )
                   )
+                ) : (
+                  <div>
+                    <img src="/section-illustration/project.svg" />
+                    <h4 className="text-lg">No Projects is shown</h4>
+                  </div>
                 )}
               </div>
             </div>
@@ -270,7 +278,14 @@ const ExperienceItem = ({
           <div className="mt-5 lg:mt-0 lg:flex-1 lg:hidden">
             <p className="font-open-sauce md:text-lg">Projects I Worked On</p>
             <div className={`mt-4 space-y-5 experience-${index}-animate`}>
-              <MobileCard projects={projects} cardIndex={index} />
+              {projects.length ? (
+                <MobileCard projects={projects} cardIndex={index} />
+              ) : (
+                <div>
+                  <img src="/section-illustration/project.svg" />
+                  <h4 className="text-sm text-center">No Projects is shown</h4>
+                </div>
+              )}
             </div>
           </div>
         )
