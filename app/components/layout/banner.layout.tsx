@@ -67,7 +67,7 @@ export default function BannerLayout() {
                 1500,
                 "Backend Developer",
                 1500,
-                "Fullstack Developer",
+                "Full Stack Developer",
                 1500,
                 "AI Engineer",
                 1500,

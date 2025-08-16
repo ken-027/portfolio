@@ -36,7 +36,7 @@ export default function CardUI({
     <div
       onTouchStart={toggleTooltip}
       onTouchEnd={offTooltip}
-      className={`overflow-hidden transition-shadow-b-colors dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl items-center flex flex-col border-[1px] text-center border-border dark:border-border-dark rounded-md w-full ${
+      className={`overflow-hidden transition-shadow-b-colors dark:bg-dark-bg dark:hover:shadow-light/30 dark:hover:border-border duration-500 hover:shadow-dark/50 hover:border-dark hover:shadow-2xl items-center flex flex-col border-[1px] text-center border-border dark:border-border-dark rounded-md w-full ${
         className || ""
       }
         ${
