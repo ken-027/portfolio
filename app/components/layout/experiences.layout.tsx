@@ -180,7 +180,7 @@ const ExperienceItem = ({
           >
             <p
               className={`font-open-sauce md:text-lg dark:text-dark-text lg:text-xl text-center font-bold ${
-                !even ? "lg:text-right" : ""
+                !even ? "lg:text-right" : "lg:text-left"
               }`}
             >
               Projects I Worked On

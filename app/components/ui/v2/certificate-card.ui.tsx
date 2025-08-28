@@ -1,6 +1,6 @@
 import type { Certificate } from "~/types";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RibbonIcon from "~/components/icons/ribbon.icon";
 import moment from "moment";
 
@@ -15,6 +15,7 @@ export default function CertificateCardUI({
   Certificate,
   "name" | "certificateLink" | "dateCompleted" | "certificateImage" | "platform"
 > & { className?: string }) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
   const [hover, setHover] = useState<boolean>(false);
   const cardVariants = {
@@ -55,18 +56,33 @@ export default function CertificateCardUI({
     setHover(false);
   };
 
+  const onOutsideClick = () => {
+    if (!hover) return;
+
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setHover(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
+  };
+
+  useEffect(onOutsideClick, [hover]);
+
   return (
     <motion.div
       layout
       variants={cardVariants}
-      className={`space-y-4 group ${className || ""}`}
+      className={`space-y-4 group z-0 ${className || ""}`}
     >
       <div
         // onTouchStart={onHover}
         onClick={onHover}
         onMouseEnter={onHover}
-        onTouchEnd={onHoverOut}
         onMouseLeave={onHoverOut}
+        ref={cardRef}
         className={`relative border aspect-5/4 border-border transition-shadow duration-500 rounded-xl overflow-hidden z-10 ${
           hover ? "shadow-2xl" : ""
         }`}

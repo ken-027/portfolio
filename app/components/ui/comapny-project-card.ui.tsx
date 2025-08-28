@@ -4,7 +4,7 @@ import RepoIcon from "../icons/repo.icon";
 import DockerLinkIcon from "../icons/docker-link.icon";
 import DownloadImageIcon from "../icons/download-image.icon";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CompanyProjectCardUI({
   thumbnailLink,
@@ -19,6 +19,7 @@ export default function CompanyProjectCardUI({
   projectRole,
   category,
 }: Project & { className?: string }) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const [keyInc, setKeyInc] = useState<number>(0);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [hover, setHover] = useState<boolean>(false);
@@ -73,20 +74,33 @@ export default function CompanyProjectCardUI({
     setKeyInc((prev) => prev + 1);
   };
 
+  const onOutsideClick = () => {
+    if (!hover) return;
+
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setHover(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
+  };
+
   useEffect(hoverChange, [hover]);
+  useEffect(onOutsideClick, [hover]);
 
   return (
     <motion.div
       layout
       variants={cardVariants}
-      className={`space-y-4 group ${className || ""}`}
+      className={`space-y-4 group z-0 ${className || ""}`}
     >
       <div
-        // onTouchStart={onHover}
         onClick={onHover}
         onMouseEnter={onHover}
-        onTouchEnd={onHoverOut}
         onMouseLeave={onHoverOut}
+        ref={cardRef}
         className={`relative border aspect-5/4 border-border transition-shadow duration-500 rounded-xl overflow-hidden z-10 ${
           hover ? "shadow-2xl" : ""
         }`}
