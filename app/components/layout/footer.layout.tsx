@@ -122,7 +122,7 @@ export default function FooterLayout({
           © 2025 Kenneth Andales. Software Developer
         </p>
         <small className="text-dark/50 dark:text-light/50 footer-animate lg:text-base">
-          Built with Tailwind and React JS
+          Built with Tailwind, React and Express JS
         </small>
       </PaddingWrapperUI>
     </footer>

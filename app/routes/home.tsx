@@ -31,11 +31,8 @@ import type {
   Project,
   Service,
   Skill,
-  WhatIDo,
 } from "~/types";
 import { storeChat } from "~/api/chat-stream.api";
-import AboutMeLayout from "~/components/layout/about-me.layout";
-import WhatIDoLayout from "~/components/layout/what-i-do.layout";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -53,11 +50,9 @@ export default function Home() {
   const [experiences, setExperiences] = useState<Experience[]>();
   const [platforms, setPlatforms] = useState<DeveloperPlatform[]>();
   const [services, setServices] = useState<Service[]>();
-  const [whatIDo, setWhatIDo] = useState<WhatIDo[]>();
   const [certificates, setCertificates] = useState<Certificate[]>();
   const [skills, setSkills] = useState<Skill[]>();
   const [projects, setProjects] = useState<Project[]>();
-  const [aboutMe, setAboutMe] = useState<string[]>();
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
@@ -88,8 +83,6 @@ export default function Home() {
       setSkills(_skills);
       setProjects(_projects);
       setPlatforms(_platforms);
-      setAboutMe(_aboutMe);
-      setWhatIDo(_whatIDo);
     } catch (err) {
       console.error(err);
     } finally {
@@ -121,9 +114,7 @@ export default function Home() {
                 experiences &&
                 projects &&
                 certificates &&
-                platforms &&
-                aboutMe &&
-                whatIDo
+                platforms
               ) ? (
                 <div className="grid justify-center py-6 lg:py-10">
                   <div className="mt-2 flex items-center gap-2 lg:gap-3 lg:mt-4 justify-center">
@@ -134,11 +125,9 @@ export default function Home() {
                 </div>
               ) : (
                 <>
-                  <AboutMeLayout aboutMe={aboutMe} />
                   <SkillsLayout skills={skills || []} />
-                  <WhatIDoLayout whatIDo={whatIDo || []} />
-                  <ProjectsLayout projects={projects || []} />
                   <ExperiencesLayout experiences={experiences || []} />
+                  <ProjectsLayout projects={projects || []} />
                   <CertificateLayout certificates={certificates || []} />
                   <ContactLayout />
                   <FooterLayout platforms={platforms || []} />
