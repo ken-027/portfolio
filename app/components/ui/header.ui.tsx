@@ -16,8 +16,8 @@ export default function HeaderUI({
       }`}
       {...props}
     >
-      <h2 className="text-2xl md:text-2xl lg:text-4xl lg:mb-4 text-secondary font-anton">{headerTitle}</h2>
-      <small className="font-open-sauce px-4 lg:px-0 dark:text-dark-text lg:text-xl">
+      <h2 className="text-2xl md:text-xl lg:text-3xl lg:mb-4 text-secondary font-anton">{headerTitle}</h2>
+      <small className="font-open-sauce px-4 lg:px-0 dark:text-dark-text lg:text-base">
         {headerSubtitle}
       </small>
     </div>

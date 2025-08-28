@@ -1,17 +1,15 @@
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
-import ImageUI from "../ui/image.ui";
-import CertificateCardUI from "../ui/certificate-card.ui";
 
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/effect-cards";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Certificate } from "~/types";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { AnimatePresence, motion } from "motion/react";
+import CertificateCardUI from "../ui/v2/certificate-card.ui";
 
 const organizeByPlatforms = (
   certificates: Certificate[]
@@ -28,35 +26,61 @@ const organizeByPlatforms = (
 };
 
 export default function CertificateLayout({
-  certificates,
+  certificates: _certificates,
 }: {
   certificates: Certificate[];
 }) {
+  const completedCertificates = _certificates.filter(
+    ({ status }) => status === "completed"
+  );
+  const [filter, setFilter] = useState<string>("All");
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const containerVariants = {
+    animate: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
   const certificateRef = useRef(null);
 
   useAnimateElement("certificate", certificateRef);
 
-  const desktopEffect = {
-    className: "pb-10!",
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 1,
-    coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: false,
-    },
-    pagination: true,
-    modules: [EffectCoverflow, Pagination],
-  };
+  const FilterButton = ({ value }: { value: string }) => (
+    <button
+      onClick={() => setFilter(value)}
+      className={`px-3 py-1 border transition-colors duration-500 flex gap-1 items-center text-sm cursor-pointer rounded-md ${
+        value === filter
+          ? "bg-secondary text-light border-blue-600 hover:bg-secondary/90"
+          : "border-border bg-white text-dark hover:bg-gray-200"
+      }`}
+    >
+      {value}
+    </button>
+  );
 
   //   const effect = responseSize.lg ? desktopEffect : mobileEffect;
-  const effect = desktopEffect;
 
-  const platforms = organizeByPlatforms(certificates);
+  const platforms = organizeByPlatforms(completedCertificates);
+
+  const initialLoaded = () => {
+    setCertificates(completedCertificates);
+    setFilter("Udemy");
+  };
+  const onFilter = () => {
+    if (filter !== "All") {
+      setCertificates(
+        completedCertificates.filter(({ platform }) => platform === filter)
+      );
+    } else {
+      setCertificates(completedCertificates);
+    }
+  };
+
+  useEffect(initialLoaded, []);
+  useEffect(onFilter, [filter]);
+
+  console.log(platforms);
 
   return (
     <SectionUI ref={certificateRef} id="certificates">
@@ -65,43 +89,26 @@ export default function CertificateLayout({
         headerSubtitle="Verified Achievements & Professional Milestones"
         className="certificate-animate"
       />
-      <PaddingWrapperUI className="min-h-[100vh] text-dark lg:min-h-fit!">
-        <div className="flex flex-col items-center justify-center gap-10 lg:gap-20">
-          <div className="xl:self-start w-1/2 max-w-[400px] mx-auto">
-            <ImageUI
-              src="/section-illustration/certificates.svg"
-              alt="service illustration"
-              width={500}
-              height={336}
-              wrapperClassName="certificate-animate"
-            />
-          </div>
-          <div className="flex flex-col gap-4 md:gap-7 lg:gap-16 w-full">
-            {[...platforms.keys()].map((key) => (
-              <div className="lg:w-[40%] md:mx-auto md:w-[70%] space-y-10 w-full" key={key}>
-                <h3
-                  className={`text-center text-2xl md:text-3xl font-anton dark:text-dark-text lg:text-3xl capitalize certificate-animate`}
-                >
-                  {key}
-                </h3>
-                <Swiper {...effect}>
-                  {/* @ts-ignore */}
-                  {platforms
-                    .get(key)
-                    .filter(({ status }) => status !== "plan")
-                    .map((certificate, index) => (
-                      <SwiperSlide key={index}>
-                        <CertificateCardUI
-                          className={`certificate-animate`}
-                          {...certificate}
-                        />
-                      </SwiperSlide>
-                    ))}
-                </Swiper>
-              </div>
-            ))}
-          </div>
+      <PaddingWrapperUI className="max-w-screen-2xl! space-y-6">
+        <div className="flex gap-2 flex-wrap justify-center items-center">
+          {["All", ...platforms.keys()].map((platform, index) => (
+            <FilterButton key={index} value={platform} />
+          ))}
         </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={filter}
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6"
+            variants={containerVariants}
+            initial="initial"
+            animate="animate"
+          >
+            {certificates.map((certificate, index) => {
+              return <CertificateCardUI key={index} {...certificate} />;
+            })}
+          </motion.div>
+        </AnimatePresence>
       </PaddingWrapperUI>
     </SectionUI>
   );
