@@ -67,6 +67,10 @@ const ExperienceItem = ({
 
   useAnimateElement(`experience-${index}`, experienceItemRef);
   const { responseSize } = useScreenSize();
+  const parallaxSpeedDetails = responseSize.xl
+    ? -20 - (projects?.length || 1) * 4
+    : 0;
+  const parallaxSpeedItem = responseSize.xl ? 5 * (projects?.length || 1) : 0;
 
   return (
     <div
@@ -75,7 +79,7 @@ const ExperienceItem = ({
       className={`xl:flex xl:gap-10 xl:grid-cols-2 justify-end`}
     >
       <div className={`lg:flex-1 ${index % 2 === 0 ? "" : "order-2"}`}>
-        <Parallax speed={responseSize.xl ? -50 : 0} className="lg:pt-40">
+        <Parallax speed={parallaxSpeedDetails} className="lg:pt-40">
           <div
             className={`flex gap-3 flex-col items-center justify-center ${
               even ? "lg:items-end" : "lg:items-start"
@@ -175,7 +179,7 @@ const ExperienceItem = ({
       {projects?.length ? (
         responseSize.md ? (
           <Parallax
-            speed={responseSize.xl ? 100 : 0}
+            speed={parallaxSpeedItem}
             className="mt-5 lg:mt-10 xl:mt-0 lg:flex-1 hidden md:block"
           >
             <p
@@ -228,7 +232,7 @@ const ExperienceItem = ({
           </div>
         )
       ) : (
-        <div>
+        <div className={`experience-${index}-animate`}>
           <img
             className="mx-auto lg:mr-auto"
             src="/section-illustration/project.svg"
