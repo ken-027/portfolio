@@ -10,7 +10,7 @@ import GlobeUI from "../ui/globe.ui";
 export default function SkillsLayout({ skills }: { skills: Skill[] }) {
   const skillRef = useRef(null);
 
-  useAnimateElement("skill", skillRef, 0.05);
+  useAnimateElement("skill", skillRef, 0.15);
 
   return (
     <SectionUI ref={skillRef} id="skills">
@@ -160,7 +160,7 @@ const SkillComponent = ({
             }}
           />
         </div>
-        <p className="font-anton text-dark dark:text-light">{name}</p>
+        <p className="font-anton text-dark dark:text-light text-center">{name}</p>
         <small className={`${proficiencyColor[proficiency]}`}>
           {proficiency}
         </small>

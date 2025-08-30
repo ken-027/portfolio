@@ -20,7 +20,7 @@ export default function NavLayout() {
   const [scope, animate] = useAnimate();
   const [desktopMenuScope, animateList] = useAnimate();
   const { width } = useScreenSize();
-  const centerMenu = menus.slice(0, 4);
+  const centerMenu = menus.slice(0, 5);
   const bottomMenu = MENUS[MENUS.length - 2];
 
   const darkMode = useDarkMode();

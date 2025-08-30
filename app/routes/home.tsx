@@ -31,8 +31,10 @@ import type {
   Project,
   Service,
   Skill,
+  WhatIDo,
 } from "~/types";
 import { storeChat } from "~/api/chat-stream.api";
+import WhatIDoLayout from "~/components/layout/what-i-do.layout";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -52,6 +54,7 @@ export default function Home() {
   const [services, setServices] = useState<Service[]>();
   const [certificates, setCertificates] = useState<Certificate[]>();
   const [skills, setSkills] = useState<Skill[]>();
+  const [whatIDos, setWhatIDos] = useState<WhatIDo[]>();
   const [projects, setProjects] = useState<Project[]>();
   const [loading, setLoading] = useState(true);
 
@@ -83,6 +86,7 @@ export default function Home() {
       setSkills(_skills);
       setProjects(_projects);
       setPlatforms(_platforms);
+      setWhatIDos(_whatIDo);
     } catch (err) {
       console.error(err);
     } finally {
@@ -114,7 +118,8 @@ export default function Home() {
                 experiences &&
                 projects &&
                 certificates &&
-                platforms
+                platforms &&
+                whatIDos
               ) ? (
                 <div className="grid justify-center py-6 lg:py-10">
                   <div className="mt-2 flex items-center gap-2 lg:gap-3 lg:mt-4 justify-center">
@@ -126,6 +131,7 @@ export default function Home() {
               ) : (
                 <>
                   <SkillsLayout skills={skills || []} />
+                  <WhatIDoLayout whatIDo={whatIDos || []} />
                   <ExperiencesLayout experiences={experiences || []} />
                   <ProjectsLayout projects={projects || []} />
                   <CertificateLayout certificates={certificates || []} />

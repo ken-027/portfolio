@@ -29,7 +29,7 @@ export default function BannerLayout() {
   return (
     <header
       ref={scope}
-      className="text-center text-dark dark:bg-dark flex flex-col gap-2 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
+      className="text-center text-dark dark:bg-dark lg:mb-[30vh] flex flex-col gap-2 lg:gap-0 2xl:gap-10 items-center min-h-[100vh] lg:ml-10 lg:grid lg:grid-cols-2 max-w-[1600px] mx-auto!"
       id="home"
     >
       <div className="w-fit overflow-hidden relative bg-light dark:bg-transparent lg:ml-auto banner-animate mt-[60px] mb-4">
@@ -37,10 +37,7 @@ export default function BannerLayout() {
           className="w-full absolute inset-0 text-light dark:text-dark h-full scale-105"
           borderClassName="fill-border-dark"
         />
-        <img
-          className="w-full h-full"
-          src="/images/banner-dark.gif"
-        />
+        <img className="w-full h-full" src="/images/banner-dark.gif" />
       </div>
 
       <PaddingWrapperUI
