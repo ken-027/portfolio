@@ -2,14 +2,15 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
 
-import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
-import "swiper/css/effect-cards";
+// import "swiper/css/pagination";
+// import "swiper/css/effect-coverflow";
+// import "swiper/css/effect-cards";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Certificate } from "~/types";
 import { AnimatePresence, motion } from "motion/react";
 import CertificateCardUI from "../ui/v2/certificate-card.ui";
+import PortfolioDB from "~/utils/db.util";
 
 const organizeByPlatforms = (
   certificates: Certificate[]
@@ -25,15 +26,19 @@ const organizeByPlatforms = (
   return platforms;
 };
 
-export default function CertificateLayout({
-  certificates: _certificates,
-}: {
-  certificates: Certificate[];
-}) {
-  const completedCertificates = _certificates.filter(
-    ({ status }) => status === "completed"
+interface CertificateLayout {
+  loading: boolean;
+}
+
+export default function CertificateLayout({ loading }: CertificateLayout) {
+  const [allCertificates, setAllCertificates] = useState<Certificate[]>([]);
+
+  const completedCertificates = useMemo(
+    () => allCertificates.filter(({ status }) => status === "completed"),
+    [loading, allCertificates]
   );
-  const [filter, setFilter] = useState<string>("All");
+  const [dbLoading, setDbLoading] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>("Udemy");
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const containerVariants = {
     animate: {
@@ -63,9 +68,33 @@ export default function CertificateLayout({
 
   const platforms = organizeByPlatforms(completedCertificates);
 
+  const getCertificates = async () => {
+    try {
+      setDbLoading(true);
+      const db = new PortfolioDB();
+
+      const data = await db.getCertificates();
+
+      const order = ["Udemy", "Hacker Rank", "SimpliLearn"];
+
+      setAllCertificates(
+        data.sort(
+          (a, b) => order.indexOf(a.platform) - order.indexOf(b.platform)
+        )
+      );
+    } catch (err) {
+      console.error("certificates fetch indexdb", err);
+    } finally {
+      setDbLoading(false);
+    }
+  };
+
   const initialLoaded = () => {
-    setCertificates(completedCertificates);
-    setFilter("Udemy");
+    getCertificates();
+
+    setCertificates(
+      completedCertificates.filter(({ platform }) => platform === filter)
+    );
   };
   const onFilter = () => {
     if (filter !== "All") {
@@ -77,10 +106,8 @@ export default function CertificateLayout({
     }
   };
 
-  useEffect(initialLoaded, []);
+  useEffect(initialLoaded, [loading, dbLoading]);
   useEffect(onFilter, [filter]);
-
-  console.log(platforms);
 
   return (
     <SectionUI ref={certificateRef} id="certificates">

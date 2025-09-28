@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useAnimate } from "motion/react";
 import { stagger } from "motion";
 import ToggleDarkModeUI from "../ui/toggle-darkmode.ui";
 import { Colors } from "~/shared/colors";
-import MENUS from "~/shared/menus";
+import { type Nav } from "~/shared/menus";
 import { Link } from "react-router";
 import useScreenSize from "~/hooks/useScreenSize";
 import useDarkMode from "~/hooks/useDarkMode";
@@ -12,8 +12,11 @@ import LinkAnimatedUI from "../ui/link-animated.ui";
 import ContactModalUI from "../ui/contact-modal.ui";
 import ContactIcon from "../icons/contact.icon";
 
-const menus = MENUS;
-export default function NavLayout() {
+interface NavLayout {
+  menus: Nav[];
+}
+
+export default function NavLayout({ menus }: NavLayout) {
   const [isOpen, setOpen] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -21,7 +24,7 @@ export default function NavLayout() {
   const [desktopMenuScope, animateList] = useAnimate();
   const { width } = useScreenSize();
   const centerMenu = menus.slice(0, 5);
-  const bottomMenu = MENUS[MENUS.length - 2];
+  const bottomMenu = menus[menus.length - 2];
 
   const darkMode = useDarkMode();
 
@@ -178,7 +181,7 @@ export default function NavLayout() {
                 className="flex flex-col gap-2 font-anton pb-2 md:text-lg"
                 ref={scope}
               >
-                {MENUS.map(({ href, name, Icon }, index) => (
+                {menus.map(({ href, name, Icon }, index) => (
                   <li
                     className="translate-x-[-120%] relative w-fit group"
                     key={index}

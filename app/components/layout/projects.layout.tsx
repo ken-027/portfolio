@@ -5,28 +5,35 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import { useEffect, useRef, useState } from "react";
 import SectionUI from "../ui/section.ui";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
+// import "swiper/css/effect-coverflow";
+// import "swiper/css/pagination";
 import type { Project } from "~/types";
 import ProjectCardUI from "../ui/project-card.ui";
 import { motion, AnimatePresence } from "framer-motion";
+import PortfolioDB from "~/utils/db.util";
 
 type Filter = "all" | "fullstack" | "frontend" | "backend" | "ai-powered";
 
-export default function ProjectsLayout({
-  projects: _projects,
-}: {
-  projects: Project[];
-}) {
+interface ProjectsLayout {
+  loading: boolean;
+}
+
+export default function ProjectsLayout({ loading }: ProjectsLayout) {
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [dbLoading, setDbLoading] = useState<boolean>(false);
   const [filter, setFilter] = useState<Filter>("fullstack");
   const [projects, setProjects] = useState<Project[]>([]);
-  const totalProjects = Object.keys(_projects)
-    // @ts-ignore
-    .map((name) => ({ ..._projects[name] }))
-    .filter(
-      ({ thumbnailLink, type }) =>
-        thumbnailLink !== undefined && type === "personal"
-    );
+  //   const totalProjects = useMemo(
+  //     () =>
+  //       Object.keys(allProjects)
+  //         // @ts-ignore
+  //         .map((name) => ({ ...allProjects[name] }))
+  //         .filter(
+  //           ({ thumbnailLink, type }) =>
+  //             thumbnailLink !== undefined && type === "personal"
+  //         ),
+  //     [loading, allProjects]
+  //   );
   const projectRef = useRef(null);
   const containerVariants = {
     animate: {
@@ -56,21 +63,47 @@ export default function ProjectsLayout({
     </button>
   );
 
+  const getProjects = async () => {
+    try {
+      setDbLoading(true);
+
+      const db = new PortfolioDB();
+
+      const data = await db.getProjects();
+
+      setAllProjects(
+        Object.keys(data)
+          // @ts-ignore
+          .map((name) => ({ ...data[name] }))
+          .filter(
+            ({ thumbnailLink, type }) =>
+              thumbnailLink !== undefined && type === "personal"
+          )
+      );
+    } catch (err) {
+      console.error("projects fetch indexdb", err);
+    } finally {
+      setDbLoading(false);
+    }
+  };
+
   const initialLoad = () => {
-    setProjects(totalProjects);
+    getProjects();
+
+    setProjects(allProjects.filter(({ category }) => category === filter));
   };
 
   const onFilter = () => {
     if (["fullstack", "frontend", "backend"].includes(filter)) {
-      setProjects(totalProjects.filter(({ category }) => category === filter));
+      setProjects(allProjects.filter(({ category }) => category === filter));
     } else if (filter === "ai-powered") {
-      setProjects(totalProjects.filter(({ aiPowered }) => aiPowered));
+      setProjects(allProjects.filter(({ aiPowered }) => aiPowered));
     } else {
-      setProjects(totalProjects);
+      setProjects(allProjects);
     }
   };
 
-  useEffect(initialLoad, []);
+  useEffect(initialLoad, [loading, dbLoading]);
   useEffect(onFilter, [filter]);
 
   return (

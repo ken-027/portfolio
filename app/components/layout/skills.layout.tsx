@@ -6,11 +6,30 @@ import useAnimateElement from "~/hooks/useAnimateElement";
 import useScreenSize from "~/hooks/useScreenSize";
 import type { ItemSkill, Proficiency, Skill } from "~/types";
 import GlobeUI from "../ui/globe.ui";
+import PortfolioDB from "~/utils/db.util";
 
-export default function SkillsLayout({ skills }: { skills: Skill[] }) {
+interface SkillLayout {
+  loading: boolean;
+}
+
+export default function SkillsLayout({ loading }: SkillLayout) {
+  const [skills, setSkills] = useState<Skill[]>([]);
   const skillRef = useRef(null);
 
   useAnimateElement("skill", skillRef, 0.15);
+
+  const getSkills = async () => {
+    const db = new PortfolioDB();
+    const data = await db.getSkills();
+
+    setSkills(data);
+  };
+
+  const loadData = () => {
+    getSkills();
+  };
+
+  useEffect(loadData, [loading]);
 
   return (
     <SectionUI ref={skillRef} id="skills">
@@ -29,15 +48,16 @@ export default function SkillsLayout({ skills }: { skills: Skill[] }) {
               height={336}
               wrapperClassName="skill-animate"
             /> */}
-            <GlobeUI />
+            <GlobeUI fetching={loading} />
           </div>
           <div className="flex flex-col items-center justify-center md:grid gap-10 md:gap-16 lg:items-start">
-            {skills.map((skill, index) => (
-              <SkillWrapper
-                key={index}
-                {...skill}
-              />
-            ))}
+            {loading ? (
+              <SkillSkeleton />
+            ) : (
+              skills.map((skill, index) => (
+                <SkillWrapper key={index} {...skill} />
+              ))
+            )}
           </div>
         </div>
       </PaddingWrapperUI>
@@ -45,10 +65,31 @@ export default function SkillsLayout({ skills }: { skills: Skill[] }) {
   );
 }
 
-const SkillWrapper = ({
-  items,
-  name,
-}: Skill) => {
+const SkillSkeleton = () => {
+  return (
+    <div>
+      <h3
+        className={`font-anton text-lg md:text-xl dark:text-dark-text skill-animate w-fit mx-auto mb-10 lg:text-2xl text-transparent px-10 animate-pulse bg-gray-200 rounded-md`}
+      >
+        Skill Category
+      </h3>
+      <div
+        className={` grid grid-cols-3 gap-4 md:gap-8 md:justify-center md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:grid w-full`}
+      >
+        {Array(12)
+          .fill({ name: "Skill" })
+          .map((_, index) => (
+            <div
+              key={index}
+              className={`font-open-sauce group text-sm md:text-base xl:text-lg dark:text-dark-text flex bg-gray-200 animate-pulse  items-center gap-2 w-32 aspect-square skill-animate border rounded-md border-border dark:border-border-dark duration-300 transition-colors`}
+            />
+          ))}
+      </div>
+    </div>
+  );
+};
+
+const SkillWrapper = ({ items, name }: Skill) => {
   return (
     <div
       className={`flex flex-col gap-2 space-y-2 md:space-y-6 items-center w-full`}
@@ -160,7 +201,9 @@ const SkillComponent = ({
             }}
           />
         </div>
-        <p className="font-anton text-dark dark:text-light text-center">{name}</p>
+        <p className="font-anton text-dark dark:text-light text-center">
+          {name}
+        </p>
         <small className={`${proficiencyColor[proficiency]}`}>
           {proficiency}
         </small>

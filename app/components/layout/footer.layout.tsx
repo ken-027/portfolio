@@ -2,18 +2,21 @@
 
 import useAnimateElement from "~/hooks/useAnimateElement";
 import PaddingWrapperUI from "../ui/padding-wrapper.ui";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ResumeMenuIcon from "../icons/resume-menu.icon";
 import LinkUI from "../ui/link.ui";
 import TerminalStyledIcon from "../icons/terminal-styled.icon";
 import { switchStyle } from "~/shared/local-storage";
 import { PORTFOLIO_BASE_URL } from "~/config/env.config";
 import type { DeveloperPlatform } from "~/types";
-export default function FooterLayout({
-  platforms,
-}: {
-  platforms: DeveloperPlatform[];
-}) {
+import PortfolioDB from "~/utils/db.util";
+
+interface FooterLayout {
+  loading: boolean;
+}
+
+export default function FooterLayout({ loading }: FooterLayout) {
+  const [platforms, setPlatforms] = useState<DeveloperPlatform[]>([]);
   const [_switching, setSwitching] = useState(false);
   const footerRef = useRef(null);
 
@@ -25,7 +28,21 @@ export default function FooterLayout({
     // }, 3500);
   };
 
+  const getPlatforms = async () => {
+    const db = new PortfolioDB();
+
+    const data = await db.getDevPlatforms();
+
+    setPlatforms(data);
+  };
+
+  const loadData = () => {
+    getPlatforms();
+  };
+
   useAnimateElement("footer", footerRef);
+
+  useEffect(loadData, [loading]);
 
   return (
     <footer

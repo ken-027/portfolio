@@ -2,10 +2,9 @@
 
 import type { Route } from "./+types/home";
 import { getStyledType } from "~/shared/local-storage";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { access } from "~/api/access.api";
 import {
-  getAboutMe,
   getCertificates,
   getDeveloperPlatform,
   getExperiences,
@@ -14,6 +13,7 @@ import {
   getSkills,
   getWhatIDo,
 } from "~/api/portfolio.api";
+import { useQuery } from "@tanstack/react-query";
 
 import BannerLayout from "~/components/layout/banner.layout";
 import TerminalLayout from "~/components/layout/terminal.layout";
@@ -24,17 +24,20 @@ import ContactLayout from "~/components/layout/contact.layout";
 import FooterLayout from "~/components/layout/footer.layout";
 import ChatBotLayout from "~/components/layout/chatbot.layout";
 import CertificateLayout from "~/components/layout/certificate.layout";
+
+import { storeChat } from "~/api/chat-stream.api";
+import WhatIDoLayout from "~/components/layout/what-i-do.layout";
+import NavLayout from "~/components/layout/nav.layout";
+import MENUS, { type Nav } from "~/shared/menus";
 import type {
   Certificate,
   DeveloperPlatform,
   Experience,
   Project,
-  Service,
   Skill,
   WhatIDo,
 } from "~/types";
-import { storeChat } from "~/api/chat-stream.api";
-import WhatIDoLayout from "~/components/layout/what-i-do.layout";
+import PortfolioDB from "~/utils/db.util";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -46,63 +49,123 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+interface NavLayout extends Nav {
+  Component: React.ReactNode;
+}
+
 export default function Home() {
+  const [storing, setStoring] = useState<boolean>(false);
   const getStyle = getStyledType();
   const [show, setShow] = useState(false);
-  const [experiences, setExperiences] = useState<Experience[]>();
-  const [platforms, setPlatforms] = useState<DeveloperPlatform[]>();
-  const [services, setServices] = useState<Service[]>();
-  const [certificates, setCertificates] = useState<Certificate[]>();
-  const [skills, setSkills] = useState<Skill[]>();
-  const [whatIDos, setWhatIDos] = useState<WhatIDo[]>();
-  const [projects, setProjects] = useState<Project[]>();
-  const [loading, setLoading] = useState(true);
 
-  const loadData = async () => {
+  const { data: experiences, isLoading: experienceLoading } = useQuery({
+    queryKey: ["experiences"],
+    queryFn: getExperiences,
+  });
+  const { data: services, isLoading: serviceLoading } = useQuery({
+    queryKey: ["services"],
+    queryFn: getServices,
+  });
+  const { data: platforms } = useQuery({
+    queryKey: ["platforms"],
+    queryFn: getDeveloperPlatform,
+  });
+  const { data: certificates, isFetching: certificateLoading } = useQuery({
+    queryKey: ["certificates"],
+    queryFn: getCertificates,
+  });
+  const { data: skills, isLoading: skillLoading } = useQuery({
+    queryKey: ["skills"],
+    queryFn: getSkills,
+  });
+  const { data: whatIDos, isLoading: whatIdoLoading } = useQuery({
+    queryKey: ["whatIDos"],
+    queryFn: getWhatIDo,
+  });
+  const { data: projects, isFetching: projectLoading } = useQuery({
+    queryKey: ["projects"],
+    queryFn: getProjects,
+  });
+
+  const loading =
+    experienceLoading ||
+    serviceLoading ||
+    certificateLoading ||
+    skillLoading ||
+    whatIdoLoading ||
+    projectLoading;
+
+  const menus: NavLayout[] = MENUS.map((menu) => {
+    let Component: React.ReactNode;
+
+    switch (menu.name.toLocaleLowerCase()) {
+      case "skills":
+        Component = <SkillsLayout loading={skillLoading || storing} />;
+        break;
+      case "what i do":
+        Component = <WhatIDoLayout loading={whatIdoLoading || storing} />;
+        break;
+      case "experiences":
+        Component = (
+          <ExperiencesLayout loading={experienceLoading || storing} />
+        );
+        break;
+      case "portfolio":
+        Component = <ProjectsLayout loading={projectLoading || storing} />;
+        break;
+      case "certificates":
+        Component = (
+          <CertificateLayout loading={certificateLoading || storing} />
+        );
+        break;
+      case "contact":
+        Component = <ContactLayout />;
+        break;
+      case "my resume":
+        Component = <FooterLayout loading={storing} />;
+        break;
+    }
+
+    return { ...menu, Component };
+  });
+
+  const loadDB = async () => {
     try {
-      const [
-        _experiences,
-        _services,
-        _certificates,
-        _skills,
-        _projects,
-        _platforms,
-        _aboutMe,
-        _whatIDo,
-      ] = await Promise.all([
-        getExperiences(),
-        getServices(),
-        getCertificates(),
-        getSkills(),
-        getProjects(),
-        getDeveloperPlatform(),
-        getAboutMe(),
-        getWhatIDo(),
-      ]);
+      setStoring(true);
+      const db = new PortfolioDB();
 
-      setExperiences(_experiences);
-      setServices(_services);
-      setCertificates(_certificates);
-      setSkills(_skills);
-      setProjects(_projects);
-      setPlatforms(_platforms);
-      setWhatIDos(_whatIDo);
-    } catch (err) {
-      console.error(err);
+      await Promise.all([
+        db.storeExperiences(experiences as Experience[]),
+        db.storeWhatIDos(whatIDos as WhatIDo[]),
+        db.storeDevPlatforms(platforms as DeveloperPlatform[]),
+        db.storeCertificates(certificates as Certificate[]),
+        db.storeProjects(projects as Project[]),
+        db.storeSkills(skills as Skill[]),
+      ]);
+    } catch (error) {
+      console.error("Failed to open IndexedDB:", error);
     } finally {
-      setLoading(false);
+      setStoring(false);
     }
   };
 
-  useEffect(() => {
+  const loadDBEffect = () => {
+    if (loading) return;
+
+    loadDB();
+  };
+
+  const initialLoadingEffect = () => {
     storeChat();
     access();
-    loadData();
 
     setTimeout(() => {
       setShow(true);
     }, 400);
-  }, []);
+  };
+
+  useEffect(initialLoadingEffect, []);
+  useEffect(loadDBEffect, [loading]);
 
   return (
     <>
@@ -110,42 +173,34 @@ export default function Home() {
         <>
           {show ? (
             <>
+              <NavLayout menus={menus} />
               <BannerLayout />
-              {loading ||
-              !(
-                services &&
-                skills &&
-                experiences &&
-                projects &&
-                certificates &&
-                platforms &&
-                whatIDos
-              ) ? (
-                <div className="grid justify-center py-6 lg:py-10">
+              {menus.map(({ Component }, index) => (
+                <Fragment key={index}>{Component}</Fragment>
+              ))}
+              {/* <div className="grid justify-center py-6 lg:py-10">
                   <div className="mt-2 flex items-center gap-2 lg:gap-3 lg:mt-4 justify-center">
                     <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-yellow-300 border-[1px] border-border rounded-full ball-loading" />
                     <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-green-300 animate-100 border-[1px] border-border rounded-full ball-loading" />
                     <div className="animate-bounce h-4 w-4 lg:h-5 lg:w-5 bg-blue-300 delay-200 border-[1px] border-border rounded-full ball-loading" />
                   </div>
-                </div>
-              ) : (
-                <>
-                  <SkillsLayout skills={skills || []} />
-                  <WhatIDoLayout whatIDo={whatIDos || []} />
-                  <ExperiencesLayout experiences={experiences || []} />
-                  <ProjectsLayout projects={projects || []} />
-                  <CertificateLayout certificates={certificates || []} />
-                  <ContactLayout />
-                  <FooterLayout platforms={platforms || []} />
-                  <ChatBotLayout />
-                </>
-              )}
+                </div> */}
+              {/* <SkillsLayout loading={skillLoading} skills={skills || []} />
+              <WhatIDoLayout
+                loading={whatIdoLoading}
+                whatIDo={whatIDos || []}
+              />
+              <ExperiencesLayout experiences={experiences || []} />
+              <ProjectsLayout projects={projects || []} />
+              <CertificateLayout certificates={certificates || []} /> */}
+
+              <ChatBotLayout />
             </>
           ) : null}
         </>
       ) : (
         <TerminalLayout
-          loading={loading}
+          loading={false}
           skills={skills || []}
           services={services || []}
           experiences={experiences || []}

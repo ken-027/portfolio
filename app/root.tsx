@@ -10,11 +10,13 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import "swiper/css";
-import NavLayout from "./components/layout/nav.layout";
 import { useEffect, useRef, useState } from "react";
-import { getDarkMode, getStyledType } from "./shared/local-storage";
+import { getDarkMode } from "./shared/local-storage";
 import { ParallaxProvider } from "react-scroll-parallax";
 import ScrollUpUI from "./components/ui/scroll-up.ui";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,7 +34,6 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const isDev = import.meta.env.MODE === "development";
-  const getStyle = getStyledType();
   const [scrollEl, setScrollElement] = useState<HTMLDivElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -106,11 +107,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         // @ts-ignore
         ref={ref}
       >
-        {getStyle === "gui" ? <NavLayout /> : null}
+        {/* {getStyle === "gui" ? <NavLayout /> : null} */}
         {/* @ts-ignore */}
         <ParallaxProvider scrollContainer={scrollEl}>
           <ScrollUpUI body={ref} />
-          {children}
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
         </ParallaxProvider>
         <ScrollRestoration />
         <Scripts />

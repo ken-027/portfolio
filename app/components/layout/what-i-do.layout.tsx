@@ -2,15 +2,29 @@ import PaddingWrapperUI from "../ui/padding-wrapper.ui";
 import HeaderUI from "../ui/header.ui";
 import SectionUI from "../ui/section.ui";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { WhatIDo } from "~/types";
 import WhatIDoCardUI from "../ui/whatido-card.ui";
 import { AnimatePresence, motion } from "motion/react";
+import PortfolioDB from "~/utils/db.util";
 
-export default function WhatIDoLayout({ whatIDo }: { whatIDo: WhatIDo[] }) {
+interface WhatIDoLayout {
+  loading: boolean;
+}
+
+const db = new PortfolioDB();
+
+export default function WhatIDoLayout({ loading }: WhatIDoLayout) {
   const whatIDoRef = useRef<HTMLDivElement>(null);
   const serviceItemRef = useRef<HTMLDivElement>(null);
+  const [whatIDo, setWhatIDo] = useState<WhatIDo[]>([]);
   useAnimateElement(`what-i-do`, whatIDoRef, 0.15);
+
+  const getWhatIdo = async () => {
+    const whatIdo = await db.getWhatIDos();
+
+    setWhatIDo(whatIdo);
+  };
 
   const containerVariants = {
     animate: {
@@ -19,6 +33,14 @@ export default function WhatIDoLayout({ whatIDo }: { whatIDo: WhatIDo[] }) {
       },
     },
   };
+
+  const loadData = () => {
+    if (whatIDo.length) return;
+
+    getWhatIdo();
+  };
+
+  useEffect(loadData, [loading]);
 
   return (
     <SectionUI id="what-i-do" ref={whatIDoRef}>
