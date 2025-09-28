@@ -4,21 +4,36 @@ import { getDateFormat, getTotalByFormat } from "~/utils/date.utils";
 import CheckIcon from "../icons/check.icon";
 import SectionUI from "../ui/section.ui";
 import useAnimateElement from "~/hooks/useAnimateElement";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useScreenSize from "~/hooks/useScreenSize";
 import { Parallax } from "react-scroll-parallax";
 import type { Experience } from "~/types";
 import CompanyProjectCardUI from "../ui/comapny-project-card.ui";
 import { AnimatePresence, motion } from "motion/react";
+import PortfolioDB from "~/utils/db.util";
 
-export default function ExperiencesLayout({
-  experiences,
-}: {
-  experiences: Experience[];
-}) {
+interface ExperiencesLayout {
+  loading: boolean;
+}
+
+export default function ExperiencesLayout({ loading }: ExperiencesLayout) {
+  const [experiences, setExperiences] = useState<Experience[]>([]);
   const experienceRef = useRef(null);
   useAnimateElement("experience", experienceRef);
   const { responseSize } = useScreenSize();
+
+  const getExperiences = async () => {
+    const db = new PortfolioDB();
+
+    const data = await db.getExperiences();
+    setExperiences(data);
+  };
+
+  const loadData = () => {
+    getExperiences();
+  };
+
+  useEffect(loadData, [loading]);
 
   return (
     <SectionUI ref={experienceRef} id="experiences" className="lg:mt-32">

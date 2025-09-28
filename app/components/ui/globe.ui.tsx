@@ -1,19 +1,27 @@
 import { Cloud, renderSimpleIcon } from "react-icon-cloud";
 import { motion, useAnimate } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
-import { getSkills } from "~/api/portfolio.api";
 import type { ItemSkill } from "~/types";
 import { stagger } from "motion";
+import PortfolioDB from "~/utils/db.util";
 
-export default function GlobeUI({ className }: { className?: string }) {
+export default function GlobeUI({
+  className,
+  fetching,
+}: {
+  className?: string;
+  fetching: boolean;
+}) {
   const [data, _setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [icons, setIcons] = useState<ItemSkill[]>([]);
 
   const loadImages = async () => {
-    setLoading(true);
+    setLoading(fetching);
     try {
-      const results = await getSkills();
+      const db = new PortfolioDB();
+
+      const results = await db.getSkills();
 
       const iconsList = results.flatMap(({ items }) => items);
 
