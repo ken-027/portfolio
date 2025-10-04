@@ -133,11 +133,11 @@ export default function GlobeUI({
     );
   };
 
-  useEffect(initData, []);
+    useEffect(initData, [fetching]);
 
   return (
     <>
-      {loading ? (
+      {loading || fetching ? (
         <SkeletonGlobe />
       ) : (
         <motion.div

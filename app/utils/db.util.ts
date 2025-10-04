@@ -106,17 +106,17 @@ export class IndexedDBService {
 
 export default class PortfolioDB extends IndexedDBService {
   constructor() {
-    super("PortfolioDB", 1);
+    super("PortfolioDB", 2);
   }
 
   async storeExperiences(experiences: Experience[]) {
     const storeName = "experiences";
     await this.clearStore(storeName);
 
-    for (const [index, experience] of experiences.entries()) {
-      const id = `${index}${experience.company
-        .toLocaleLowerCase()
-        .replaceAll(/\s+|-+/g, "_")}`;
+    for (const [id, experience] of experiences.entries()) {
+      //   const id = `${index}${experience.company
+      //     .toLocaleLowerCase()
+      //     .replaceAll(/\s+|-+/g, "_")}`;
       const record = {
         id,
         ...experience,
@@ -134,9 +134,9 @@ export default class PortfolioDB extends IndexedDBService {
     const storeName = "what_i_dos";
     await this.clearStore(storeName);
 
-    for (const whatIdo of whatIDo) {
+    for (const [id, whatIdo] of whatIDo.entries()) {
       const record = {
-        id: whatIdo.title.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
+        id, //: whatIdo.title.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
         ...whatIdo,
       };
 
@@ -152,11 +152,11 @@ export default class PortfolioDB extends IndexedDBService {
     const storeName = "projects";
     await this.clearStore(storeName);
 
-    for (const projectKey of Object.keys(projects)) {
+    for (const [id, projectKey] of Object.keys(projects).entries()) {
       const project = projects[projectKey as any] as Project;
 
       const record = {
-        id: project.title.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
+        id, //: project.title.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
         ...project,
       };
 
@@ -172,9 +172,9 @@ export default class PortfolioDB extends IndexedDBService {
     const storeName = "certificates";
     await this.clearStore(storeName);
 
-    for (const certificate of certificates) {
+    for (const [id, certificate] of certificates.entries()) {
       const record = {
-        id: certificate.name.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
+        id, //: certificate.name.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
         ...certificate,
       };
 
@@ -190,9 +190,9 @@ export default class PortfolioDB extends IndexedDBService {
     const storeName = "skills";
     await this.clearStore(storeName);
 
-    for (const skill of skills) {
+    for (const [id, skill] of skills.entries()) {
       const record = {
-        id: skill.name.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
+        id, //: skill.name.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
         ...skill,
       };
 
@@ -208,9 +208,9 @@ export default class PortfolioDB extends IndexedDBService {
     const storeName = "developer_platforms";
     await this.clearStore(storeName);
 
-    for (const platform of platforms) {
+    for (const [id, platform] of platforms.entries()) {
       const record = {
-        id: platform.name.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
+        id, //: platform.name.toLocaleLowerCase().replaceAll(/\s+|-+/g, "_"),
         ...platform,
       };
 
