@@ -70,7 +70,7 @@ export default function Home() {
     queryKey: ["platforms"],
     queryFn: getDeveloperPlatform,
   });
-  const { data: certificates, isFetching: certificateLoading } = useQuery({
+  const { data: certificates, isLoading: certificateLoading } = useQuery({
     queryKey: ["certificates"],
     queryFn: getCertificates,
   });
@@ -82,7 +82,7 @@ export default function Home() {
     queryKey: ["whatIDos"],
     queryFn: getWhatIDo,
   });
-  const { data: projects, isFetching: projectLoading } = useQuery({
+  const { data: projects, isLoading: projectLoading } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
   });
@@ -131,17 +131,72 @@ export default function Home() {
 
   const loadDB = async () => {
     try {
-      setStoring(true);
       const db = new PortfolioDB();
 
-      await Promise.all([
-        db.storeExperiences(experiences as Experience[]),
-        db.storeWhatIDos(whatIDos as WhatIDo[]),
-        db.storeDevPlatforms(platforms as DeveloperPlatform[]),
-        db.storeCertificates(certificates as Certificate[]),
-        db.storeProjects(projects as Project[]),
-        db.storeSkills(skills as Skill[]),
+      const [
+        storedExperiences,
+        storedWhatIDos,
+        storedPlatforms,
+        storedCertificates,
+        storedProjects,
+        storedSkills,
+      ] = await Promise.all([
+        db.getExperiences(),
+        db.getWhatIDos(),
+        db.getDevPlatforms(),
+        db.getCertificates(),
+        db.getProjects(),
+        db.getSkills(),
       ]);
+
+      const removeId = ({ id: _id, ...item }: any) => ({ ...item });
+
+      const tasks: Promise<any>[] = [];
+
+      if (
+        JSON.stringify(storedExperiences.map(removeId)) !==
+        JSON.stringify(experiences)
+      ) {
+        tasks.push(db.storeExperiences(experiences as Experience[]));
+      }
+      if (
+        JSON.stringify(storedWhatIDos.map(removeId)) !==
+        JSON.stringify(whatIDos)
+      ) {
+        tasks.push(db.storeWhatIDos(whatIDos as WhatIDo[]));
+      }
+      if (
+        JSON.stringify(storedPlatforms.map(removeId)) !==
+        JSON.stringify(platforms)
+      ) {
+        tasks.push(db.storeDevPlatforms(platforms as DeveloperPlatform[]));
+      }
+      if (
+        JSON.stringify(storedCertificates.map(removeId)) !==
+        JSON.stringify(certificates)
+      ) {
+        tasks.push(db.storeCertificates(certificates as Certificate[]));
+      }
+      if (
+        JSON.stringify(storedProjects.map(removeId)) !==
+        // @ts-ignore
+        JSON.stringify(Object.keys(projects).map((key) => projects[key]))
+      ) {
+        tasks.push(db.storeProjects(projects as Project[]));
+      }
+      if (
+        JSON.stringify(storedSkills.map(removeId)) !== JSON.stringify(skills)
+      ) {
+        tasks.push(db.storeSkills(skills as Skill[]));
+      }
+
+      if (tasks.length > 0) {
+        setStoring(true);
+        await Promise.all(tasks);
+        console.log("IndexedDB updated.");
+      } else {
+        console.log("No changes detected, IndexedDB not updated.");
+      }
     } catch (error) {
       console.error("Failed to open IndexedDB:", error);
     } finally {
