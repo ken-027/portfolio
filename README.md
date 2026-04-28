@@ -4,7 +4,7 @@ This is a personal portfolio website built to showcase projects, skills, certifi
 
 ## Production Link
 
-[https://portfolio.ksoftdev.site](https://portfolio.ksoftdev.site)
+[https://v1.kdevtech.com](https://v1.kdevtech.com)
 
 ## Features
 - About me
